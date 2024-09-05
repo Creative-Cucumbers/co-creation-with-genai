@@ -19,4 +19,4 @@
 
 ### 6. [総合演習①](6_comprehensive_exercise/readme.md)
 
-### 7. 総合演習②
+### 7. [総合演習②](7_comprehensive_exercis2/readme.md)
