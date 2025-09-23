@@ -1,4 +1,4 @@
-# Co-creation with Gen AI 2024
+# Co-creation with Gen AI 2025
 
 ## 講師
 
@@ -17,6 +17,6 @@
 
 ### 5. [プロンプトエンジニアリング ~ アプリ生成 ② ~](5_webapp_dev_with_ai2/readme.md)
 
-### 6. [総合演習①](6_comprehensive_exercise/readme.md)
+### 6. [総合演習 ①](6_comprehensive_exercise/readme.md)
 
-### 7. 総合演習②
+### 7. 総合演習 ②
