@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI基礎 - プレゼンテーション</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f8f9fa;
+        color: #333;
+        overflow: hidden;
+      }
+
+      .presentation-container {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+      }
+
+      .slide {
+        width: 100%;
+        height: 100%;
+        display: none;
+        padding: 60px;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: slideIn 0.3s ease-in-out;
+      }
+
+      .slide.active {
+        display: flex;
+        flex-direction: column;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .slide-header {
+        background: #2c3e50;
+        color: white;
+        padding: 30px;
+        margin: -60px -60px 40px -60px;
+      }
+
+      .slide-title {
+        font-size: 2.2em;
+        font-weight: 300;
+        margin-bottom: 8px;
+      }
+
+      .slide-subtitle {
+        font-size: 1.1em;
+        opacity: 0.8;
+        font-weight: normal;
+      }
+
+      .slide-content {
+        flex: 1;
+        overflow-y: auto;
+        line-height: 1.7;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-weight: 400;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+      h2 {
+        font-size: 1.5em;
+      }
+      h3 {
+        font-size: 1.2em;
+      }
+
+      .schedule-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 30px 0;
+        background: white;
+      }
+
+      .schedule-table th,
+      .schedule-table td {
+        padding: 16px 12px;
+        text-align: center;
+        border: 1px solid #e0e0e0;
+        vertical-align: top;
+      }
+
+      .schedule-table th {
+        background: #2c3e50;
+        color: white;
+        font-weight: 500;
+      }
+
+      .schedule-table tr:nth-child(even) {
+        background-color: #f8f9fa;
+      }
+
+      .schedule-table td:first-child {
+        font-weight: 500;
+        background: #f1f3f4;
+      }
+
+      .instructor-card {
+        background: #f8f9fa;
+        padding: 25px;
+        margin: 20px 0;
+        border-left: 4px solid #2c3e50;
+      }
+
+      .instructor-name {
+        font-size: 1.3em;
+        font-weight: 500;
+        color: #2c3e50;
+        margin-bottom: 8px;
+      }
+
+      .instructor-field {
+        color: #666;
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+
+      .reason-card {
+        background: #f8f9fa;
+        padding: 25px;
+        margin: 20px 0;
+        border-left: 4px solid #2c3e50;
+      }
+
+      .warning-card {
+        background: #f8f9fa;
+        padding: 25px;
+        margin: 20px 0;
+        border-left: 4px solid #666;
+      }
+
+      .demo-card {
+        background: #f8f9fa;
+        padding: 25px;
+        margin: 20px 0;
+        border-left: 4px solid #2c3e50;
+      }
+
+      .navigation {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 15px;
+        z-index: 1000;
+      }
+
+      .nav-btn {
+        background: #2c3e50;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.2s;
+      }
+
+      .nav-btn:hover {
+        background: #34495e;
+      }
+
+      .nav-btn:disabled {
+        background: #95a5a6;
+        cursor: not-allowed;
+      }
+
+      .slide-indicator {
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        background: #2c3e50;
+        color: white;
+        padding: 10px 16px;
+        font-size: 14px;
+        z-index: 1000;
+      }
+
+      .emoji {
+        margin-right: 12px;
+      }
+
+      ul,
+      ol {
+        margin: 20px 0;
+        padding-left: 25px;
+      }
+
+      li {
+        margin-bottom: 10px;
+        line-height: 1.6;
+      }
+
+      .highlight {
+        background: #f8f9fa;
+        padding: 25px;
+        margin: 25px 0;
+        border-left: 4px solid #2c3e50;
+      }
+
+      .quote {
+        background: #f8f9fa;
+        border-left: 4px solid #2c3e50;
+        padding: 25px;
+        margin: 25px 0;
+        font-style: italic;
+        color: #555;
+      }
+
+      .image-container {
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .slide-image {
+        max-width: 100%;
+        max-height: 400px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        display: block;
+      }
+
+      .image-caption {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 10px;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="presentation-container">
+      <div class="slide-indicator">
+        <span id="current-slide">1</span> / <span id="total-slides">8</span>
+      </div>
+
+      <!-- Slide 1: Title -->
+      <div class="slide active">
+        <div class="slide-header">
+          <div class="slide-title">AI基礎</div>
+          <div class="slide-subtitle">人工知能の基本理論と活用</div>
+        </div>
+        <div class="slide-content">
+          <div class="highlight">
+            <h2>🎯 コース概要</h2>
+            <p>
+              このコースは人工知能（AI）の基本的な理論とその活用についての理解を提供することを目的とします。具体的には、AIの基礎概念、倫理的考慮事項、そしてAI技術を使用して調査やドキュメント、アプリケーションを作成する実践的な方法を学びます。
+            </p>
+          </div>
+          <div class="highlight">
+            <h2>🚀 学習目標</h2>
+            <p>
+              このコースを通じて、AI技術の効果的かつ倫理的な使用に必要な知識とスキルを習得し、将来のキャリアや創作活動への適用につなげることができます。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Schedule -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">📅 授業スケジュール</div>
+          <div class="slide-subtitle">全7回の学習計画</div>
+        </div>
+        <div class="slide-content">
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>回数</th>
+                <th>1<br />(9/25)</th>
+                <th>2<br />(10/2)</th>
+                <th>3<br />(10/9)</th>
+                <th>4<br />(10/16)</th>
+                <th>5<br />(10/23)</th>
+                <th>6<br />(11/6)</th>
+                <th>7<br />(11/13)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>テーマ</strong></td>
+                <td>AI基礎</td>
+                <td>AIの活用と倫理</td>
+                <td>プロンプトエンジニアリング</td>
+                <td>AI活用アプリ生成①</td>
+                <td>AI活用アプリ生成②</td>
+                <td>総合演習</td>
+                <td>総合演習</td>
+              </tr>
+              <tr>
+                <td><strong>担当講師</strong></td>
+                <td>伊藤、小島</td>
+                <td>伊藤</td>
+                <td>小島</td>
+                <td>伊藤</td>
+                <td>小島</td>
+                <td>小島、伊藤</td>
+                <td>伊藤、小島</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Slide 3: Instructors -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">👨‍🏫 講師紹介</div>
+          <div class="slide-subtitle">経験豊富な講師陣</div>
+        </div>
+        <div class="slide-content">
+          <div class="instructor-card">
+            <div class="instructor-name">小島 弘誉（こじま ひろたか）</div>
+            <div class="instructor-field">専門分野: ソフトウェア工学</div>
+            <ul>
+              <li>
+                通信事業会社にて6年、OpenStackを用いたパブリッククラウド開発・運用
+              </li>
+              <li>グループ全体のアプリコンテストにて UX賞、最優秀賞を受賞</li>
+              <li>自動車部品メーカーにて3年、XPを用いた新規事業開発</li>
+              <li>現在：Solution Architectとして顧客課題解決に従事</li>
+            </ul>
+          </div>
+
+          <div class="instructor-card">
+            <div class="instructor-name">伊藤 尚祐（いとう なおすけ）</div>
+            <div class="instructor-field">専門分野: 情報通信</div>
+            <ul>
+              <li>総合電機メーカーにて通信装置の研究開発</li>
+              <li>スタートアップにてIoTサービス構築をリード</li>
+              <li>
+                現在：デザインシンキングとアイデア実装の短期サイクル化に挑戦
+              </li>
+              <li>趣味：スケボー🛹と編み物🧶</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Why Learn -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">🤔 なぜAIとプログラミングを学ぶのか？</div>
+          <div class="slide-subtitle">時代の変化への対応</div>
+        </div>
+        <div class="slide-content">
+          <div class="quote">
+            <strong
+              >新規プロダクトの企画時は、まず生成AIなどで開発したプロトタイプを持ってくること</strong
+            >、企画書のみ提出はNG──DeNAが一部の部署で、ある新制度を採用していることが7月4日までに判明した。
+          </div>
+
+          <div class="highlight">
+            <h3>🎯 背景</h3>
+            <ul>
+              <li>AIの登場でプログラミングの敷居が下がった</li>
+              <li>
+                ビジネス職・デザイナー職もプロトタイプ作成が求められる時代
+              </li>
+              <li>企画書を書くより実装の方が早い</li>
+              <li>現物を見て判断した方が良い判断ができる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Why Programming -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">💻 なぜプログラミングを学ぶべきか</div>
+          <div class="slide-subtitle">3つの重要な理由</div>
+        </div>
+        <div class="slide-content">
+          <div class="reason-card">
+            <h3><span class="emoji">🧠</span>1. 論理的に考える力が身につく</h3>
+            <p><strong>効果:</strong> 問題解決の筋道を立てる力を鍛える</p>
+            <p>
+              <strong>学ばないと...</strong>
+              エラーの原因がわからず、ものづくりに関われない
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <h3>
+              <span class="emoji">📖</span>2. デジタル社会の"読み書き"だから
+            </h3>
+            <p><strong>効果:</strong> プログラミングは現代の共通言語</p>
+            <p>
+              <strong>学ばないと...</strong>
+              ツールを「使うだけの人」になり、主導権を握れない
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <h3><span class="emoji">💡</span>3. 自分のアイデアを形にできる</h3>
+            <p><strong>効果:</strong> アプリやサービスを自分で作れる</p>
+            <p>
+              <strong>学ばないと...</strong>
+              「誰かに頼まないとできない人」になってしまう
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Why AI -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">🤖 なぜAIを活用すべきか</div>
+          <div class="slide-subtitle">AIがもたらす3つの変化</div>
+        </div>
+        <div class="slide-content">
+          <div class="reason-card">
+            <h3>
+              <span class="emoji">⚡</span>1. 効率とスピードが圧倒的に変わる
+            </h3>
+            <p>
+              <strong>効果:</strong> 調べ物・デバッグ・資料作成が何倍も速くなる
+            </p>
+            <p>
+              <strong>使わないと...</strong>
+              同じ課題でも数倍かかり「遅い人」と見られる
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <h3>
+              <span class="emoji">🎓</span>2. 学ぶことそのものを助けてくれる
+            </h3>
+            <p><strong>効果:</strong> 自分専属の先生や相棒のように使える</p>
+            <p><strong>使わないと...</strong> 学ぶ方法がわからず諦めてしまう</p>
+          </div>
+
+          <div class="reason-card">
+            <h3><span class="emoji">🌍</span>3. 世界のルールが変わった</h3>
+            <p><strong>効果:</strong> AI活用はすでに社会の前提</p>
+            <p>
+              <strong>使わないと...</strong>
+              職場でも大事な仕事を任せてもらえない
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: Cautions -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">⚠️ AI活用の注意点</div>
+          <div class="slide-subtitle">便利さの裏にあるリスク</div>
+        </div>
+        <div class="slide-content">
+          <p>
+            AIの活用は便利で必要性がある一方で、注意も必要です。次回以降の授業で詳しくお伝えしますが、まずは以下の点を意識しておきましょう。
+          </p>
+
+          <div class="warning-card">
+            <h3><span class="emoji">🔄</span>依存に関する注意</h3>
+            <ul>
+              <li>学びに活かす適切な使い方を身につける</li>
+              <li>バイアスを避ける意識を持つ</li>
+            </ul>
+          </div>
+
+          <div class="warning-card">
+            <h3><span class="emoji">🎯</span>正確性の問題</h3>
+            <ul>
+              <li>間違い・偏り・古い情報への注意</li>
+              <li>情報の検証を怠らない</li>
+            </ul>
+          </div>
+
+          <div class="warning-card">
+            <h3><span class="emoji">🛡️</span>リスク管理</h3>
+            <ul>
+              <li>情報漏洩の防止</li>
+              <li>著作権・倫理的配慮</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Demo -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">🧑‍💻 実践デモ</div>
+          <div class="slide-subtitle">AIの可能性を体験</div>
+        </div>
+        <div class="slide-content">
+          <div class="demo-card">
+            <h3><span class="emoji">📱</span>モック作成</h3>
+            <p>Google AI Studioを使用したアプリケーションモックアップの作成</p>
+          </div>
+
+          <div class="demo-card">
+            <h3><span class="emoji">🌐</span>Webアプリ作成</h3>
+            <p>Google AI Studioによる実動Webアプリケーションの生成</p>
+          </div>
+
+          <div class="demo-card">
+            <h3><span class="emoji">📦</span>3Dモデル作成</h3>
+            <p>SuperCraftを活用した3Dプロダクトデザイン</p>
+          </div>
+
+          <div class="demo-card">
+            <h3><span class="emoji">🎨</span>Blender MCP</h3>
+            <p>高度な3Dモデリングツールとの連携</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: AI Definition -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">🤖 AIの定義</div>
+          <div class="slide-subtitle">人工知能とは何か</div>
+        </div>
+        <div class="slide-content">
+          <div class="highlight">
+            <h3>人工知能（Artificial Intelligence, AI）とは</h3>
+            <p>
+              人間の知的行動をコンピューターで模倣する技術、またはその研究分野
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <h3>含まれる知的活動</h3>
+            <ul>
+              <li><strong>学習</strong> - 経験から知識を獲得する</li>
+              <li><strong>推論</strong> - 論理的に結論を導き出す</li>
+              <li><strong>問題解決</strong> - 課題に対する最適解を見つける</li>
+              <li><strong>知覚</strong> - 環境から情報を認識する</li>
+              <li><strong>言語理解</strong> - 自然言語を処理する</li>
+            </ul>
+          </div>
+
+          <div class="quote">
+            <strong>ジョン・マッカーシー（1956年）</strong><br />
+            "AIは機械に知性を実装する科学および工学である"
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 10: AI History Timeline -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">📚 AIの歴史</div>
+          <div class="slide-subtitle">発展の軌跡</div>
+        </div>
+        <div class="slide-content">
+          <div class="reason-card">
+            <h3><span class="emoji">🔬</span>1950年代 - 起源</h3>
+            <p>
+              <strong>アラン・チューリング</strong
+              >：「機械は考えることができるか？」
+            </p>
+            <p><strong>チューリングテスト</strong>の提案</p>
+          </div>
+
+          <div class="reason-card">
+            <h3><span class="emoji">🎯</span>1956年 - AI誕生</h3>
+            <p>
+              <strong>ダートマス会議</strong>："Artificial
+              Intelligence"という用語が初めて使用される
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <h3><span class="emoji">❄️</span>1960-1970年代 - 冬の時代</h3>
+            <p>初期の成功の後、期待に応えられず研究が停滞</p>
+          </div>
+
+          <div class="reason-card">
+            <h3><span class="emoji">💼</span>1980年代 - 復活</h3>
+            <p><strong>エキスパートシステム</strong>の商業的成功</p>
+          </div>
+
+          <div class="reason-card">
+            <h3><span class="emoji">🌐</span>1990-2000年代 - データ時代</h3>
+            <p>インターネット普及、<strong>機械学習</strong>が主流に</p>
+          </div>
+
+          <div class="reason-card">
+            <h3><span class="emoji">🚀</span>2012年-現在 - AI革命</h3>
+            <p><strong>ディープラーニング</strong>の成功、AI技術の急速な発展</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11: AI Development -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">🌟 AIの発展と重要性</div>
+          <div class="slide-subtitle">現代社会における役割</div>
+        </div>
+        <div class="slide-content">
+          <h3>AI発展の要因</h3>
+          <div class="reason-card">
+            <ul>
+              <li>
+                <strong>機械学習とディープラーニングの進化</strong
+                ><br />大量データからの自動学習能力
+              </li>
+              <li>
+                <strong>計算能力の飛躍的向上</strong
+                ><br />クラウドコンピューティングと高性能プロセッサ
+              </li>
+              <li>
+                <strong>ビッグデータの利用</strong
+                ><br />デジタルデータの爆発的増加
+              </li>
+            </ul>
+          </div>
+
+          <h3>現代におけるAIの重要性</h3>
+          <div class="reason-card">
+            <ul>
+              <li>
+                <strong>自動化と生産性向上</strong> - 労働集約的作業の効率化
+              </li>
+              <li>
+                <strong>意思決定支援</strong> - データドリブンな予測と判断
+              </li>
+              <li>
+                <strong>イノベーション創出</strong> - 新ビジネスモデルとサービス
+              </li>
+              <li>
+                <strong>社会課題解決</strong> - 環境、医療、教育分野での貢献
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12: Try AI -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">💡 AIに質問してみよう！</div>
+          <div class="slide-subtitle">Let's Try!</div>
+        </div>
+        <div class="slide-content">
+          <h3>実習手順</h3>
+          <div class="reason-card">
+            <h4>ステップ1: ChatGPTにアクセス</h4>
+            <p>
+              <strong>chat.openai.com</strong>
+              にアクセスしてGoogleアカウントでログイン
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <h4>ステップ2: AI歴史の簡単説明を依頼</h4>
+            <div class="quote">
+              以下の文章を小学生でもわかるように説明してください。<br />
+              """<br />
+              AIの歴史は、1950年代の初頭にまで遡ります。英国の数学者アラン・チューリングは、「機械は考えることができるか？」という問いを提起し、チューリングテストとして知られる考え方を提案しました。これは、人間が機械との対話からその相手が機械か人間かを判別できない場合、その機械は「知的」と見なすことができるというものです。<br />
+              ...<br />
+              """
+            </div>
+          </div>
+
+          <div class="reason-card">
+            <h4>ステップ3: 疑問点を質問</h4>
+            <p><strong>例:</strong> 「冬の時代とはなんですか？」</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 13: Generative AI -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">✨ 注目される生成AI</div>
+          <div class="slide-subtitle">新しいコンテンツを生み出すAI</div>
+        </div>
+        <div class="slide-content">
+          <div class="highlight">
+            <h3>生成AI（Generative AI）とは</h3>
+            <p>人間のように新しいコンテンツを「生成」することができるAI技術</p>
+            <p>
+              大量のデータから学習し、パターンを把握して全く新しいコンテンツを生み出す
+            </p>
+          </div>
+
+          <h3>生成AIができること</h3>
+          <div class="reason-card">
+            <ul>
+              <li><strong>テキスト生成</strong> - 記事、物語、詩を自動作成</li>
+              <li>
+                <strong>画像/動画生成</strong> -
+                記述に基づいた視覚的コンテンツ作成
+              </li>
+              <li>
+                <strong>音楽生成</strong> - スタイルを指定したオリジナル楽曲作成
+              </li>
+              <li><strong>言語翻訳</strong> - 高品質な多言語翻訳</li>
+              <li>
+                <strong>データ解析と予測</strong> - トレンド分析と将来予測
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 14: AI Basic Concepts Try -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">💡 AI基礎概念 - 実習</div>
+          <div class="slide-subtitle">AIに質問してみよう！</div>
+        </div>
+        <div class="slide-content">
+          <h3>実習課題</h3>
+          <div class="reason-card">
+            <h4>質問1: 基本的な事実確認</h4>
+            <div class="quote">日本の総理大臣を教えてください。</div>
+          </div>
+
+          <div class="reason-card">
+            <h4>質問2: 具体的な組織情報</h4>
+            <div class="quote">京都芸術大学の学長は誰ですか？</div>
+          </div>
+
+          <div class="highlight">
+            <h4>注目ポイント</h4>
+            <p>
+              AIの回答の正確性、情報の新しさ、回答の根拠について観察してみましょう
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 15: Large Language Models -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">🧠 大規模言語モデル</div>
+          <div class="slide-subtitle">AI技術との関連性</div>
+        </div>
+        <div class="slide-content">
+          <div class="highlight">
+            <h3>大規模言語モデルとは</h3>
+            <p>
+              大量のテキストデータから学習し、人間のように自然言語を理解し生成するAI技術
+            </p>
+            <p><strong>代表例:</strong> GPT、Gemini、Claude等</p>
+          </div>
+
+          <div class="reason-card">
+            <h3>技術の基盤</h3>
+            <ul>
+              <li>
+                <strong>ディープラーニング</strong> -
+                多層ニューラルネットワークによる学習
+              </li>
+              <li>
+                <strong>トランスフォーマーモデル</strong> -
+                自然言語処理に特化したアーキテクチャ
+              </li>
+              <li>
+                <strong>機械学習の進化</strong> - データ駆動型アプローチの最前線
+              </li>
+            </ul>
+          </div>
+
+          <div class="reason-card">
+            <h3>AIの分類における位置づけ</h3>
+            <div class="image-container">
+              <img
+                src="images/category_ai.png"
+                alt="生成AIと分類"
+                class="slide-image"
+              />
+              <div class="image-caption">AIの分類と生成AIの位置づけ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 16: Machine Learning -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">🤖 機械学習（ML）とは？</div>
+          <div class="slide-subtitle">コンピュータが学習する仕組み</div>
+        </div>
+        <div class="slide-content">
+          <div class="highlight">
+            <h3>機械学習の基本</h3>
+            <p>コンピュータがデータから学習し、タスクを改善する技術</p>
+            <p>大規模言語モデルの学習プロセスにも応用される</p>
+          </div>
+
+          <div class="reason-card">
+            <h3>学習方法の種類</h3>
+            <ul>
+              <li><strong>教師あり学習</strong> - 正解データを用いた学習</li>
+              <li><strong>教師なし学習</strong> - パターン発見による学習</li>
+              <li><strong>強化学習</strong> - 試行錯誤による学習</li>
+            </ul>
+          </div>
+
+          <div class="reason-card">
+            <h3>基本的な流れ</h3>
+            <p>学習データの準備 → 機械学習モデルの学習 → モデルの利用</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 17: ML Example -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">📊 機械学習の例</div>
+          <div class="slide-subtitle">大人・子供判定モデル</div>
+        </div>
+        <div class="slide-content">
+          <h3>サンプルデータ</h3>
+          <table class="schedule-table" style="font-size: 0.9em">
+            <thead>
+              <tr>
+                <th>体重(kg)</th>
+                <th>身長(cm)</th>
+                <th>分類</th>
+                <th>体重(kg)</th>
+                <th>身長(cm)</th>
+                <th>分類</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>70</td>
+                <td>175</td>
+                <td>大人</td>
+                <td>30</td>
+                <td>110</td>
+                <td>子供</td>
+              </tr>
+              <tr>
+                <td>55</td>
+                <td>160</td>
+                <td>大人</td>
+                <td>22</td>
+                <td>105</td>
+                <td>子供</td>
+              </tr>
+              <tr>
+                <td>45</td>
+                <td>120</td>
+                <td>子供</td>
+                <td>80</td>
+                <td>185</td>
+                <td>大人</td>
+              </tr>
+              <tr>
+                <td>50</td>
+                <td>150</td>
+                <td>大人</td>
+                <td>60</td>
+                <td>165</td>
+                <td>大人</td>
+              </tr>
+              <tr>
+                <td>68</td>
+                <td>180</td>
+                <td>大人</td>
+                <td>40</td>
+                <td>130</td>
+                <td>子供</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="reason-card">
+            <h3>分類の考え方</h3>
+            <div class="image-container">
+              <img
+                src="images/scatter_plot.png"
+                alt="散布図"
+                class="slide-image"
+              />
+              <div class="image-caption">体重と身長の散布図による分類</div>
+            </div>
+            <p>
+              <strong>数式例:</strong> w1(重み1) × 身長 + w2(重み2) × 体重 < 190
+            </p>
+            <div class="image-container">
+              <img
+                src="images/scatter_plot_predict.png"
+                alt="予測結果"
+                class="slide-image"
+              />
+              <div class="image-caption">機械学習による分類境界線</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 18: Deep Learning -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">🧮 ディープラーニング（DL）</div>
+          <div class="slide-subtitle">多層ニューラルネットワーク</div>
+        </div>
+        <div class="slide-content">
+          <div class="highlight">
+            <h3>ディープラーニングとは</h3>
+            <p>
+              機械学習の一つの手法で、多層ニューラルネットワークを使用した学習方法
+            </p>
+            <p>大規模言語モデルの背後にある主要な技術</p>
+          </div>
+
+          <div class="reason-card">
+            <h3>ニューラルネットワークの構造</h3>
+            <div class="image-container">
+              <img
+                src="images/deep_learning.png"
+                alt="ディープラーニング"
+                class="slide-image"
+              />
+              <div class="image-caption">多層ニューラルネットワークの構造</div>
+            </div>
+            <ul>
+              <li><strong>人間の脳を模倣</strong> - 計算モデルの一種</li>
+              <li>
+                <strong>ノード（ニューロン）</strong> -
+                基本的な計算単位が相互接続
+              </li>
+              <li>
+                <strong>パターン学習</strong> - 入力データから規則性を発見
+              </li>
+              <li>
+                <strong>予測・分類</strong> -
+                学習したパターンで新しいデータを処理
+              </li>
+            </ul>
+          </div>
+
+          <div class="reason-card">
+            <h3>応用例</h3>
+            <p><strong>画像認識:</strong> 数字認識、文字認識、物体検出</p>
+            <p><strong>自然言語処理:</strong> 翻訳、要約、対話システム</p>
+            <p><strong>音声処理:</strong> 音声認識、音声合成</p>
+            <p>
+              <strong>デモ動画:</strong>
+              <a
+                href="https://www.youtube.com/watch?v=6M5VXKLf4D4"
+                target="_blank"
+                >数字認識の例</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 19: Rule-based Systems -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">📋 ルールベースシステム</div>
+          <div class="slide-subtitle">従来の手法とその限界</div>
+        </div>
+        <div class="slide-content">
+          <div class="highlight">
+            <h3>ルールベースシステムとは</h3>
+            <p>明確なルールや手続きに基づいて意思決定を行うシステム</p>
+            <p>伝統的なプログラミングの一形態</p>
+          </div>
+
+          <div class="reason-card">
+            <h3>利点</h3>
+            <ul>
+              <li><strong>透明性</strong> - 判断過程が明確</li>
+              <li>
+                <strong>解釈可能性</strong> - なぜその結果になったかがわかる
+              </li>
+              <li><strong>確実性</strong> - 同じ入力には同じ出力</li>
+            </ul>
+          </div>
+
+          <div class="reason-card">
+            <h3>限界</h3>
+            <ul>
+              <li><strong>複雑な問題への対応困難</strong></li>
+              <li><strong>未知の状況への適応能力不足</strong></li>
+              <li><strong>ルールの管理・更新の負担</strong></li>
+            </ul>
+          </div>
+
+          <div class="reason-card">
+            <h3>進化</h3>
+            <p>
+              初期のエキスパートシステム →
+              現在は機械学習・ディープラーニングとの組み合わせ
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 21: Workshop Introduction -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">🎯 AIワークショップ</div>
+          <div class="slide-subtitle">生成AIは学生生活をどう変えるか？</div>
+        </div>
+        <div class="slide-content">
+          <div class="image-container">
+            <img
+              src="images/workshop_example.png"
+              alt="ワークショップ例"
+              class="slide-image"
+            />
+            <div class="image-caption">ワークショップのイメージ</div>
+          </div>
+
+          <div class="highlight">
+            <h3>🎯 テーマ</h3>
+            <p>「生成AIは自分たち学生の生活をどう変えるだろうか？」</p>
+          </div>
+
+          <div class="reason-card">
+            <h3>📋 議題</h3>
+            <ul>
+              <li><strong>AIに関する期待</strong></li>
+              <li><strong>AIに関する不安</strong></li>
+              <li><strong>生成AIでしたいこと</strong></li>
+              <li><strong>疑問点</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 22: Workshop Schedule -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">⏰ ワークショップの進め方</div>
+          <div class="slide-subtitle">90分間のスケジュール</div>
+        </div>
+        <div class="slide-content">
+          <div class="reason-card">
+            <h3>🚀 準備（10分）</h3>
+            <ul>
+              <li>出欠登録</li>
+              <li>チーム分け</li>
+              <li>ホワイトボードにテンプレート作成</li>
+            </ul>
+          </div>
+
+          <div class="reason-card">
+            <h3>💭 セッション1：期待と不安（19分）</h3>
+            <ul>
+              <li>
+                <strong>発散と収束</strong>「AIに関する期待と不安」（12分）
+              </li>
+              <li><strong>発表と質疑応答</strong>（7分 × 4チーム）</li>
+            </ul>
+          </div>
+
+          <div class="reason-card">
+            <h3>🎨 セッション2：やりたいこと・疑問（19分）</h3>
+            <ul>
+              <li>
+                <strong>発散と収束</strong>「生成AIでしたいこと、疑問」（12分）
+              </li>
+              <li><strong>発表と質疑応答</strong>（7分 × 4チーム）</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 23: Summary -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">📝 本日のまとめ</div>
+          <div class="slide-subtitle">講義の要点復習</div>
+        </div>
+        <div class="slide-content">
+          <div class="highlight">
+            <h3>🎯 本日学んだこと</h3>
+          </div>
+
+          <div class="reason-card">
+            <h3>📚 AIの理解</h3>
+            <p>歴史に基づき、<strong>AI（人工知能）</strong>とは何かを考察</p>
+            <ul>
+              <li>1950年代のチューリングテストから現在まで</li>
+              <li>機械学習・ディープラーニングの発展</li>
+              <li>ルールベースシステムとの違い</li>
+            </ul>
+          </div>
+
+          <div class="reason-card">
+            <h3>✨ 生成AIの体験</h3>
+            <p>現在、最も注目されている<strong>生成AI</strong>を理解</p>
+            <p><strong>💡 どんどん使おう！！</strong></p>
+          </div>
+
+          <div class="reason-card">
+            <h3>🤝 ワークショップ</h3>
+            <p>自分たちの<strong>AIへの考え</strong>を整理し、共有</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 24: Next Class Preview -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">🔮 次回講義の予告</div>
+          <div class="slide-subtitle">AIの活用と倫理</div>
+        </div>
+        <div class="slide-content">
+          <div class="highlight">
+            <h3>📅 次回のテーマ</h3>
+          </div>
+
+          <div class="reason-card">
+            <h3>💼 働き方の変化</h3>
+            <p><strong>AIで働き方がどう変わると予想されているか</strong></p>
+            <ul>
+              <li>業務の自動化と効率化</li>
+              <li>新しいスキルセットの必要性</li>
+              <li>人間とAIの協働</li>
+            </ul>
+          </div>
+
+          <div class="reason-card">
+            <h3>⚠️ AIの倫理と注意点</h3>
+            <p><strong>AIを使う際に気をつけるべきこととは？</strong></p>
+            <ul>
+              <li>プライバシーと情報セキュリティ</li>
+              <li>バイアスと公平性</li>
+              <li>責任ある使用方法</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 25: References -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-title">📚 参考情報</div>
+          <div class="slide-subtitle">さらなる学習のために</div>
+        </div>
+        <div class="slide-content">
+          <div class="reason-card">
+            <h3>🔗 参考サービス</h3>
+            <ul>
+              <li>
+                <a href="https://chat.openai.com/" target="_blank"
+                  ><strong>ChatGPT</strong></a
+                >
+                - OpenAI
+              </li>
+              <li>
+                <a href="https://gemini.google.com/" target="_blank"
+                  ><strong>Gemini</strong></a
+                >
+                - Google
+              </li>
+              <li>
+                <a href="https://claude.ai/" target="_blank"
+                  ><strong>Claude</strong></a
+                >
+                - Anthropic
+              </li>
+            </ul>
+          </div>
+
+          <div class="reason-card">
+            <h3>📖 参考文献</h3>
+            <ul>
+              <li>
+                <a
+                  href="https://imidas.jp/genre/detail/K-102-0113.html"
+                  target="_blank"
+                  >imidas: ダートマス会議</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.amazon.co.jp/大規模言語モデルは新たな知能か"
+                  target="_blank"
+                  >大規模言語モデルは新たな知能か - 岡野原大輔</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.amazon.co.jp/教養としての生成AI"
+                  target="_blank"
+                  >教養としての生成AI - 清水亮</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="reason-card">
+            <h3>🎥 参考動画</h3>
+            <ul>
+              <li>
+                <a
+                  href="https://www.youtube.com/watch?v=U9vhGvFxKu0"
+                  target="_blank"
+                  >「生成AI」松尾豊・東京大学大学院教授</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://ibm-learning.udemy.com/course/google-jp-ai/"
+                  target="_blank"
+                  >はじめてのAI - IBM Learning</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="navigation">
+      <button class="nav-btn" onclick="previousSlide()" id="prevBtn">
+        ◀ 前へ
+      </button>
+      <button class="nav-btn" onclick="nextSlide()" id="nextBtn">次へ ▶</button>
+    </div>
+
+    <script>
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide");
+      const totalSlides = slides.length;
+
+      document.getElementById("total-slides").textContent = totalSlides;
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.remove("active");
+          if (i === index) {
+            slide.classList.add("active");
+          }
+        });
+
+        document.getElementById("current-slide").textContent = index + 1;
+        document.getElementById("prevBtn").disabled = index === 0;
+        document.getElementById("nextBtn").disabled = index === totalSlides - 1;
+      }
+
+      function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+          currentSlide++;
+          showSlide(currentSlide);
+        }
+      }
+
+      function previousSlide() {
+        if (currentSlide > 0) {
+          currentSlide--;
+          showSlide(currentSlide);
+        }
+      }
+
+      // キーボードナビゲーション
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === " ") {
+          nextSlide();
+        } else if (e.key === "ArrowLeft") {
+          previousSlide();
+        }
+      });
+
+      // 初期表示
+      showSlide(0);
+    </script>
+  </body>
+</html>
