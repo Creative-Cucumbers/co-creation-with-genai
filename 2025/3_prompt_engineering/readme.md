@@ -28,43 +28,43 @@
 
 ### 
 
+### 生成AIサービス利用準備 (5 分)
+
+生成AIをすぐに利用できるようにしておこう。
+以下の中で利用したいサービスをクリック、Googleアカウントでログインすれば、利用できるようになります。
+
+1. [ChatGPT](https://chat.openai.com/)
+2. [Claude](https://claude.ai/)
+3. [Gemini](https://gemini.google.com/app)
+
 ### アイスブレイク (10 分)
 
 ```
-朝ごはん何食べました？
-1. パン
-2. ごはん
-3. その他
-4. 食べてない
+今週、生成AI使いましたか？
+:one: ほぼ毎日
+:two: 数回
+:three: ほぼ使ってない
 ```
 
 ```
-1週間で生成AI使いました？
-1. ほぼ毎日
-2. 数回
-3. ほぼ使ってない
+今日はどの生成AIを相棒として使う予定?
+:one: ChatGPT
+:two: Claude
+:three: Gemini
+:four: その他 (スレッドでサービス名を投稿)
 ```
 
 ```
 Meta 社のオープンソースLLM llama3が公開されたこと知ってます？
-1. 知ってる
-2. なにそれおいしいの？
-```
-
-- [Meta Llama 3](https://llama.meta.com/llama3/)
-- [HuggingChat](https://huggingface.co/chat/)
-
-```
-Adobe のライセンス持ってる？
-1. 持っている
-2. 持っていない
+:one: 知ってる
+:two: なにそれおいしいの？
 ```
 
 ```
-HTML/css触ったことある？
-1. ある
-2. ちょっとだけ
-3. なにそれおいしいの？
+HTML/CSS触ったことある？
+:one: ある
+:two: ちょっとだけ
+:three: なにそれおいしいの？
 ```
 
 ### 前回の振り返り (10 分)
@@ -78,12 +78,6 @@ HTML/css触ったことある？
 > 前回のノートを要約してみよう
 
 > この文章は、AI 技術の活用と倫理に関する講義内容を詳述しています。主に、AI の基礎と応用、倫理的課題、そして AI 技術が職業に与える影響に焦点を当てています。講義では、生成 AI や大規模言語モデルなどの技術的側面に加えて、AI が職業や社会に与える潜在的影響を探求し、AI 倫理について深く議論しています。具体的な技術解説にはトランスフォーマーや自己教師あり学習が含まれ、AI の応用が労働市場に与える効果を「労働保管型」と「労働置換型」の観点から評価しています。さらに、AI 倫理のセッションでは AI のリスクと対策について説明し、具体的な事例を通じて理解を深めるアプローチが取られています。
-
-### 利用する生成 AI (5 分)
-
-- [ChatGPT](https://chat.openai.com/)
-- [Copilot](https://copilot.microsoft.com/)
-- [Adobe Firefly](https://firefly.adobe.com/)
 
 ### 生成 AI はどのように使われている？ (5 分)
 
@@ -108,10 +102,10 @@ HTML/css触ったことある？
 ![soumu](images/soumu.png)
 
 > [!NOTE]
-> 上記サイトを要約してみよう
+> 要約: 総務省サイトを要約してみよう
 
 > [!NOTE]
-> ChatGPT 4 に pdf ファイルをアップロードしてみよう
+> 生成AIにpdf ファイルをアップロードしてみよう
 
 #### 文部科学省
 
@@ -122,23 +116,56 @@ HTML/css触ったことある？
 #### デロイト
 
 - Text
+
 - Image
+
 - Audio
+
 - Video
+
 - Code
+
 - 3d/Specialized
 
-- [Gen AI use cases by type and industry | Deloitte US](https://www2.deloitte.com/us/en/pages/consulting/articles/gen-ai-use-cases.html)
+  参考: [Gen AI use cases by type and industry | Deloitte US](https://www2.deloitte.com/us/en/pages/consulting/articles/gen-ai-use-cases.html)
 
 #### IBM
 
-- 要約
-- セマンティック検索
-- コンテンツ作成
-- コード作成
+- コードの生成
 
-- [生成 AI のユースケースと潜在的リスク : 問題点やデメリットはないのか？ | IBM ソリューション ブログ](https://www.ibm.com/blogs/solutions/jp-ja/exploring-generative-ai-to-maximize-experiences-decision-making-and-business-value/)
-- [CEO のための生成 AI 活用ガイド - 総集編 | IBM](https://www.ibm.com/thought-leadership/institute-business-value/jp-ja/report/ceo-generative-ai-jp)
+- カスタマー・サポートとサービス
+
+- 教育
+
+- 金融サービスと投資分析
+
+- 不正アクセス検知とリスク管理
+
+- グラフィック・デザインと動画
+
+- 医療
+
+- 人事 (HR)
+
+- 保険
+
+- 法務およびコンプライアンス支援
+
+- 製品開発
+
+- プロジェクト管理と運用
+
+- 販売およびマーケティング
+
+- サプライチェーン
+
+- 合成データ生成
+
+  参考: [生成AIのユースケース](https://www.ibm.com/jp-ja/think/topics/generative-ai-use-cases)
+
+  参考: [CEO のための生成 AI 活用ガイド - 総集編 | IBM](https://www.ibm.com/thought-leadership/institute-business-value/jp-ja/report/ceo-generative-ai-jp)
+
+
 
 ### 生成 AI を組み込んだシステム (5 分)
 
@@ -209,9 +236,6 @@ https://www.kyoto-art.ac.jp/
 
 > [!NOTE]
 > 画像を説明してもらおう
-
-- [Copilot](https://copilot.microsoft.com/)
-- [LLaVA](https://llava.hliu.cc/)
 
 #### 深掘り (5 分)
 
