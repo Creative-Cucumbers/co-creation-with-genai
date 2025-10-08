@@ -53,7 +53,7 @@
 ```
 
 ```
-Meta 社のオープンソースLLM llama3が公開されたこと知ってます？
+OpenAIからAgent Builderが発表されたの知ってる?
 :one: 知ってる
 :two: なにそれおいしいの？
 ```
