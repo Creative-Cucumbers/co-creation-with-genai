@@ -196,7 +196,7 @@ HTML/CSS触ったことある？
 
 #### RAG (Retrieval-Augmented Generation：検索拡張生成)
 
-Copilot 等は、検索機能と生成 AI（LLM）を組み合わせて RAG (Retrieval-Augmented Generation) と呼ばれる方法で実現しています。
+最近のAIサービスは、検索機能と生成 AI（LLM）を組み合わせて RAG (Retrieval-Augmented Generation) と呼ばれる方法で実現しています。
 
 > 生成系 AI／LLM（大規模言語モデル）の RAG（Retrieval-Augmented Generation：検索拡張生成）とは、ChatGPT や Gemini に代表されるチャット AI に独自の情報源を付与する仕組みのことで、具体的には言語モデルによるテキスト生成に特定の知識や情報源（例えばナレッジベースなど）への検索を組み合わせることである。
 
@@ -344,9 +344,6 @@ https://www.kyoto-art.ac.jp/
 > 作品（画像）についてアドバイスしてもらおう
 > ヒント: 役割付与で批評家として評価してもらい、制約の明示で色使い・構図・改善提案など欲しい観点を指定しよう。
 
-- [Copilot](https://copilot.microsoft.com/)
-- [LLaVA](https://llava.hliu.cc/)
-
 ### ポートフォーリオサイト
 
 #### 構成を考える (5 分)
@@ -360,9 +357,6 @@ https://www.kyoto-art.ac.jp/
 > [!NOTE]
 > 画像について説明してもらおう
 > ヒント: 役割付与でギャラリストやエディター視点を指定し、制約の明示で文字数やトーンを伝えよう。
-
-- [Copilot](https://copilot.microsoft.com/)
-- [LLaVA](https://llava.hliu.cc/)
 
 > [!WARNING]
 > 自分の言葉で考えることは大前提ですが。
@@ -426,7 +420,7 @@ https://www.kyoto-art.ac.jp/
 私は、芸術大学で「ビジネス（B）」「テクノロジー（T）」「クリエイティブ（C）」を学んでいます。どのようなキャリアが考えられるでしょうか。
 ```
 
-#### Copilot（RAG）を利用して情報収集 (5 分)
+#### RAGを利用して情報収集 (5 分)
 
 > [!NOTE]
 > 気になる企業や団体について情報収集しよう
