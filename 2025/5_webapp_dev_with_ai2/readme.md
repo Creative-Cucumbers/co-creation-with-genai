@@ -13,17 +13,15 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 
 ---
 
-## 1-1 限目：振り返りと Web サイト・Web アプリの基礎 (13:40-)
+## 1限目：振り返りと Web サイト・Web アプリの基礎 (13:40-)
 
 ### 3 限出席コード
 
-出席コードを slack に投稿します。
+出席コードをディスプレイに表示します。
 
 ### 講義の目的
 
 この講義では、生成 AI（人工知能）活用方法の基本を学び、AI を用いた創作活動の可能性に焦点を当てます。学生には、AI 技術がクリエイティブな分野でどのように利用され、どのような影響を与えるかを理解してもらうことが目的です。この講義を通じて、学生は AI を活用した Web アプリケーション開発手法を身につけることができるようになります。最終的には、技術の進歩を活かして個人の創造性をさらに伸ばすための知識と技術を提供します。
-
-
 
 | 回数     | 1<br />(9/25) |  2<br />(10/2)  |       3<br />(10/9)        |      4<br />(10/16)       |      5<br />(10/23)       | 6<br />(11/6) | 7<br />(11/13) |
 | -------- | :-----------: | :-------------: | :------------------------: | :-----------------------: | :-----------------------: | :-----------: | :------------: |
@@ -73,26 +71,26 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 > Webアプリケーションの構造(特にフロントエンドとバックエンドの違い)理解できた?
 
 ```
-1. 完全に理解した
+1. そこそこ
 2. なんとなく
 3. 全然
 ```
 
-
-
-### 前回の振り返り (10 分)
-
-> [!Tip]
->
-> HTML、CSS、JavaScript って何？
->
-> 必要に応じて、深掘りして聞いてみよう
+### 前回の振り返り - 理解できていない箇所の質問と深堀り (10 分)
 
 > [!Tip]
 >
 > Web アプリケーションの構造を教えて
+> 中学生でもわかるように説明して
 
-### 前回の振り返り (20 分)
+> [!Tip]
+>
+> HTML、CSS、JavaScript って何？
+> 必要に応じて、深掘りして聞いてみよう
+
+
+
+### 前回の振り返り - Webアプリケーションの作成 (20 分)
 
 > [!Note]
 >
@@ -104,7 +102,7 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 > 4. トップページを作ってみよう
 > 5. 共有してみよう
 
-例：
+例 コーポレートサイト作成：
 
 ```
 下記説明を元に、HTML、CSS、JavaScriptでコーポレートサイトを書いて
@@ -119,24 +117,211 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 久しぶりに会う友人と飲むために店を選んでいて、google map経由で気になってのぞいてみた
 
 # 要件
-- 全てのファイルはルートフォルダに配置
+- バックエンドは利用しない
+- JavaScriptはreactを使わず、Vanilla JSだけを利用してください。
 - htmlのファイル名はindex.html
 - cssのファイル名はstyles.css
 ```
 
 > [!Tip]
 >
-> [co-creation-with-genai/2024/4_webapp_dev_with_ai/readme.md at main · Creative-Cucumbers/co-creation-with-genai](https://github.com/Creative-Cucumbers/co-creation-with-genai/blob/main/2024/4_webapp_dev_with_ai/readme.md)
+> Webアプリケーションのファイルをダウンロードして、自分のPC上でも動作することを確認してみよう。
 
-### 画像から生成 (5 分)
+
+
+### 前回の補足 - バックエンドを利用したアプリケーション開発 - 天気アプリの作成 (10 分)
+
+
+
+> [!Note]
+>
+> Web APIの仕様を理解しよう
+
+```
+以下のAPIの仕様を教えてください。
+https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m
+```
+
+
+
+> [!Note]
+>
+> Web APIを実行してみよう
+>
+> ①ブラウザでAPIを実行
+> ブラウザのURLにhttps://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2mをいれて、エンターキーを押下
+>
+> ②CLIでAPIを実行
+> Windows (PowerShellを開いて以下のコマンドを実行):
+>
+> ```powershell
+> Invoke-RestMethod -Uri "https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m"
+> ```
+>
+> Mac (Terminalを開いて以下コマンドを実行):
+> ```shell
+> curl "https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m"
+> ```
+>
+> ③生成AIを活用してAPIを実行
+>
+> ```
+> 以下のAPIを実行し、実行結果を見せてくれませんか?
+> https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m
+> ```
+
+
+
+> [!Note]
+>
+> 天気アプリを作ってみよう
+
+````
+下記APIを使って、京都の気温をグラフ表示する簡単なwebサイトをHTMLで作ってください。
+
+URL:
+https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m
+
+
+````
+
+[🌦️ Docs | Open-Meteo.com](https://open-meteo.com/en/docs)
+
+### Web サイト・Web アプリケーションの基礎 (15 分)
+
+あらためて、Web サイトや Web アプリケーションが動く仕組みについて整理してみましょう
+
+参考：
+[co-creation-with-genai/2024/4_webapp_dev_with_ai/readme.md at main · Creative-Cucumbers/co-creation-with-genai](https://github.com/Creative-Cucumbers/co-creation-with-genai/blob/main/2024/4_webapp_dev_with_ai/readme.md#web%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A8%E3%81%AF)
+
+#### Web アプリケーションについて改めて理解しようとしてみよう
+
+![](./images/backend.png)
 
 > [!Tip]
 >
-> 画像から、コードを生成してもらうことも！
+> Web アプリケーションについて改めて調べてみよう
 
-![](./images/from_image.png)
+```
+APIとWeb APIとバックエンドについて教えて
+```
 
-## 1-2 限目： 動きのあるサイト 〜シューティングゲームを作ろう〜 (14:30-)
+```
+Web API ってどんなものがある？
+```
+
+```
+Web アプリはなぜ、フロントエンドとバックエンド（Web API）で分けている？
+```
+
+
+
+#### HTML
+
+> [!Tip]
+>
+> HTML はどう書く？
+
+> [!Tip]
+>
+> HTML にはどんなタグがある？
+
+#### CSS
+
+> [!Tip]
+>
+> CSS ファイルはどう書く？
+
+> [!Tip]
+>
+> CSS にはどんなプロパティがある？
+
+#### JavaScript/TypeScript
+
+> [!Tip]
+>
+> JavaScript はどう書く？
+
+> [!Tip]
+>
+> JavaScript はどんな構文がある？
+
+> [!Tip]
+>
+> JavaScriptとTypeScriptの違いは? 
+
+
+
+#### リッチなWebアプリケーション開発を支援するツール郡
+
+リッチなWebアプリケーションを作成するために下記のようなライブラリ（事前に作成された機能を提供するプログラムの塊）やフレームワーク（ルールに従ってファイル配置すると楽にアプリを開発できるライブラリの塊）を使うこともあります。
+
+ライブラリ例: [React](https://ja.react.dev/)
+
+Webアプリケーションフレームワーク例: [Next.js by Vercel - The React Framework](https://nextjs.org/)
+
+UIコンポーネント: [MUI Core: Ready-to-use React components, free forever](https://mui.com/core/)
+
+> [!Tip]
+>
+> 上記の中で気になるツールについて生成AIに聞いてみよう。
+
+#### まとめ
+
+> [!Note]
+>
+> HTML と CSS と JavaScript について整理して教えて
+
+> [!Tip]
+>
+> [1 冊ですべて身につく HTML & CSS と Web デザイン入門講座 | SB クリエイティブ](https://www.sbcr.jp/product/4797398892/)
+>
+> [1 冊ですべて身につく JavaScript 入門講座 | SB クリエイティブ](https://www.sbcr.jp/product/4815615758/)
+
+### [オプション1] ラフなデザインからWebアプリケーション生成 (10 分)
+
+①手書きでラフなデザインを描いたあと、生成AIに綺麗にしてもらおう。
+
+```
+添付の画像をベースにプロトタイプデザインの画像を作成してください。
+このポートフォリオサイトでは他の会社の人に自分の作品を見てもらい仕事を受けれるようになりたいと思っています。
+```
+
+![from_image](images/from_image.png)
+
+②プロトタイプデザインをベースにWebアプリケーションを作成する
+
+```
+添付画像のWebサイトを作成してください。
+```
+
+![from_image_2](images/from_image_2.png)
+
+![from_image_3](images/from_image_3.png)
+
+
+
+### [オプション2] ポケモンずかんを作ろう (10 分)
+
+> [!Tip]
+>
+> PokeAPI を使ってポケモンずかんを作ってみよう
+
+[トップページ｜ポケモンずかん](https://zukan.pokemon.co.jp/)
+https://www.pokemon.co.jp/rules/
+
+[PokéAPI](https://pokeapi.co/)
+
+参考：
+[ご利用について｜ポケットモンスターオフィシャルサイト](https://www.pokemon.co.jp/rules/)
+
+
+
+## 2-1 限目： 動きのあるサイト 〜シューティングゲームを作ろう〜 (15:40--)
+
+### 2限出席コード
+
+出席コードをディスプレイに表示します。
 
 ### シューティングゲームを作ってみよう (30 分)
 
@@ -147,6 +332,8 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 ```
 シューティングゲームを作成してください。HTML、CSS、JavaScriptで作成してください。
 また、以下の要件も満たしてください。
+- バックエンドは利用しない
+- 初心者でもわかりやすいファイル構造
 - 全てのファイルはルートフォルダに配置
 - htmlのファイル名はindex.html
 - CSSのファイル名はstyles.css
@@ -159,21 +346,18 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 >
 > コードを理解しよう
 
+```
+index.htmlの内容をわかりやすく解説してください。
+```
+
+
+
 > [!Tip]
 >
 > ルールを AI と相談しながら仕様を決めてアップデートしていこう
 
 ```
-シューティングゲームを作成してください。HTML、CSS、JavaScriptで作成してください。
-また、以下の要件も満たしてください。
-- 全てのファイルはルートフォルダに配置
-- htmlのファイル名はindex.html
-- CSSのファイル名はstyles.css
-- JavaScriptのファイル名はscript.js
-- グラフィックにはcanvasを使う
-- 矢印キーで移動
-- スペースキーで弾を発射
-- 定期的に敵が出現
+さらに機能を追加したいですが、追加機能のイメージが湧きません。追加機能候補を10個教えてください。
 ```
 
 > [!Tip]
@@ -181,11 +365,7 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 > 対話的に機能を追加しても OK
 
 ```
-スペースキーで弾を発射できるようにして
-```
-
-```
-動かないんだけど
+パワーアップアイテムの追加して
 ```
 
 > [!Tip]
@@ -201,26 +381,13 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 > さらにアップデートしていこう
 
 ```
-シューティングゲームを作成してください。HTML、CSS、JavaScriptで作成してください。
-また、以下の要件も満たしてください。
-- 全てのファイルはルートフォルダに配置
-- htmlのファイル名はindex.html
-- CSSのファイル名はstyles.css
-- JavaScriptのファイル名はscript.js
-- グラフィックにはcanvasを使う
-- 矢印キーで移動
-- スペースキーで弾を発射
-- 定期的に敵が出現
+以下の要件を追加してください。
 - 弾が的に当たったら10点
 - 敵にぶつかったらゲームオーバー
 - 制限時間は15秒
 ```
 
 ### スマホで使えるようにしてみよう (15 分)
-
-> [!Note]
->
-> スマホでアクセスしてみよう
 
 > [!Note]
 >
@@ -240,12 +407,11 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 
 ```
 シューティングゲームを作成してください。HTML、CSS、JavaScriptで作成してください。
-また、以下の要件も満たしてください。
-- 全てのファイルはルートフォルダに配置
-- htmlのファイル名はindex.html
-- CSSのファイル名はstyles.css
-- JavaScriptのファイル名はscript.js
+また、以下の制約と要件も満たしてください。
+## 開発制約
+- CodeSandboxのReact(TS)にデプロイ可能な構成
 - グラフィックにはcanvasを使う
+## 機能要件
 - 矢印キーで移動
 - スペースキーで弾を発射
 - 定期的に敵が出現
@@ -257,11 +423,18 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 - スマホの場合は傾けたら移動
 ```
 
-## 2-1 限目： 様々なユーザー入力 〜センサー入力をもっと試してみよう〜 (15:40-)
+> [!Note]
+>
+> スマホでアクセスしてみよう
+>
+> ① Google AI Studio上で共有 `Share app` を押下
+> ② アプリケーションURLをコピー後、新しいブラウザのタブで開く
+> ③ ブラウザ上で共有 ` キャスト、保存、共有`→ `QRコードを作成` を押下
+> ④ スマホでQRコードをスキャンし、
 
-### 2限出席コード
 
-出席コードを slack に投稿します。
+
+## 2-2 限目： 様々なユーザー入力 〜センサー入力をもっと試してみよう〜 (16:30-)
 
 ### Web アプリでデバイスの機能を呼び出せる仕組み (10 分)
 
@@ -334,154 +507,7 @@ webのsensor apisとweb apiとは違う？
 >
 > Web アプリの HTML や JavaScript で、スマホのバイブレーションを操作する方法を教えて
 
-## 2-2 限目： バックエンド呼び出し 〜外部 API を使った Web サービスを作ろう〜 (16:30-)
 
-### 天気アプリを作ってみよう (10 分)
-
-> [!Note]
->
-> 天気アプリを作ってみよう
-
-````
-下記APIを使って、京都の気温をグラフ表示する簡単なwebサイトをHTMLで作りたい
-
-URL:
-https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m
-
-レスポンス:
-```json
-{
-  "latitude": 52.52,
-  "longitude": 13.419,
-  "elevation": 44.812,
-  "generationtime_ms": 2.2119,
-  "utc_offset_seconds": 0,
-  "timezone": "Europe/Berlin",
-  "timezone_abbreviation": "CEST",
-  "hourly": {
-    "time": ["2022-07-01T00:00", "2022-07-01T01:00", "2022-07-01T02:00", ...],
-    "temperature_2m": [13, 12.7, 12.7, 12.5, 12.5, 12.8, 13, 12.9, 13.3, ...]
-  },
-  "hourly_units": {
-    "temperature_2m": "°C"
-  }
-}
-```
-
-````
-
-[🌦️ Docs | Open-Meteo.com](https://open-meteo.com/en/docs)
-
-### Web サイト・Web アプリケーションの基礎 (15 分)
-
-あらためて、Web サイトや Web アプリケーションが動く仕組みについて整理してみましょう
-
-参考：
-[co-creation-with-genai/2024/4_webapp_dev_with_ai/readme.md at main · Creative-Cucumbers/co-creation-with-genai](https://github.com/Creative-Cucumbers/co-creation-with-genai/blob/main/2024/4_webapp_dev_with_ai/readme.md#web%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A8%E3%81%AF)
-
-#### Web アプリケーションについて改めて調べてみよう
-
-![](./images/backend.png)
-
-> [!Tip]
->
-> Web アプリケーションについて改めて調べてみよう
-
-```
-APIとWeb APIとバックエンドについて教えて
-```
-
-```
-Web API ってどんなものがある？
-```
-
-```
-Web アプリはなぜ、フロントエンドとバックエンド（Web API）で分けている？
-```
-
-#### 具体例 （テックルズのアート作品にコメントしてもらう Web アプリ）
-
-![](./images/mfk2024.png)
-
-[テックルズ | Maker Faire Kyoto 2024 | Make: Japan](https://makezine.jp/event/makers-mfk2024/m0061/)
-
-上記プロジェクトの構成は以下の 3 要素から成り立っています。
-
-- Web ブラウザで実行するための HTML、CSS、JavaScript を配信する Web サーバー
-- 生成 AI の機能を呼び出すための Web API サーバー（外部サービス）
-- データを保存するための Web API サーバー
-
-このように役割ごとに要素を分離することで、セキュリティ、パフォーマンス、開発効率、保守性を担保します。
-
-参考：
-
-よりリッチに見せるために下記のようなフレームワーク（骨組み的なもの）・ライブラリ（図書館的なもの）を使っています。
-
-[React](https://ja.react.dev/)
-
-[Next.js by Vercel - The React Framework](https://nextjs.org/)
-
-[MUI Core: Ready-to-use React components, free forever](https://mui.com/core/)
-
-#### HTML
-
-> [!Tip]
->
-> HTML はどう書く？
-
-> [!Tip]
->
-> HTML にはどんなタグがある？
-
-#### CSS
-
-> [!Tip]
->
-> CSS ファイルはどう書く？
-
-> [!Tip]
->
-> CSS にはどんなプロパティがある？
-
-#### JavaScript
-
-> [!Tip]
->
-> JavaScript はどう書く？
-
-> [!Tip]
->
-> JavaScript はどんな構文がある？
-
-#### まとめ
-
-> [!Note]
->
-> HTML と CSS と JavaScript について整理して教えて
-
-> [!Tip]
->
-> [1 冊ですべて身につく HTML & CSS と Web デザイン入門講座 | SB クリエイティブ](https://www.sbcr.jp/product/4797398892/)
->
-> [1 冊ですべて身につく JavaScript 入門講座 | SB クリエイティブ](https://www.sbcr.jp/product/4815615758/)
-
-### [オプション] ポケモンずかんを作ろう (10 分)
-
-> [!Tip]
->
-> ポケモンのデータを取得できる PokeAPI を使ってポケモンずかんを作ってみよう
-
-[トップページ｜ポケモンずかん](https://zukan.pokemon.co.jp/)
-https://www.pokemon.co.jp/rules/
-
-[PokéAPI](https://pokeapi.co/)
-
-```
-PokeAPIを使って、HTMLとCSSとJavaScriptでポケモンずかんを作る方法を教えて
-```
-
-参考：
-[ご利用について｜ポケットモンスターオフィシャルサイト](https://www.pokemon.co.jp/rules/)
 
 ## まとめ (10 分)
 
@@ -494,7 +520,7 @@ PokeAPIを使って、HTMLとCSSとJavaScriptでポケモンずかんを作る�
 > 感想を共有しよう
 
 ```
-以下は授業の感想です。講師が傷つかないように建設的なフィードバックとなるように丁寧な文章にして。くれぐれも講師が傷つかないようによろしく。
+以下は授業の感想です。建設的なフィードバックとなるように丁寧な文章にして。
 
 # よかったところ
 - 動くものを作れた
