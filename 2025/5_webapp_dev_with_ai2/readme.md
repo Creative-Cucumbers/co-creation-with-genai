@@ -13,7 +13,7 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 
 ---
 
-## 1限目：振り返りと Web サイト・Web アプリの基礎 (13:40-)
+## 3-1 限目：振り返りとWeb アプリの基礎① (13:40-)
 
 ### 3 限出席コード
 
@@ -28,7 +28,7 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 | テーマ   |    AI 基礎    | AI の活用と倫理 | プロンプトエンジニアリング | AI を活用したアプリ生成 ① | AI を活用したアプリ生成 ② |   総合演習    |    総合演習    |
 | 担当講師 |  伊藤、小島   |      伊藤       |            小島            |           伊藤            |           小島            |  小島、伊藤   |   伊藤、小島   |
 
-### アイスブレイク (10 分)
+### アイスブレイク (5 分)
 
 > [!Note]
 >
@@ -64,8 +64,6 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 4. その他
 ```
 
-[Maker Faire Kyoto 2024 | Make: Japan](https://makezine.jp/event/mfk2024/)
-
 > [!Note]
 >
 > Webアプリケーションの構造(特にフロントエンドとバックエンドの違い)理解できた?
@@ -90,9 +88,133 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 
 
 
-### 前回の振り返り - Webアプリケーションの作成 (20 分)
+### 前回の振り返り  (15 分)
+
+生成AIを使って、実際にWebアプリケーションを作る方法を学びました。
+
+### 覚えておきたい3つの言葉 - AIでアプリケーションを開発する理由
+
+| 言葉                              | 意味                           | 提唱者             |
+| --------------------------------- | ------------------------------ | ------------------ |
+| ⚡ **Fail fast**                   | 速く失敗せよ                   | Silicon Valley文化 |
+| ✅ **Done is better than perfect** | 完璧を目指すよりまず終わらせろ | Mark Zuckerberg    |
+| 🚀 **Deploy or Die**               | デプロイ（公開）か死か         | Joi Ito            |
+
+> 💡 **ポイント**: 完璧を目指して何もできないより、まず作って試してみることが大事！
+
+####  使ったツール: Google AI Studio
+
+- Googleアカウントでログインするだけで使える
+- テキストで指示を出すとWebアプリが作れる
+- React（リアクト）という技術でアプリが生成される
+
+##### できること:
+
+1. プロンプト（指示文）を書く
+2. AIがコードを生成してくれる
+3. その場でアプリを試せる
+4. 修正したい部分をチャットで伝えられる
+
+#### 前回学んだこと
+
+##### Webアプリケーションの基本構造
+
+Webアプリは3つの部分でできています：
+
+```mermaid
+graph TB
+    A[👤 フロントエンド<br/>ユーザーが見る画面] --> B[⚙️ バックエンド<br/>裏側の処理]
+    B --> C[💾 データベース<br/>データの保管場所]
+    C --> B
+    B --> A
+```
+
+| 部分               | 役割                             | 使う技術                      |
+| ------------------ | -------------------------------- | ----------------------------- |
+| **フロントエンド** | ユーザーが見る画面・操作する部分 | HTML, CSS, JavaScript         |
+| **バックエンド**   | 裏側でデータを処理する部分       | Python, JavaScript, Java など |
+| **データベース**   | 情報を保存・管理する部分         | MySQL, MongoDB など           |
+
+> 💡 **例え話**: レストランで考えると...
+>
+> - フロントエンド = お客さんが見るメニューと店内
+> - バックエンド = 厨房での調理
+> - データベース = 食材の倉庫
+
+
+
+##### アプリ開発の流れ
+
+```mermaid
+graph LR
+    A[1.要件定義] --> B[2.設計]
+    B --> C[3.開発]
+    C --> D[4.テスト]
+    D --> E[5.デプロイ]
+    E --> F[6.運用保守]
+    
+```
+
+| 段階              | 説明             | AIの活用例                                                   |
+| ----------------- | ---------------- | ------------------------------------------------------------ |
+| **1. 要件定義**   | 何を作るか決める | 「キャンプで使えるアプリを作りたい」→ 必要な機能リストを提案 |
+| **2. 設計**       | どう作るか考える | データベース設計、フローチャート（Mermaid図）の作成          |
+| **3. 開発**       | 実際に作る       | コードの生成、SQL文の作成                                    |
+| **4. テスト**     | 動作確認         | テストコードの生成                                           |
+| **5. デプロイ**   | 公開する         | デプロイ用のコマンド生成                                     |
+| **6. 運用・保守** | 改善し続ける     | 監視設定の手順説明                                           |
+
+
+
+##### 複雑なアプリを作るコツ
+
+一度で完璧なアプリは作れません。以下のサイクルを繰り返します：
+
+```mermaid
+graph LR
+    A[💡 アイディア出し] --> B[🤖 コード生成]
+    B --> C[🔧 バグ修正]
+    C --> D[📖 コードを理解]
+    D --> C
+    B --> A
+    C --> B
+```
+
+**大切なポイント:**
+
+- 最初から完璧を目指さない
+- エラーが出たら、エラーメッセージをAIに見せて修正依頼
+- 生成されたコードを読んで理解する努力をする
+- 「ここを青色にして」「もっとシンプルにして」など、具体的に指示
+
+------
+
+##### 💡 プロンプト（指示の出し方）のコツ
+
+###### ❌ 良くない例
+
+```
+アプリを作って
+```
+
+→ 何を作りたいか不明確
+
+###### ✅ 良い例
+
+```
+モダンでクールなフラットデザインのポートフォリオサイトを作成してください。
+以下の情報を表示できるようにしてください：
+- 名前
+- スキル一覧
+- プロジェクト実績
+- お問い合わせフォーム
+```
+
+→ 具体的で明確
 
 > [!Note]
+>
+> 振り返り: Webサイトを作ってみよう
 >
 > 友人に頼まれて、友人の会社（or お店 or コミニティ）の Web サイトを作ることになりました。
 >
@@ -102,7 +224,7 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 > 4. トップページを作ってみよう
 > 5. 共有してみよう
 
-例 コーポレートサイト作成：
+例 コーポレートサイト
 
 ```
 下記説明を元に、HTML、CSS、JavaScriptでコーポレートサイトを書いて
@@ -123,15 +245,95 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 - cssのファイル名はstyles.css
 ```
 
+
+
+
+
+###  Web サイト・Web アプリケーションの基礎 (15 分)
+
+あらためて、Web サイトや Web アプリケーションが動く仕組みについて整理してみましょう
+
+参考：
+[co-creation-with-genai/2025/4_webapp_dev_with_ai/readme.md at main · Creative-Cucumbers/co-creation-with-genai](https://github.com/Creative-Cucumbers/co-creation-with-genai/blob/main/2025/4_webapp_dev_with_ai/readme.md#21-web-%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3-10-%E5%88%86)
+
+#### Web アプリケーションについて改めて理解しようとしてみよう
+
+![](./images/backend.png)
+
 > [!Tip]
 >
-> Webアプリケーションのファイルをダウンロードして、自分のPC上でも動作することを確認してみよう。
+> Web アプリケーションについて改めて調べてみよう
+
+```
+APIとWeb APIの違いは?
+```
+
+```
+Web APIってどんなものがある？
+```
+
+```
+Web アプリにおけるフロントエンドとバックエンドの違いはなに?
+```
 
 
 
-### 前回の補足 - バックエンドを利用したアプリケーション開発 - 天気アプリの作成 (10 分)
+#### HTML, CSS, JavaScript/TypeScriptについて (10分)
+
+> [!Tip]
+>
+> HTML, CSS, JavaScriptの役割の違いは？
+
+> [!Tip]
+>
+> HTML にはどんなタグがある？
+
+> [!Tip]
+>
+> CSS にはどんなプロパティがある？
+
+> [!Tip]
+>
+> JavaScript はどんな構文がある？
+
+> [!Tip]
+>
+> JavaScriptとTypeScriptの違いは? 
+
+### (フロントエンドを理解するために) ローカルPCでWebアプリを動作させてみよう(10分)
+
+① (ChatからGemini Proで) フロントエンドを構成するファイル郡の生成
+
+```
+下記説明を元に、HTML、CSS、JavaScriptでコーポレートサイトを書いて
+
+# 会社
+ビールの醸造所とバー。小さいけれど、こだわってる。おしゃれ。
+
+# 誰向けのサイト？
+ビールは大好きってほどじゃないけど、変わったビールは飲んでみたい
+20代から30代
+洒落た雰囲気を楽しみたい
+久しぶりに会う友人と飲むために店を選んでいて、google map経由で気になってのぞいてみた
+
+# 要件
+- バックエンドは利用しない
+- JavaScriptのファイル名はscripts.js
+- htmlのファイル名はindex.html
+- cssのファイル名はstyles.css
+```
+
+② 各ファイルのダウンロード(index.html, styles.css, scripts.js)し、フォルダに配置
+
+③ファイル名をindex.html, styles.css, scripts.jsに変更する
+
+③index.htmlをダブルクリックし、ブラウザで開く
 
 
+
+## 3-2 限目：Web アプリの基礎② (14:30-)
+
+### (バックエンドを理解するために) 天気アプリの作成してみよう (20 分)
 
 > [!Note]
 >
@@ -142,33 +344,32 @@ HTML と CSS と JavaScript 〜動きのあるサイトを作ろう〜
 https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m
 ```
 
-
-
 > [!Note]
 >
 > Web APIを実行してみよう
->
-> ①ブラウザでAPIを実行
-> ブラウザのURLにhttps://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2mをいれて、エンターキーを押下
->
-> ②CLIでAPIを実行
-> Windows (PowerShellを開いて以下のコマンドを実行):
->
-> ```powershell
-> Invoke-RestMethod -Uri "https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m"
-> ```
->
-> Mac (Terminalを開いて以下コマンドを実行):
-> ```shell
-> curl "https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m"
-> ```
->
-> ③生成AIを活用してAPIを実行
->
-> ```
-> 以下のAPIを実行し、実行結果を見せてくれませんか?
-> https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m
-> ```
+
+①ブラウザでAPIを実行
+ブラウザのURLにhttps://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2mをいれて、エンターキーを押下
+
+②CLIでAPIを実行
+Windowsの場合 (PowerShellを開いて以下のコマンドを実行):
+
+```powershell
+Invoke-RestMethod -Uri "https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m"
+```
+
+Mac (Terminalを開いて以下コマンドを実行):
+
+```shell
+curl "https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m"
+```
+
+③生成AIを活用してAPIを実行
+
+```
+以下のAPIを実行し、実行結果を見せてくれませんか?
+https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m
+```
 
 
 
@@ -181,106 +382,37 @@ https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourl
 
 URL:
 https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=temperature_2m
-
-
 ````
 
 [🌦️ Docs | Open-Meteo.com](https://open-meteo.com/en/docs)
 
-### Web サイト・Web アプリケーションの基礎 (15 分)
-
-あらためて、Web サイトや Web アプリケーションが動く仕組みについて整理してみましょう
-
-参考：
-[co-creation-with-genai/2024/4_webapp_dev_with_ai/readme.md at main · Creative-Cucumbers/co-creation-with-genai](https://github.com/Creative-Cucumbers/co-creation-with-genai/blob/main/2024/4_webapp_dev_with_ai/readme.md#web%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A8%E3%81%AF)
-
-#### Web アプリケーションについて改めて理解しようとしてみよう
-
-![](./images/backend.png)
-
-> [!Tip]
+> [!Note]
 >
-> Web アプリケーションについて改めて調べてみよう
+> コードを理解しよう
 
 ```
-APIとWeb APIとバックエンドについて教えて
-```
-
-```
-Web API ってどんなものがある？
-```
-
-```
-Web アプリはなぜ、フロントエンドとバックエンド（Web API）で分けている？
+どこでAPIを実行しているのですか?
 ```
 
 
 
-#### HTML
+#### リッチなWebアプリケーション開発を支援するツール郡 (10分)
 
-> [!Tip]
->
-> HTML はどう書く？
+リッチなWebアプリケーションを作成するために下記のようなライブラリ（事前に作成された機能を提供するプログラムの塊）やフレームワーク（ルールに従ってファイル配置すると楽にアプリを開発できるライブラリの塊）やUIコンポーネントを使うこともあります。
 
-> [!Tip]
->
-> HTML にはどんなタグがある？
-
-#### CSS
-
-> [!Tip]
->
-> CSS ファイルはどう書く？
-
-> [!Tip]
->
-> CSS にはどんなプロパティがある？
-
-#### JavaScript/TypeScript
-
-> [!Tip]
->
-> JavaScript はどう書く？
-
-> [!Tip]
->
-> JavaScript はどんな構文がある？
-
-> [!Tip]
->
-> JavaScriptとTypeScriptの違いは? 
-
-
-
-#### リッチなWebアプリケーション開発を支援するツール郡
-
-リッチなWebアプリケーションを作成するために下記のようなライブラリ（事前に作成された機能を提供するプログラムの塊）やフレームワーク（ルールに従ってファイル配置すると楽にアプリを開発できるライブラリの塊）を使うこともあります。
-
-ライブラリ例: [React](https://ja.react.dev/)
-
-Webアプリケーションフレームワーク例: [Next.js by Vercel - The React Framework](https://nextjs.org/)
-
-UIコンポーネント: [MUI Core: Ready-to-use React components, free forever](https://mui.com/core/)
+- ライブラリ (例) [React](https://ja.react.dev/)
+- Webアプリケーションフレームワーク (例) [Next.js by Vercel - The React Framework](https://nextjs.org/)
+- UIコンポーネント (例) [MUI Core: Ready-to-use React components, free forever](https://mui.com/core/)
 
 > [!Tip]
 >
 > 上記の中で気になるツールについて生成AIに聞いてみよう。
 
-#### まとめ
 
-> [!Note]
->
-> HTML と CSS と JavaScript について整理して教えて
 
-> [!Tip]
->
-> [1 冊ですべて身につく HTML & CSS と Web デザイン入門講座 | SB クリエイティブ](https://www.sbcr.jp/product/4797398892/)
->
-> [1 冊ですべて身につく JavaScript 入門講座 | SB クリエイティブ](https://www.sbcr.jp/product/4815615758/)
+### ラフなデザインからWebアプリケーション生成 (15 分)
 
-### [オプション1] ラフなデザインからWebアプリケーション生成 (10 分)
-
-①手書きでラフなデザインを描いたあと、生成AIに綺麗にしてもらおう。
+①手書きで[ラフなデザイン](./images/sample_image.png)を描いたあと、生成AIにプロトタイプデザインを作成してもらおう。
 
 ```
 添付の画像をベースにプロトタイプデザインの画像を作成してください。
@@ -301,11 +433,11 @@ UIコンポーネント: [MUI Core: Ready-to-use React components, free forever]
 
 
 
-### [オプション2] ポケモンずかんを作ろう (10 分)
+### [オプション] ポケモンずかんを作ろう (20 分)
 
 > [!Tip]
 >
-> PokeAPI を使ってポケモンずかんを作ってみよう
+> PokeAPIの仕様を理解したあと、そのAPIを使ってポケモンずかんを作ってみよう
 
 [トップページ｜ポケモンずかん](https://zukan.pokemon.co.jp/)
 https://www.pokemon.co.jp/rules/
@@ -317,11 +449,103 @@ https://www.pokemon.co.jp/rules/
 
 
 
-## 2-1 限目： 動きのあるサイト 〜シューティングゲームを作ろう〜 (15:40--)
+## 4-1 限目： 様々なユーザー入力 〜センサー入力をもっと試してみよう〜 (15:40-)
 
-### 2限出席コード
+### 4 限出席コード
 
 出席コードをディスプレイに表示します。
+
+### PC/スマホのセンサー機能を調べてみよう (10分)
+
+> [!Tip]
+>
+> スマートフォンの Web ブラウザから利用できるスマートフォンのセンサーや通信について教えて
+
+![](./images/sensor.png)
+
+### Web アプリでデバイスの機能を呼び出せる仕組み (10 分)
+
+HTML/JavaScript から、ブラウザに組み込まれている API を経由してセンサー情報にアクセスできます。
+
+> [!Tip]
+>
+> どうやって Web ブラウザからスマホのセンサーにアクセスしているの？
+
+> [!Tip]
+>
+> PC/スマホ向けの Web アプリとネイティブアプリの違いを教えて？
+
+> [!Warning]
+>
+> Sensor API と Web API は違う!?
+
+```
+sensor apisとweb apiとは違う？
+```
+
+参考：
+[Sensor APIs - Web API | MDN](https://developer.mozilla.org/ja/docs/Web/API/Sensor_APIs)
+
+### 音声入力 (10 分)
+
+> [!Note]
+>
+> 音声を入力して、グラフを表示しよう
+
+```
+音声の周波数をグラフとして表示するWebアプリを作成してください。HTML、CSS、JavaScriptで作成してください。
+また、以下の要件も満たしてください。
+- 全てのファイルはルートフォルダに配置
+- htmlのファイル名はindex.html
+- CSSのファイル名はstyles.css
+- JavaScriptのファイル名はscript.js
+```
+
+### カメラ (10 分)
+
+> [!Note]
+>
+> カメラから画像を入力して表示してみよう
+
+```
+カメラ画像を表示するWebアプリを作成してください。HTML、CSS、JavaScriptで作成してください。
+また、以下の要件も満たしてください。
+- 全てのファイルはルートフォルダに配置
+- htmlのファイル名はindex.html
+- CSSのファイル名はstyles.css
+- JavaScriptのファイル名はscript.js
+```
+
+### 位置情報 (10 分)
+
+> [!Note]
+>
+> 位置情報を取得して表示してみよう。
+
+```
+位置情報を取得し、地図にピンを配置うするWebアプリを作成してください。HTML、CSS、JavaScriptで作成してください。
+また、以下の要件も満たしてください。
+- 全てのファイルはルートフォルダに配置
+- htmlのファイル名はindex.html
+- CSSのファイル名はstyles.css
+- JavaScriptのファイル名はscript.js
+```
+
+
+
+
+
+### その他 (5 分)
+
+> [!Tip]
+>
+> ローカルストレージはどういう用途で使われる？
+
+> [!Tip]
+>
+> Web アプリの HTML や JavaScript で、スマホのバイブレーションを操作する方法を教えて
+
+## 4-2 限目： 動きのあるサイト 〜シューティングゲームを作ろう〜 (16:30-)
 
 ### シューティングゲームを作ってみよう (30 分)
 
@@ -349,8 +573,6 @@ https://www.pokemon.co.jp/rules/
 ```
 index.htmlの内容をわかりやすく解説してください。
 ```
-
-
 
 > [!Tip]
 >
@@ -431,83 +653,6 @@ index.htmlの内容をわかりやすく解説してください。
 > ② アプリケーションURLをコピー後、新しいブラウザのタブで開く
 > ③ ブラウザ上で共有 ` キャスト、保存、共有`→ `QRコードを作成` を押下
 > ④ スマホでQRコードをスキャンし、
-
-
-
-## 2-2 限目： 様々なユーザー入力 〜センサー入力をもっと試してみよう〜 (16:30-)
-
-### Web アプリでデバイスの機能を呼び出せる仕組み (10 分)
-
-HTML/JavaScript から、ブラウザに組み込まれている API を経由してセンサー情報にアクセスできます。
-
-![](./images/sensor.png)
-
-> [!Tip]
->
-> どうやって Web ブラウザからスマホのセンサーにアクセスしているの？
-
-> [!Tip]
->
-> スマホ向けの Web アプリとネイティブアプリの違いを教えて？
-
-参考：
-[Sensor APIs - Web API | MDN](https://developer.mozilla.org/ja/docs/Web/API/Sensor_APIs)
-
-> [!Warning]
->
-> Sensor API と Web API は違う！
-
-```
-webのsensor apisとweb apiとは違う？
-```
-
-### スマホのセンサー機能を調べてみよう (10 分)
-
-> [!Tip]
->
-> スマートフォンの Web ブラウザから利用できるスマートフォンのセンサーや通信について教えて
-
-### 音声入力 (10 分)
-
-> [!Note]
->
-> 音声を入力して、音量を表示しよう
-
-```
-マイク入力から音量を表示するWebアプリを作成してください。HTML、CSS、JavaScriptで作成してください。
-また、以下の要件も満たしてください。
-- 全てのファイルはルートフォルダに配置
-- htmlのファイル名はindex.html
-- CSSのファイル名はstyles.css
-- JavaScriptのファイル名はscript.js
-```
-
-### カメラ (10 分)
-
-> [!Note]
->
-> カメラから画像を入力して表示してみよう
-
-```
-カメラ画像を表示するWebアプリを作成してください。HTML、CSS、JavaScriptで作成してください。
-また、以下の要件も満たしてください。
-- 全てのファイルはルートフォルダに配置
-- htmlのファイル名はindex.html
-- CSSのファイル名はstyles.css
-- JavaScriptのファイル名はscript.js
-```
-
-### その他 (5 分)
-
-> [!Tip]
->
-> ローカルストレージはどういう用途で使われる？
-
-> [!Tip]
->
-> Web アプリの HTML や JavaScript で、スマホのバイブレーションを操作する方法を教えて
-
-
 
 ## まとめ (10 分)
 
