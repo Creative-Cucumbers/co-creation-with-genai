@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>総合演習 ①</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css"
+    />
+    <style>
+      .reveal h1 {
+        font-size: 2.5em;
+      }
+      .reveal h2 {
+        font-size: 2em;
+        color: #2c3e50;
+      }
+      .reveal h3 {
+        font-size: 1.5em;
+        color: #34495e;
+      }
+      .reveal ul {
+        font-size: 0.9em;
+      }
+      .reveal table {
+        font-size: 0.7em;
+      }
+      .reveal .small {
+        font-size: 0.8em;
+      }
+      .reveal .note-box {
+        background-color: #e8f4f8;
+        border-left: 5px solid #3498db;
+        padding: 15px;
+        margin: 20px 0;
+      }
+      .reveal .tip-box {
+        background-color: #fff9e6;
+        border-left: 5px solid #f39c12;
+        padding: 15px;
+        margin: 20px 0;
+      }
+      .reveal img {
+        max-height: 400px;
+        object-fit: contain;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- タイトルスライド -->
+        <section>
+          <h1>総合演習 ①</h1>
+          <img
+            src="./images/a.webp"
+            alt="メインイメージ"
+            style="max-width: 60%"
+          />
+        </section>
+
+        <!-- 目次 -->
+        <section>
+          <h2>目次</h2>
+          <ul>
+            <li>3限目: 総復習</li>
+            <li>4限目: 総合演習課題</li>
+          </ul>
+        </section>
+
+        <!-- 3限目セクション -->
+        <section>
+          <section>
+            <h2>3限目</h2>
+            <h3>講義の目的</h3>
+          </section>
+
+          <section>
+            <h3>講義の目的</h3>
+            <p class="small">
+              この講義では、生成AI(人工知能)活用方法の基本を再確認し、AIを用いた創作活動の可能性に改めて焦点を当てます。これまで学んだAI技術がクリエイティブな分野でどのように利用され、どのような影響を与えるかを再度理解し、実践的なスキルを再確認します。
+            </p>
+          </section>
+
+          <section>
+            <h3>講義スケジュール</h3>
+            <table style="font-size: 0.6em">
+              <thead>
+                <tr>
+                  <th>回数</th>
+                  <th>1<br />(9/25)</th>
+                  <th>2<br />(10/2)</th>
+                  <th>3<br />(10/9)</th>
+                  <th>4<br />(10/16)</th>
+                  <th>5<br />(10/23)</th>
+                  <th>6<br />(11/6)</th>
+                  <th>7<br />(11/13)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>テーマ</td>
+                  <td>AI基礎</td>
+                  <td>AIの活用と倫理</td>
+                  <td>プロンプトエンジニアリング</td>
+                  <td>AIを活用したアプリ生成①</td>
+                  <td>AIを活用したアプリ生成②</td>
+                  <td>総合演習</td>
+                  <td>総合演習</td>
+                </tr>
+                <tr>
+                  <td>担当講師</td>
+                  <td>伊藤、小島</td>
+                  <td>伊藤</td>
+                  <td>小島</td>
+                  <td>伊藤</td>
+                  <td>小島</td>
+                  <td>小島、伊藤</td>
+                  <td>伊藤、小島</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section>
+            <h3>アイスブレイク (10分)</h3>
+            <div class="note-box">
+              <ul>
+                <li>大学周辺のおすすめのごはん屋さん</li>
+                <li>行ってみたい国</li>
+                <li>最近、欲しいもの</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <h3>総合演習の進め方</h3>
+            <h4>Day1 (今回の講義)</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>時間</th>
+                  <th>アクティビティ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>3限目</td>
+                  <td>
+                    ・総復習<br />・補足(アイディエーションと計画づくり、Webアプリケーション開発方法)
+                  </td>
+                </tr>
+                <tr>
+                  <td>4限目</td>
+                  <td>
+                    ・総合課題: アイディエーションと計画づくり<br />・中間発表
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section>
+            <h3>総合演習の進め方</h3>
+            <h4>Day2 (次回の講義)</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>時間</th>
+                  <th>アクティビティ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>3限目</td>
+                  <td>・総合課題: Webアプリケーション開発</td>
+                </tr>
+                <tr>
+                  <td>4限目</td>
+                  <td>
+                    ・最終発表: "Demo Day" <strong>※全員発表＆課題提出</strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </section>
+
+        <!-- 総復習: AI基礎 -->
+        <section>
+          <section>
+            <h2>総復習: AI基礎</h2>
+            <p>(15分)</p>
+          </section>
+
+          <section>
+            <h3>AI (人工知能)とは</h3>
+            <ul>
+              <li>
+                AIは人間の知的行動をコンピューターで模倣する技術、またはその研究分野を指す
+              </li>
+              <li>
+                AIは発展途上であり、歴史とともに人が想像するAIと現実のAIは変わってきている
+              </li>
+              <li>歴史とともにAIを理解することが重要</li>
+            </ul>
+            <p class="small">(参照: 第1回)</p>
+          </section>
+
+          <section>
+            <h3>生成AIはどのように作られているか</h3>
+            <ul>
+              <li>
+                機械学習はコンピューターとデータを使って規則性をみつける手法
+              </li>
+              <li>
+                ニューラルネットワークは人間の脳神経系にヒントを得て、設計された計算モデル。その規模を大きくしたものがディープラーニング
+              </li>
+              <li>
+                トランスフォーマーと自己教師学習により、現代の生成AIが実現できている
+              </li>
+            </ul>
+            <p class="small">(参照: 第1回、第2回)</p>
+          </section>
+
+          <section>
+            <h3>生成AIの分類</h3>
+            <img
+              src="../1_ai_basic/images/category_ai.png"
+              alt="生成AIと分類"
+            />
+          </section>
+
+          <section>
+            <h3>AIにはどのようなリスクがあるか</h3>
+            <ul>
+              <li>
+                AIが職業に与える影響の研究結果が報告されている。労働補完型と労働置換型があることを認識する
+              </li>
+              <li>AIリスクは2階建て(1階: 合法性、2階: 社会受容性)</li>
+              <li>
+                AIにリスク(情報流出、著作権侵害、ハルシネーション等々)があることを理解して、臨機応変に使いこなそう
+              </li>
+            </ul>
+            <p class="small">(参照: 第2回)</p>
+          </section>
+
+          <section>
+            <h3>生成AIの使い方</h3>
+            <img
+              src="../3_prompt_engineering/images/soumu.png"
+              alt="生成AIの使い方"
+            />
+          </section>
+
+          <section>
+            <h3>生成AI活用のユースケース</h3>
+            <div class="small">
+              <h4>「授業」のユースケース</h4>
+              <ul>
+                <li>
+                  <strong>インプット:</strong>
+                  英語の翻訳、資料の要約、画像の説明、深堀り
+                </li>
+                <li>
+                  <strong>アウトプット:</strong>
+                  レポートのアイディア出し、レポートの生成、レポートの推敲、プレゼン資料の作成、プレゼン用画像の生成
+                </li>
+              </ul>
+              <h4>「創作活動」のユースケース</h4>
+              <ul>
+                <li>
+                  <strong>アイディア出し:</strong>
+                  案だし、フィードバック、深堀り、アドバイス
+                </li>
+                <li>ポートフォリオサイトの作成</li>
+              </ul>
+              <h4>「就職活動」のユースケース</h4>
+              <ul>
+                <li>
+                  <strong>自己分析と計画:</strong>
+                  自己分析、タスク化、キャリア相談
+                </li>
+              </ul>
+            </div>
+            <p class="small">(参照: 第3回)</p>
+          </section>
+        </section>
+
+        <!-- 復習してみよう -->
+        <section>
+          <section>
+            <h2>復習してみよう</h2>
+            <p>(15分)</p>
+          </section>
+
+          <section>
+            <h3>テーマ: 卒業制作のアイディアを出してみよう</h3>
+            <div class="note-box">
+              <p><strong>例:</strong></p>
+              <ul>
+                <li>
+                  <strong>アイディア出し:</strong> アイディアだしてもらおう
+                </li>
+                <li>
+                  <strong>フィードバック:</strong>
+                  アイディアの良いところ、改善が必要なところをもらおう
+                </li>
+                <li>
+                  <strong>深堀り:</strong>
+                  疑問に感じたことを質問し、理解することでアイディアを広げよう
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <h3>Tips</h3>
+            <div class="tip-box">
+              <p><strong>生成AIに役割を与えてみよう</strong></p>
+              <p>
+                (例) あなたは笑いで世界を幸せにするコメディアンです。<br />
+                〇〇に関するアイディアを10個出してください。
+              </p>
+            </div>
+            <div class="tip-box">
+              <p><strong>アイディアを広げるように指示してみよう</strong></p>
+              <ul>
+                <li>そのアイディアを拡大したらどうなるか?</li>
+                <li>そのアイディアを代用したらどうか?</li>
+              </ul>
+              <p class="small">
+                (参考:
+                <a href="https://www.sbbit.jp/article/cont1/29988"
+                  >オズボーンのチェックリスト</a
+                >)
+              </p>
+            </div>
+          </section>
+        </section>
+
+        <!-- 4-2限目 -->
+        <section>
+          <section>
+            <h2>3限目後半</h2>
+            <h3>総復習: 生成AIを活用したWebアプリケーション開発</h3>
+            <p>(10分)</p>
+          </section>
+
+          <section>
+            <h3>Webアプリケーションとは?</h3>
+            <ul>
+              <li>
+                Webアプリケーションは、インターネットを介してユーザーがアクセスできるアプリケーションソフトウェアのこと
+              </li>
+              <li>
+                一般的に3つの要素で構成される:
+                クライアント(フロントエンド)、サーバー(バックエンド)、データベース
+              </li>
+              <li>
+                フロントエンドはHTML, CSS, JavaScript
+                バックエンドはJavaScript、Python等を使って実装される
+              </li>
+              <li>
+                本講義では主にフロントエンドを対象とし、AIを活用して創作活動を行う
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Webアプリケーションの構成</h3>
+            <img
+              src="../4_webapp_dev_with_ai/images/webapp_1.png"
+              alt="Webアプリケーション構成図"
+            />
+          </section>
+
+          <section>
+            <h3>CodeSandboxを活用した開発</h3>
+            <ul>
+              <li>
+                <a href="https://codesandbox.io/">CodeSandbox</a
+                >でWebアプリケーションを開発できる
+              </li>
+              <li>開発したアプリは即座に公開できる</li>
+              <li>様々な共有方法 (URLリンク、ZIPファイルでの共有)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>様々なWebアプリケーション</h3>
+            <ul>
+              <li>ポートフォリオサイト</li>
+              <li>タイマーアプリ</li>
+              <li>クイズアプリ</li>
+              <li>画像共有サイト</li>
+              <li>シューティングゲーム</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>一般的なソフトウェア開発プロセス</h3>
+            <ul class="small">
+              <li>
+                <strong>要件定義:</strong>
+                クライアントやプロジェクトの関係者からニーズを聞き、機能や仕様を明確にする
+              </li>
+              <li>
+                <strong>設計:</strong> システムの全体像等を整理し、決定する
+              </li>
+              <li><strong>開発:</strong> Webアプリケーションを実装する</li>
+              <li>
+                <strong>テスト:</strong>
+                アプリケーションが正しく動作することを検証する
+              </li>
+              <li>
+                <strong>デプロイ:</strong> サーバにアプリケーションを配置する
+              </li>
+              <li>
+                <strong>運用・保守:</strong>
+                アプリケーションが安定して稼働するように監視、修正、改善を行う
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>より複雑なWebアプリケーション開発</h3>
+            <h4>生成AIを活用した試行錯誤</h4>
+            <ul>
+              <li>アイディア → コード生成</li>
+              <li>バグ修正/デバッグ</li>
+              <li>コードや仕組みの理解</li>
+              <li>デザイン変更</li>
+              <li>(認証)機能追加</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>スマートフォンのセンサー活用</h3>
+            <div style="display: flex; justify-content: space-around">
+              <div>
+                <h4>センサー</h4>
+                <ul class="small">
+                  <li>加速度計</li>
+                  <li>ジャイロスコープ</li>
+                  <li>方位磁石</li>
+                  <li>位置情報</li>
+                  <li>ライトセンサー</li>
+                  <li>マイク</li>
+                  <li>近接センサー</li>
+                  <li>カメラ</li>
+                </ul>
+              </div>
+              <div>
+                <h4>通信機能</h4>
+                <ul class="small">
+                  <li>Wi-Fi</li>
+                  <li>Bluetooth</li>
+                  <li>セルラーネットワーク</li>
+                  <li>NFC</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>ブラウザを活用した開発</h3>
+            <ul>
+              <li>ローカルストレージ</li>
+              <li>セッションストレージ</li>
+              <li>クッキー</li>
+              <li>等々</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>復習してみよう (15分)</h3>
+            <div class="note-box">
+              <p>
+                <strong
+                  >センサーを使ったWebアプリケーション開発を復習してみよう</strong
+                >
+              </p>
+              <ol>
+                <li>カメラ表示できるWebページを作ってみよう (15分)</li>
+                <li>
+                  マイクから音を入力し、波形を出力するWebアプリケーションを作ってみよう
+                  (15分)
+                </li>
+              </ol>
+            </div>
+          </section>
+        </section>
+
+        <!-- 補足: 計画の重要性 -->
+        <section>
+          <section>
+            <h2>補足: 計画の重要性</h2>
+            <p>(15分)</p>
+          </section>
+
+          <section>
+            <h3>計画的なアプローチ</h3>
+            <p class="small">
+              アイディアを創出した後、そのアイディアを実際のWebアプリケーションとして具現化するためには、計画的なアプローチが重要です。
+            </p>
+            <ol class="small">
+              <li>
+                <strong>アイディアの詳細化:</strong>
+                アイディアを具体的な機能や要件に分解する
+              </li>
+              <li>
+                <strong>優先順位の整理:</strong>
+                重要かつ実装が容易な機能から順にリストアップ
+              </li>
+              <li>
+                <strong>リスクの洗い出し:</strong>
+                開発において直面する可能性のある問題や障害を予測
+              </li>
+            </ol>
+          </section>
+
+          <section>
+            <h3>演習: 卒業制作の計画を練ってみよう</h3>
+            <div class="note-box small">
+              <p>
+                <strong
+                  >AIを活用しながら、以下のフォーマットを埋めてみよう</strong
+                >
+              </p>
+              <pre
+                style="
+                  text-align: left;
+                  font-size: 0.6em;
+                  background: white;
+                  color: #333;
+                "
+              >
+# アイディア名:
+
+## 機能一覧:
+※重要かつ実装が容易な機能から順にリスト
+1. A
+2. B
+...
+
+## 実現が難しそうな機能とその理由
+
+## その他
+                        </pre
+              >
+            </div>
+          </section>
+        </section>
+
+        <!-- 4限目 -->
+        <section>
+          <section>
+            <h2>4限目</h2>
+            <h3>総合演習課題</h3>
+          </section>
+
+          <section>
+            <h3>総合演習課題</h3>
+            <h4>自由な発想でWebアプリケーション開発</h4>
+            <p class="small">
+              生成AIを活用して、アイディアを練り、計画をたてWebアプリケーションを開発してください。
+            </p>
+            <p class="small">
+              <strong>今日中に:</strong>
+              アイディアと計画とバージョン1作成まで終わらせてください。
+            </p>
+            <p class="small">
+              <strong>次回:</strong>
+              そのアイディアの深掘りや詳細の実装をしてもらいます。
+            </p>
+          </section>
+
+          <section>
+            <h3>テーマ選定</h3>
+            <p>以下のテーマの中で好きなものを選んでください</p>
+            <ul>
+              <li><strong>テーマ1:</strong> 推し紹介Webサイト</li>
+              <li><strong>テーマ2:</strong> リアル連携ゲーム</li>
+              <li><strong>テーマ3:</strong> その他</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>中間成果物 (※今回)</h3>
+            <ul>
+              <li>アイディアと計画ドキュメント</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>最終提出物 (※次回)</h3>
+            <ul>
+              <li>
+                <strong>ドキュメント</strong>
+                <ul>
+                  <li>アイディアと計画</li>
+                  <li>Webアプリケーションのキャプチャ動画</li>
+                </ul>
+              </li>
+              <li>
+                <strong>作成したWebアプリのコード</strong> ※ZIPファイル形式
+              </li>
+              <li><strong>[オプション]</strong> CodeSandbox共有リンク</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>中間発表</h3>
+            <p>5人 × 7分</p>
+          </section>
+
+          <section>
+            <h2>まとめ</h2>
+            <p>お疲れ様でした!</p>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        transition: "slide",
+        width: 1920,
+        height: 1080,
+        margin: 0.1,
+        minScale: 0.2,
+        maxScale: 2.0,
+      });
+    </script>
+  </body>
+</html>
