@@ -5,259 +5,125 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI基礎 - プレゼンテーション</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      :root {
+        --ink: #242424;
+        --muted: #666;
+        --blue: #004898;
+        --paper: #fff;
+        --panel: #f2f3f4;
+        --line: #d9dde2;
       }
-
+      * { margin: 0; padding: 0; box-sizing: border-box; }
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: #f8f9fa;
-        color: #333;
-        overflow: hidden;
+        font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+        color: var(--ink); background: #e6e8eb; overflow: hidden;
+        height: 100vh; height: 100dvh;
       }
-
       .presentation-container {
-        width: 100vw;
-        height: 100vh;
-        position: relative;
+        width: 1600px; height: 900px; position: absolute;
+        left: 50%; top: 50%; transform: translate(-50%, -50%) scale(var(--slide-scale, 1));
+        background: var(--paper); overflow: hidden;
+        box-shadow: 0 16px 70px #16223818;
       }
-
-      .slide {
-        width: 100%;
-        height: 100%;
-        display: none;
-        padding: 60px;
-        background: white;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        position: absolute;
-        top: 0;
-        left: 0;
-        animation: slideIn 0.3s ease-in-out;
+      .slide { position: absolute; inset: 0; display: none; padding: 70px 80px 100px; }
+      .slide.active { display: flex; flex-direction: column; }
+      .slide::before {
+        content: "2026 / AI BASIC"; position: absolute; top: 30px; left: 80px;
+        color: var(--blue); font-size: 15px; font-weight: 700; letter-spacing: .13em;
       }
-
-      .slide.active {
-        display: flex;
-        flex-direction: column;
+      .slide::after {
+        content: "人工知能の基本理論と活用"; position: absolute; bottom: 35px; left: 80px;
+        color: var(--muted); font-size: 15px; letter-spacing: .08em;
       }
-
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .slide-header {
-        background: #2c3e50;
-        color: white;
-        padding: 30px;
-        margin: -60px -60px 40px -60px;
-      }
-
-      .slide-title {
-        font-size: 2.2em;
-        font-weight: 300;
-        margin-bottom: 8px;
-      }
-
-      .slide-subtitle {
-        font-size: 1.1em;
-        opacity: 0.8;
-        font-weight: normal;
-      }
-
+      .slide-header { flex: 0 0 auto; padding-bottom: 24px; margin-bottom: 28px; border-bottom: 2px solid var(--ink); }
+      .slide-title { font-size: 44px; font-weight: 750; letter-spacing: -.035em; line-height: 1.4; }
+      .slide-subtitle { color: var(--muted); font-size: 20px; margin-top: 8px; }
       .slide-content {
-        flex: 1;
-        overflow-y: auto;
-        line-height: 1.7;
+        flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px; align-content: start; font-size: 23px; line-height: 1.7;
       }
-
-      h1,
-      h2,
-      h3 {
-        color: #2c3e50;
-        margin-bottom: 20px;
-        font-weight: 400;
+      .slide-content > * { min-width: 0; }
+      h1, h2, h3, h4 { font-weight: 700; line-height: 1.45; }
+      h2 { font-size: 30px; margin-bottom: 18px; }
+      h3 { font-size: 26px; margin-bottom: 16px; }
+      h4 { font-size: 23px; margin-bottom: 12px; }
+      p + p { margin-top: 10px; }
+      strong { font-weight: 700; }
+      ul, ol { padding-left: 1.25em; }
+      li { margin-bottom: 10px; }
+      li:last-child { margin-bottom: 0; }
+      li::marker { color: var(--blue); }
+      a { color: var(--blue); text-underline-offset: 5px; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
+      a:hover { text-decoration-thickness: 2px; }
+      :focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; }
+      .highlight, .reason-card, .warning-card, .demo-card, .instructor-card, .quote {
+        background: var(--panel); padding: 28px 30px; border-top: 3px solid var(--line);
       }
-
-      h1 {
-        font-size: 2em;
-      }
-      h2 {
-        font-size: 1.5em;
-      }
-      h3 {
-        font-size: 1.2em;
-      }
-
-      .schedule-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 30px 0;
-        background: white;
-      }
-
-      .schedule-table th,
-      .schedule-table td {
-        padding: 16px 12px;
-        text-align: center;
-        border: 1px solid #e0e0e0;
-        vertical-align: top;
-      }
-
-      .schedule-table th {
-        background: #2c3e50;
-        color: white;
-        font-weight: 500;
-      }
-
-      .schedule-table tr:nth-child(even) {
-        background-color: #f8f9fa;
-      }
-
-      .schedule-table td:first-child {
-        font-weight: 500;
-        background: #f1f3f4;
-      }
-
-      .instructor-card {
-        background: #f8f9fa;
-        padding: 25px;
-        margin: 20px 0;
-        border-left: 4px solid #2c3e50;
-      }
-
-      .instructor-name {
-        font-size: 1.3em;
-        font-weight: 500;
-        color: #2c3e50;
-        margin-bottom: 8px;
-      }
-
-      .instructor-field {
-        color: #666;
-        font-weight: 500;
-        margin-bottom: 15px;
-      }
-
-      .reason-card {
-        background: #f8f9fa;
-        padding: 25px;
-        margin: 20px 0;
-        border-left: 4px solid #2c3e50;
-      }
-
-      .warning-card {
-        background: #f8f9fa;
-        padding: 25px;
-        margin: 20px 0;
-        border-left: 4px solid #666;
-      }
-
-      .demo-card {
-        background: #f8f9fa;
-        padding: 25px;
-        margin: 20px 0;
-        border-left: 4px solid #2c3e50;
-      }
-
-      .navigation {
-        position: fixed;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 15px;
-        z-index: 1000;
-      }
-
-      .nav-btn {
-        background: #2c3e50;
-        color: white;
-        border: none;
-        padding: 12px 24px;
-        cursor: pointer;
-        font-size: 14px;
-        transition: background-color 0.2s;
-      }
-
-      .nav-btn:hover {
-        background: #34495e;
-      }
-
-      .nav-btn:disabled {
-        background: #95a5a6;
-        cursor: not-allowed;
-      }
-
-      .slide-indicator {
-        position: fixed;
-        top: 30px;
-        right: 30px;
-        background: #2c3e50;
-        color: white;
-        padding: 10px 16px;
-        font-size: 14px;
-        z-index: 1000;
-      }
-
-      .emoji {
-        margin-right: 12px;
-      }
-
-      ul,
-      ol {
-        margin: 20px 0;
-        padding-left: 25px;
-      }
-
-      li {
-        margin-bottom: 10px;
-        line-height: 1.6;
-      }
-
-      .highlight {
-        background: #f8f9fa;
-        padding: 25px;
-        margin: 25px 0;
-        border-left: 4px solid #2c3e50;
-      }
-
-      .quote {
-        background: #f8f9fa;
-        border-left: 4px solid #2c3e50;
-        padding: 25px;
-        margin: 25px 0;
-        font-style: italic;
-        color: #555;
-      }
-
-      .image-container {
-        text-align: center;
-        margin: 20px 0;
-      }
-
-      .slide-image {
-        max-width: 100%;
-        max-height: 400px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        margin: 0 auto;
-        display: block;
-      }
-
-      .image-caption {
-        font-size: 0.9em;
-        color: #666;
-        margin-top: 10px;
-        font-style: italic;
-      }
+      .highlight { border-color: var(--blue); background: #edf3f9; }
+      .quote { border-color: var(--blue); color: #444; }
+      .reason-card .quote { background: white; margin-top: 16px; font-size: 20px; padding: 20px; }
+      .instructor-name { font-size: 27px; font-weight: 700; margin-bottom: 10px; }
+      .instructor-field { color: var(--blue); font-size: 19px; margin-bottom: 20px; }
+      .instructor-card { font-size: 21px; }
+      .schedule-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 21px; }
+      .schedule-table th, .schedule-table td { padding: 20px 12px; text-align: center; border: 1px solid var(--line); vertical-align: top; }
+      .schedule-table th { background: var(--blue); color: white; font-weight: 600; }
+      .schedule-table td:first-child { font-weight: 700; background: var(--panel); }
+      .schedule-table tr:nth-child(even) { background: #f7f8f9; }
+      .image-container { text-align: center; }
+      .slide-image { width: 100%; max-height: 320px; object-fit: contain; display: block; margin: 0 auto; }
+      .image-caption { font-size: 16px; color: var(--muted); margin-top: 8px; }
+      .emoji { display: none; }
+      .slide-indicator { position: absolute; top: 31px; right: 80px; z-index: 2; color: var(--muted); font-size: 16px; font-variant-numeric: tabular-nums; letter-spacing: .1em; }
+      #current-slide { color: var(--blue); font-weight: 700; }
+      .navigation { position: absolute; bottom: 22px; right: 80px; display: flex; gap: 12px; z-index: 2; }
+      .nav-btn { border: 1px solid var(--line); background: white; color: var(--ink); border-radius: 4px; padding: 12px 22px; font: inherit; font-size: 18px; cursor: pointer; }
+      .nav-btn:hover { background: var(--blue); color: white; border-color: var(--blue); }
+      .nav-btn:disabled { color: #aaa; background: #f6f6f6; border-color: #eee; cursor: default; }
+      .progress { position: absolute; bottom: 0; left: 0; height: 4px; background: var(--blue); transition: width .2s; }
+      .layout-three .slide-content { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .layout-wide .slide-content { grid-template-columns: 1fr; }
+      .layout-intro .slide-content > p, .layout-intro .slide-content > h3,
+      .layout-summary .slide-content > .highlight { grid-column: 1 / -1; }
+      .layout-summary .slide-content { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .layout-summary .highlight { padding: 14px 28px; }
+      .layout-summary .highlight h3 { margin: 0; }
+      .layout-history .slide-content { grid-template-columns: repeat(3, minmax(0, 1fr)); font-size: 21px; }
+      .layout-history h3 { font-size: 24px; }
+      .layout-factors .slide-content { grid-template-rows: auto 1fr; grid-auto-flow: column; }
+      .layout-factors .slide-content > h3 { margin: 0; }
+      .layout-practice .slide-content { grid-template-columns: 1fr 2fr; }
+      .layout-practice .slide-content > h3 { grid-column: 1 / -1; margin: 0; }
+      .layout-practice .reason-card:nth-of-type(2) { grid-column: 2; grid-row: 2 / 4; }
+      .layout-definition .slide-content > .highlight { grid-column: 1 / -1; }
+      .layout-definition .slide-content > .quote { align-self: stretch; }
+      .layout-media .slide-content { font-size: 21px; grid-template-columns: 1fr 1.1fr; grid-template-rows: auto 1fr; }
+      .layout-media .slide-content > :last-child { grid-column: 2; grid-row: 1 / 3; }
+      .layout-media .slide-image { max-height: 380px; }
+      .layout-deep .slide-content { grid-template-columns: 1fr 1.2fr; }
+      .layout-deep .slide-content > :nth-child(2) { grid-column: 2; grid-row: 1 / 3; }
+      .layout-deep .slide-image { max-height: 235px; }
+      .layout-deep .image-container { margin-bottom: 15px; }
+      .layout-deep .slide-content { font-size: 21px; }
+      .layout-example .slide-content { grid-template-columns: 1fr 1.25fr; grid-template-rows: auto 1fr; gap: 14px 24px; }
+      .layout-example .slide-content > h3 { margin: 0; }
+      .layout-example .schedule-table { grid-column: 1; align-self: start; }
+      .layout-example .schedule-table th, .layout-example .schedule-table td { padding: 16px 8px; }
+      .layout-example .reason-card { grid-column: 2; grid-row: 1 / 3; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: start; }
+      .layout-example .reason-card > h3, .layout-example .reason-card > p { grid-column: 1 / -1; }
+      .layout-example .reason-card > p { grid-row: 3; font-size: 20px; }
+      .layout-example .slide-image { height: 330px; }
+      .layout-example .reason-card > .image-container { grid-row: 2; }
+      .layout-workshop .slide-content { grid-template-columns: 1.15fr 1fr; grid-template-rows: auto 1fr; }
+      .layout-workshop .slide-content > .image-container { grid-row: 1 / 3; align-self: center; }
+      .layout-workshop .slide-image { max-height: 530px; }
+      .cover .slide-header { border: 0; margin: 30px 0 30px; padding: 0; }
+      .cover .slide-title { font-size: 112px; line-height: 1.1; letter-spacing: -.06em; }
+      .cover .slide-subtitle { font-size: 28px; margin-top: 20px; }
+      .cover .slide-content { flex: 1; margin-top: 20px; }
+      .cover .highlight { background: var(--panel); padding: 30px; }
+      .cover .slide-content p { font-size: 22px; }
+      @media (prefers-reduced-motion: reduce) { .progress { transition: none; } }
     </style>
   </head>
   <body>
@@ -267,20 +133,20 @@
       </div>
 
       <!-- Slide 1: Title -->
-      <div class="slide active">
+      <div class="slide active cover">
         <div class="slide-header">
           <div class="slide-title">AI基礎</div>
           <div class="slide-subtitle">人工知能の基本理論と活用</div>
         </div>
         <div class="slide-content">
           <div class="highlight">
-            <h2>🎯 コース概要</h2>
+            <h2>コース概要</h2>
             <p>
               このコースは人工知能（AI）の基本的な理論とその活用についての理解を提供することを目的とします。具体的には、AIの基礎概念、倫理的考慮事項、そしてAI技術を使用して調査やドキュメント、アプリケーションを作成する実践的な方法を学びます。
             </p>
           </div>
           <div class="highlight">
-            <h2>🚀 学習目標</h2>
+            <h2>学習目標</h2>
             <p>
               このコースを通じて、AI技術の効果的かつ倫理的な使用に必要な知識とスキルを習得し、将来のキャリアや創作活動への適用につなげることができます。
             </p>
@@ -289,9 +155,9 @@
       </div>
 
       <!-- Slide 2: Schedule -->
-      <div class="slide">
+      <div class="slide layout-wide">
         <div class="slide-header">
-          <div class="slide-title">📅 授業スケジュール</div>
+          <div class="slide-title">授業スケジュール</div>
           <div class="slide-subtitle">全7回の学習計画</div>
         </div>
         <div class="slide-content">
@@ -337,7 +203,7 @@
       <!-- Slide 3: Instructors -->
       <div class="slide">
         <div class="slide-header">
-          <div class="slide-title">👨‍🏫 講師紹介</div>
+          <div class="slide-title">講師紹介</div>
           <div class="slide-subtitle">経験豊富な講師陣</div>
         </div>
         <div class="slide-content">
@@ -370,7 +236,7 @@
       <!-- Student Introductions -->
       <div class="slide">
         <div class="slide-header">
-          <div class="slide-title">🧑‍🎓 みなさまの自己紹介</div>
+          <div class="slide-title">みなさまの自己紹介</div>
           <div class="slide-subtitle">AIの活用と授業への期待</div>
         </div>
         <div class="slide-content">
@@ -391,7 +257,7 @@
       <!-- Slide 4: Why Learn -->
       <div class="slide">
         <div class="slide-header">
-          <div class="slide-title">🤔 なぜAIとプログラミングを学ぶのか？</div>
+          <div class="slide-title">なぜAIとプログラミングを学ぶのか？</div>
           <div class="slide-subtitle">時代の変化への対応</div>
         </div>
         <div class="slide-content">
@@ -402,7 +268,7 @@
           </div>
 
           <div class="highlight">
-            <h3>🎯 背景</h3>
+            <h3>背景</h3>
             <ul>
               <li>AIの登場でプログラミングの敷居が下がった</li>
               <li>
@@ -416,14 +282,14 @@
       </div>
 
       <!-- Slide 5: Why Programming -->
-      <div class="slide">
+      <div class="slide layout-three">
         <div class="slide-header">
-          <div class="slide-title">💻 なぜプログラミングを学ぶべきか</div>
+          <div class="slide-title">なぜプログラミングを学ぶべきか</div>
           <div class="slide-subtitle">3つの重要な理由</div>
         </div>
         <div class="slide-content">
           <div class="reason-card">
-            <h3><span class="emoji">🧠</span>1. 論理的に考える力が身につく</h3>
+            <h3>1. 論理的に考える力が身につく</h3>
             <p><strong>効果:</strong> 問題解決の筋道を立てる力を鍛える</p>
             <p>
               <strong>学ばないと...</strong>
@@ -432,8 +298,7 @@
           </div>
 
           <div class="reason-card">
-            <h3>
-              <span class="emoji">📖</span>2. デジタル社会の"読み書き"だから
+            <h3>2. デジタル社会の"読み書き"だから
             </h3>
             <p><strong>効果:</strong> プログラミングは現代の共通言語</p>
             <p>
@@ -443,7 +308,7 @@
           </div>
 
           <div class="reason-card">
-            <h3><span class="emoji">💡</span>3. 自分のアイデアを形にできる</h3>
+            <h3>3. 自分のアイデアを形にできる</h3>
             <p><strong>効果:</strong> アプリやサービスを自分で作れる</p>
             <p>
               <strong>学ばないと...</strong>
@@ -454,15 +319,14 @@
       </div>
 
       <!-- Slide 6: Why AI -->
-      <div class="slide">
+      <div class="slide layout-three">
         <div class="slide-header">
-          <div class="slide-title">🤖 なぜAIを活用すべきか</div>
+          <div class="slide-title">なぜAIを活用すべきか</div>
           <div class="slide-subtitle">AIがもたらす3つの変化</div>
         </div>
         <div class="slide-content">
           <div class="reason-card">
-            <h3>
-              <span class="emoji">⚡</span>1. 効率とスピードが圧倒的に変わる
+            <h3>1. 効率とスピードが圧倒的に変わる
             </h3>
             <p>
               <strong>効果:</strong> 調べ物・デバッグ・資料作成が何倍も速くなる
@@ -474,15 +338,14 @@
           </div>
 
           <div class="reason-card">
-            <h3>
-              <span class="emoji">🎓</span>2. 学ぶことそのものを助けてくれる
+            <h3>2. 学ぶことそのものを助けてくれる
             </h3>
             <p><strong>効果:</strong> 自分専属の先生や相棒のように使える</p>
             <p><strong>使わないと...</strong> 学ぶ方法がわからず諦めてしまう</p>
           </div>
 
           <div class="reason-card">
-            <h3><span class="emoji">🌍</span>3. 世界のルールが変わった</h3>
+            <h3>3. 世界のルールが変わった</h3>
             <p><strong>効果:</strong> AI活用はすでに社会の前提</p>
             <p>
               <strong>使わないと...</strong>
@@ -493,9 +356,9 @@
       </div>
 
       <!-- Slide 7: Cautions -->
-      <div class="slide">
+      <div class="slide layout-three layout-intro">
         <div class="slide-header">
-          <div class="slide-title">⚠️ AI活用の注意点</div>
+          <div class="slide-title">AI活用の注意点</div>
           <div class="slide-subtitle">便利さの裏にあるリスク</div>
         </div>
         <div class="slide-content">
@@ -504,7 +367,7 @@
           </p>
 
           <div class="warning-card">
-            <h3><span class="emoji">🔄</span>依存に関する注意</h3>
+            <h3>依存に関する注意</h3>
             <ul>
               <li>学びに活かす適切な使い方を身につける</li>
               <li>バイアスを避ける意識を持つ</li>
@@ -512,7 +375,7 @@
           </div>
 
           <div class="warning-card">
-            <h3><span class="emoji">🎯</span>正確性の問題</h3>
+            <h3>正確性の問題</h3>
             <ul>
               <li>間違い・偏り・古い情報への注意</li>
               <li>情報の検証を怠らない</li>
@@ -520,7 +383,7 @@
           </div>
 
           <div class="warning-card">
-            <h3><span class="emoji">🛡️</span>リスク管理</h3>
+            <h3>リスク管理</h3>
             <ul>
               <li>情報漏洩の防止</li>
               <li>著作権・倫理的配慮</li>
@@ -532,36 +395,36 @@
       <!-- Slide 8: Demo -->
       <div class="slide">
         <div class="slide-header">
-          <div class="slide-title">🧑‍💻 実践デモ</div>
+          <div class="slide-title">実践デモ</div>
           <div class="slide-subtitle">AIの可能性を体験</div>
         </div>
         <div class="slide-content">
           <div class="demo-card">
-            <h3><span class="emoji">📱</span>モック作成</h3>
+            <h3>モック作成</h3>
             <p><a href="https://aistudio.google.com/prompts/new_chat" target="_blank" rel="noopener noreferrer">Google AI Studio</a>を使用したアプリケーションモックアップの作成</p>
           </div>
 
           <div class="demo-card">
-            <h3><span class="emoji">🌐</span>Webアプリ作成</h3>
+            <h3>Webアプリ作成</h3>
             <p><a href="https://aistudio.google.com/prompts/new_chat" target="_blank" rel="noopener noreferrer">Google AI Studio</a>による実動Webアプリケーションの生成</p>
           </div>
 
           <div class="demo-card">
-            <h3><span class="emoji">📦</span>3Dモデル作成</h3>
+            <h3>3Dモデル作成</h3>
             <p><a href="https://supercraft.ai/" target="_blank" rel="noopener noreferrer">SuperCraft</a>を活用した3Dプロダクトデザイン</p>
           </div>
 
           <div class="demo-card">
-            <h3><span class="emoji">🎨</span>Blender MCP</h3>
+            <h3>Blender MCP</h3>
             <p><a href="https://github.com/ahujasid/blender-mcp/tree/main" target="_blank" rel="noopener noreferrer">Blender MCP</a>による高度な3Dモデリングツールとの連携</p>
           </div>
         </div>
       </div>
 
       <!-- Slide 9: AI Definition -->
-      <div class="slide">
+      <div class="slide layout-definition">
         <div class="slide-header">
-          <div class="slide-title">🤖 AIの定義</div>
+          <div class="slide-title">AIの定義</div>
           <div class="slide-subtitle">人工知能とは何か</div>
         </div>
         <div class="slide-content">
@@ -591,14 +454,14 @@
       </div>
 
       <!-- Slide 10: AI History Timeline -->
-      <div class="slide">
+      <div class="slide layout-history">
         <div class="slide-header">
-          <div class="slide-title">📚 AIの歴史</div>
+          <div class="slide-title">AIの歴史</div>
           <div class="slide-subtitle">発展の軌跡</div>
         </div>
         <div class="slide-content">
           <div class="reason-card">
-            <h3><span class="emoji">🔬</span>1950年代 - 起源</h3>
+            <h3>1950年代 - 起源</h3>
             <p>
               <strong>アラン・チューリング</strong
               >：「機械は考えることができるか？」
@@ -607,7 +470,7 @@
           </div>
 
           <div class="reason-card">
-            <h3><span class="emoji">🎯</span>1956年 - AI誕生</h3>
+            <h3>1956年 - AI誕生</h3>
             <p>
               <strong>ダートマス会議</strong>："Artificial
               Intelligence"という用語が初めて使用される
@@ -615,31 +478,31 @@
           </div>
 
           <div class="reason-card">
-            <h3><span class="emoji">❄️</span>1960-1970年代 - 冬の時代</h3>
+            <h3>1960-1970年代 - 冬の時代</h3>
             <p>初期の成功の後、期待に応えられず研究が停滞</p>
           </div>
 
           <div class="reason-card">
-            <h3><span class="emoji">💼</span>1980年代 - 復活</h3>
+            <h3>1980年代 - 復活</h3>
             <p><strong>エキスパートシステム</strong>の商業的成功</p>
           </div>
 
           <div class="reason-card">
-            <h3><span class="emoji">🌐</span>1990-2000年代 - データ時代</h3>
+            <h3>1990-2000年代 - データ時代</h3>
             <p>インターネット普及、<strong>機械学習</strong>が主流に</p>
           </div>
 
           <div class="reason-card">
-            <h3><span class="emoji">🚀</span>2012年-現在 - AI革命</h3>
+            <h3>2012年-現在 - AI革命</h3>
             <p><strong>ディープラーニング</strong>の成功、AI技術の急速な発展</p>
           </div>
         </div>
       </div>
 
       <!-- Slide 11: AI Development -->
-      <div class="slide">
+      <div class="slide layout-factors">
         <div class="slide-header">
-          <div class="slide-title">🌟 AIの発展と重要性</div>
+          <div class="slide-title">AIの発展と重要性</div>
           <div class="slide-subtitle">現代社会における役割</div>
         </div>
         <div class="slide-content">
@@ -682,9 +545,9 @@
       </div>
 
       <!-- Slide 12: Try AI -->
-      <div class="slide">
+      <div class="slide layout-practice">
         <div class="slide-header">
-          <div class="slide-title">💡 AIに質問してみよう！</div>
+          <div class="slide-title">AIに質問してみよう！</div>
           <div class="slide-subtitle">Let's Try!</div>
         </div>
         <div class="slide-content">
@@ -716,9 +579,9 @@
       </div>
 
       <!-- Slide 13: Generative AI -->
-      <div class="slide">
+      <div class="slide layout-factors">
         <div class="slide-header">
-          <div class="slide-title">✨ 注目される生成AI</div>
+          <div class="slide-title">注目される生成AI</div>
           <div class="slide-subtitle">新しいコンテンツを生み出すAI</div>
         </div>
         <div class="slide-content">
@@ -751,9 +614,9 @@
       </div>
 
       <!-- Slide 14: AI Basic Concepts Try -->
-      <div class="slide">
+      <div class="slide layout-intro">
         <div class="slide-header">
-          <div class="slide-title">💡 AI基礎概念 - 実習</div>
+          <div class="slide-title">AI基礎概念 - 実習</div>
           <div class="slide-subtitle">AIに質問してみよう！</div>
         </div>
         <div class="slide-content">
@@ -778,9 +641,9 @@
       </div>
 
       <!-- Slide 15: Large Language Models -->
-      <div class="slide">
+      <div class="slide layout-media">
         <div class="slide-header">
-          <div class="slide-title">🧠 大規模言語モデル</div>
+          <div class="slide-title">大規模言語モデル</div>
           <div class="slide-subtitle">AI技術との関連性</div>
         </div>
         <div class="slide-content">
@@ -824,9 +687,9 @@
       </div>
 
       <!-- Slide 16: Machine Learning -->
-      <div class="slide">
+      <div class="slide layout-definition">
         <div class="slide-header">
-          <div class="slide-title">🤖 機械学習（ML）とは？</div>
+          <div class="slide-title">機械学習（ML）とは？</div>
           <div class="slide-subtitle">コンピュータが学習する仕組み</div>
         </div>
         <div class="slide-content">
@@ -853,9 +716,9 @@
       </div>
 
       <!-- Slide 17: ML Example -->
-      <div class="slide">
+      <div class="slide layout-example">
         <div class="slide-header">
-          <div class="slide-title">📊 機械学習の例</div>
+          <div class="slide-title">機械学習の例</div>
           <div class="slide-subtitle">大人・子供判定モデル</div>
         </div>
         <div class="slide-content">
@@ -941,9 +804,9 @@
       </div>
 
       <!-- Slide 18: Deep Learning -->
-      <div class="slide">
+      <div class="slide layout-deep">
         <div class="slide-header">
-          <div class="slide-title">🧮 ディープラーニング（DL）</div>
+          <div class="slide-title">ディープラーニング（DL）</div>
           <div class="slide-subtitle">多層ニューラルネットワーク</div>
         </div>
         <div class="slide-content">
@@ -1001,7 +864,7 @@
       <!-- Slide 19: Rule-based Systems -->
       <div class="slide">
         <div class="slide-header">
-          <div class="slide-title">📋 ルールベースシステム</div>
+          <div class="slide-title">ルールベースシステム</div>
           <div class="slide-subtitle">従来の手法とその限界</div>
         </div>
         <div class="slide-content">
@@ -1042,9 +905,9 @@
       </div>
 
       <!-- Slide 21: Workshop Introduction -->
-      <div class="slide">
+      <div class="slide layout-workshop">
         <div class="slide-header">
-          <div class="slide-title">🎯 AIワークショップ</div>
+          <div class="slide-title">AIワークショップ</div>
           <div class="slide-subtitle">生成AIは学生生活をどう変えるか？</div>
         </div>
         <div class="slide-content">
@@ -1058,12 +921,12 @@
           </div>
 
           <div class="highlight">
-            <h3>🎯 テーマ</h3>
+            <h3>テーマ</h3>
             <p>「生成AIは自分たち学生の生活をどう変えるだろうか？」</p>
           </div>
 
           <div class="reason-card">
-            <h3>📋 議題</h3>
+            <h3>議題</h3>
             <ul>
               <li><strong>AIに関する期待</strong></li>
               <li><strong>AIに関する不安</strong></li>
@@ -1075,14 +938,14 @@
       </div>
 
       <!-- Slide 22: Workshop Schedule -->
-      <div class="slide">
+      <div class="slide layout-three">
         <div class="slide-header">
-          <div class="slide-title">⏰ ワークショップの進め方</div>
+          <div class="slide-title">ワークショップの進め方</div>
           <div class="slide-subtitle">90分間のスケジュール</div>
         </div>
         <div class="slide-content">
           <div class="reason-card">
-            <h3>🚀 準備（10分）</h3>
+            <h3>準備（10分）</h3>
             <ul>
               <li>出欠登録</li>
               <li>チーム分け（22名、4チーム、5-6人）</li>
@@ -1091,7 +954,7 @@
           </div>
 
           <div class="reason-card">
-            <h3>💭 セッション1：期待と不安（40分）</h3>
+            <h3>セッション1：期待と不安（40分）</h3>
             <ul>
               <li>
                 <strong>発散と収束</strong>「AIに関する期待と不安」（12分）
@@ -1101,7 +964,7 @@
           </div>
 
           <div class="reason-card">
-            <h3>🎨 セッション2：やりたいこと・疑問（40分）</h3>
+            <h3>セッション2：やりたいこと・疑問（40分）</h3>
             <ul>
               <li>
                 <strong>発散と収束</strong>「生成AIでしたいこと、疑問」（12分）
@@ -1113,18 +976,18 @@
       </div>
 
       <!-- Slide 23: Summary -->
-      <div class="slide">
+      <div class="slide layout-summary">
         <div class="slide-header">
-          <div class="slide-title">📝 本日のまとめ</div>
+          <div class="slide-title">本日のまとめ</div>
           <div class="slide-subtitle">講義の要点復習</div>
         </div>
         <div class="slide-content">
           <div class="highlight">
-            <h3>🎯 本日学んだこと</h3>
+            <h3>本日学んだこと</h3>
           </div>
 
           <div class="reason-card">
-            <h3>📚 AIの理解</h3>
+            <h3>AIの理解</h3>
             <p>歴史に基づき、<strong>AI（人工知能）</strong>とは何かを考察</p>
             <ul>
               <li>1950年代のチューリングテストから現在まで</li>
@@ -1134,31 +997,31 @@
           </div>
 
           <div class="reason-card">
-            <h3>✨ 生成AIの体験</h3>
+            <h3>生成AIの体験</h3>
             <p>現在、最も注目されている<strong>生成AI</strong>を理解</p>
             <p><strong>💡 どんどん使おう！！</strong></p>
           </div>
 
           <div class="reason-card">
-            <h3>🤝 ワークショップ</h3>
+            <h3>ワークショップ</h3>
             <p>自分たちの<strong>AIへの考え</strong>を整理し、共有</p>
           </div>
         </div>
       </div>
 
       <!-- Slide 24: Next Class Preview -->
-      <div class="slide">
+      <div class="slide layout-summary">
         <div class="slide-header">
-          <div class="slide-title">🔮 次回講義の予告</div>
+          <div class="slide-title">次回講義の予告</div>
           <div class="slide-subtitle">プロンプトエンジニアリング</div>
         </div>
         <div class="slide-content">
           <div class="highlight">
-            <h3>📅 10/2のテーマ</h3>
+            <h3>10/2のテーマ</h3>
           </div>
 
           <div class="reason-card">
-            <h3>💡 生成AIの活用方法</h3>
+            <h3>生成AIの活用方法</h3>
             <p><strong>生成AIのユースケースを知ろう</strong></p>
             <ul>
               <li>文章・画像・音声生成などの活用例</li>
@@ -1168,7 +1031,7 @@
           </div>
 
           <div class="reason-card">
-            <h3>✍️ プロンプトの書き方</h3>
+            <h3>プロンプトの書き方</h3>
             <p><strong>AIに意図が伝わる指示を考えよう</strong></p>
             <ul>
               <li>目的と条件を明確にする</li>
@@ -1180,14 +1043,14 @@
       </div>
 
       <!-- Slide 25: References -->
-      <div class="slide">
+      <div class="slide layout-three">
         <div class="slide-header">
-          <div class="slide-title">📚 参考情報</div>
+          <div class="slide-title">参考情報</div>
           <div class="slide-subtitle">さらなる学習のために</div>
         </div>
         <div class="slide-content">
           <div class="reason-card">
-            <h3>🔗 参考サービス</h3>
+            <h3>参考サービス</h3>
             <ul>
               <li>
                 <a href="https://chat.openai.com/" target="_blank"
@@ -1211,7 +1074,7 @@
           </div>
 
           <div class="reason-card">
-            <h3>📖 参考文献</h3>
+            <h3>参考文献</h3>
             <ul>
               <li>
                 <a
@@ -1238,7 +1101,7 @@
           </div>
 
           <div class="reason-card">
-            <h3>🎥 参考動画</h3>
+            <h3>参考動画</h3>
             <ul>
               <li>
                 <a
@@ -1258,13 +1121,15 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="navigation">
+    <div class="navigation" aria-label="スライド操作">
       <button class="nav-btn" onclick="previousSlide()" id="prevBtn">
         ◀ 前へ
       </button>
       <button class="nav-btn" onclick="nextSlide()" id="nextBtn">次へ ▶</button>
+    </div>
+
+      <div class="progress" aria-hidden="true"></div>
     </div>
 
     <script>
@@ -1274,6 +1139,13 @@
 
       document.getElementById("total-slides").textContent = totalSlides;
 
+      function fitPresentation() {
+        const scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+        document.documentElement.style.setProperty("--slide-scale", scale);
+      }
+      window.addEventListener("resize", fitPresentation);
+      fitPresentation();
+
       function showSlide(index) {
         slides.forEach((slide, i) => {
           slide.classList.remove("active");
@@ -1282,6 +1154,7 @@
           }
         });
 
+        document.querySelector(".progress").style.width = `${((index + 1) / totalSlides) * 100}%`;
         document.getElementById("current-slide").textContent = index + 1;
         document.getElementById("prevBtn").disabled = index === 0;
         document.getElementById("nextBtn").disabled = index === totalSlides - 1;
@@ -1303,7 +1176,9 @@
 
       // キーボードナビゲーション
       document.addEventListener("keydown", (e) => {
+        if (e.target.closest("a, button, input, textarea, select")) return;
         if (e.key === "ArrowRight" || e.key === " ") {
+          e.preventDefault();
           nextSlide();
         } else if (e.key === "ArrowLeft") {
           previousSlide();
