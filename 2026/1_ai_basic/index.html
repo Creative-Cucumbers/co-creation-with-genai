@@ -105,6 +105,10 @@
       .layout-game-lab .game-prompt { grid-column: 1 / -1; padding: 22px 28px; }
       .layout-game-lab .game-prompt h3 { margin-bottom: 10px; }
       .game-intro { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px 28px; padding: 18px 0 0; border-top: 1px solid var(--line); font-size: 18px; }
+      .layout-generative .slide-content { gap: 20px; }
+      .layout-generative .agent-note { grid-column: 1 / -1; padding: 20px 28px; }
+      .layout-generative .agent-note h3 { margin-bottom: 10px; }
+      .layout-generative .agent-note p { font-size: 22px; }
       .layout-three .slide-content { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .layout-wide .slide-content { grid-template-columns: 1fr; }
       .layout-intro .slide-content > p, .layout-intro .slide-content > h3,
@@ -578,7 +582,7 @@
       </div>
 
       <!-- Slide 13: Generative AI -->
-      <div class="slide">
+      <div class="slide layout-generative">
         <div class="slide-header">
           <div class="slide-title">注目される生成AI</div>
           <div class="slide-subtitle">新しいコンテンツを生み出すAI</div>
@@ -608,6 +612,11 @@
                 <strong>データ解析と予測</strong> - トレンド分析と将来予測
               </li>
             </ul>
+          </div>
+          <div class="highlight agent-note">
+            <h3>AI Agent（AIエージェント）とは？</h3>
+            <p>生成AIを使い、<strong>目標に向けて手順を考え、検索やコード実行などのツールを使いながら、結果を確認して作業を進める仕組み</strong>。</p>
+            <p><strong>例：</strong>ゲームを作る → 動作を確かめる → エラーを直す。</p>
           </div>
         </div>
       </div>
