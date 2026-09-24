@@ -85,6 +85,23 @@
       .layout-cases .case-date { color: var(--blue); font-size: 18px; font-weight: 700; margin-bottom: 12px; }
       .layout-cases .case-source { font-size: 17px; margin-top: 18px; }
       .layout-cases .highlight { grid-column: 1 / -1; padding: 20px 30px; }
+      .layout-news .slide-content { grid-template-columns: 1fr 1fr; }
+      .layout-news figure { height: 570px; display: flex; flex-direction: column; align-items: center; }
+      .layout-news figure > a { display: block; min-height: 0; flex: 1; }
+      .layout-news .slide-image { width: auto; max-width: 100%; height: 100%; max-height: none; }
+      .layout-news .reason-card { align-self: start; }
+      .layout-news .case-source { margin-top: 24px; font-size: 19px; }
+      .layout-timeline .slide-content { display: block; }
+      .history-timeline { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 24px; padding: 0; list-style: none; counter-reset: milestone; }
+      .history-timeline li { margin: 0; padding: 28px 24px 24px; min-height: 230px; background: var(--panel); border-top: 4px solid var(--blue); position: relative; counter-increment: milestone; }
+      .history-timeline li::before { content: counter(milestone, decimal-leading-zero); display: block; color: var(--blue); font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+      .history-timeline li:not(:nth-child(4n))::after { content: "→"; position: absolute; right: -24px; top: 80px; width: 24px; text-align: center; color: var(--blue); }
+      .history-timeline h3 { font-size: 27px; margin-bottom: 12px; }
+      .history-timeline p { font-size: 21px; }
+      .learning-flow { display: flex; align-items: stretch; list-style: none; padding: 0; gap: 28px; margin-top: 24px; counter-reset: step; }
+      .learning-flow li { flex: 1; margin: 0; padding: 24px 10px; background: white; border: 1px solid var(--line); text-align: center; position: relative; font-size: 20px; counter-increment: step; }
+      .learning-flow li::before { content: "0" counter(step); display: block; color: var(--blue); font-size: 17px; font-weight: 700; margin-bottom: 12px; }
+      .learning-flow li:not(:last-child)::after { content: "→"; position: absolute; right: -27px; top: 50%; transform: translateY(-50%); color: var(--blue); width: 26px; }
       .layout-three .slide-content { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .layout-wide .slide-content { grid-template-columns: 1fr; }
       .layout-intro .slide-content > p, .layout-intro .slide-content > h3,
@@ -92,8 +109,6 @@
       .layout-summary .slide-content { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .layout-summary .highlight { padding: 14px 28px; }
       .layout-summary .highlight h3 { margin: 0; }
-      .layout-history .slide-content { grid-template-columns: repeat(3, minmax(0, 1fr)); font-size: 21px; }
-      .layout-history h3 { font-size: 24px; }
       .layout-factors .slide-content { grid-template-rows: auto 1fr; grid-auto-flow: column; }
       .layout-factors .slide-content > h3 { margin: 0; }
       .layout-practice .slide-content { grid-template-columns: 1fr 2fr; }
@@ -133,7 +148,7 @@
   <body>
     <div class="presentation-container">
       <div class="slide-indicator">
-        <span id="current-slide">1</span> / <span id="total-slides">25</span>
+        <span id="current-slide">1</span> / <span id="total-slides">26</span>
       </div>
 
       <!-- Slide 1: Title -->
@@ -283,6 +298,31 @@
           </div>
           <div class="highlight">
             <p><strong>統制やセキュリティを重視する銀行・金融でも、現場からAIで課題解決。</strong><br />自分の専門分野の課題を見つけ、動くものを作って確かめる力を身につけよう。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DeNA news image from the course README -->
+      <div class="slide layout-news">
+        <div class="slide-header">
+          <div class="slide-title">DeNAの事例｜2025年のニュース</div>
+          <div class="slide-subtitle">2025年7月4日公開・ITmedia AI＋</div>
+        </div>
+        <div class="slide-content">
+          <figure class="image-container">
+            <a href="images/2025-07-04-DeNA.png" target="_blank" rel="noopener noreferrer" aria-label="DeNAの記事画像を原寸で開く">
+              <img src="images/2025-07-04-DeNA.png" alt="2025年7月4日公開のITmedia AI＋記事。DeNAの一部部署で企画に生成AIで作ったプロトタイプを求める制度を紹介" class="slide-image" />
+            </a>
+            <figcaption class="image-caption">記事画像をクリックすると原寸で表示</figcaption>
+          </figure>
+          <div class="reason-card">
+            <h3>記事のポイント</h3>
+            <ul>
+              <li>新規プロダクトの企画に、生成AIなどで作った試作品を添える</li>
+              <li>対象はAIイノベーション事業本部の全員。ビジネス職やデザイナー職も含む</li>
+              <li>実物で検討し、企画の精度を高める</li>
+            </ul>
+            <p class="case-source"><a href="https://www.itmedia.co.jp/aiplus/articles/2507/04/news070.html" target="_blank" rel="noopener noreferrer">出典：ITmedia AI＋（2025年7月4日） ↗</a></p>
           </div>
         </div>
       </div>
@@ -460,48 +500,22 @@
       </div>
 
       <!-- Slide 10: AI History Timeline -->
-      <div class="slide layout-history">
+      <div class="slide layout-timeline">
         <div class="slide-header">
           <div class="slide-title">AIの歴史</div>
-          <div class="slide-subtitle">発展の軌跡</div>
+          <div class="slide-subtitle">発展の軌跡｜上段左から右へ、下段へ</div>
         </div>
         <div class="slide-content">
-          <div class="reason-card">
-            <h3>1950年代 - 起源</h3>
-            <p>
-              <strong>アラン・チューリング</strong
-              >：「機械は考えることができるか？」
-            </p>
-            <p><strong>チューリングテスト</strong>の提案</p>
-          </div>
-
-          <div class="reason-card">
-            <h3>1956年 - AI誕生</h3>
-            <p>
-              <strong>ダートマス会議</strong>："Artificial
-              Intelligence"という用語が初めて使用される
-            </p>
-          </div>
-
-          <div class="reason-card">
-            <h3>1960-1970年代 - 冬の時代</h3>
-            <p>初期の成功の後、期待に応えられず研究が停滞</p>
-          </div>
-
-          <div class="reason-card">
-            <h3>1980年代 - 復活</h3>
-            <p><strong>エキスパートシステム</strong>の商業的成功</p>
-          </div>
-
-          <div class="reason-card">
-            <h3>1990-2000年代 - データ時代</h3>
-            <p>インターネット普及、<strong>機械学習</strong>が主流に</p>
-          </div>
-
-          <div class="reason-card">
-            <h3>2012年-現在 - AI革命</h3>
-            <p><strong>ディープラーニング</strong>の成功、AI技術の急速な発展</p>
-          </div>
+          <ol class="history-timeline" aria-label="AIの歴史を年代順に示す年表">
+            <li><h3>1950年代初頭</h3><p>チューリングの問いと、チューリングテストの提案</p></li>
+            <li><h3>1956年</h3><p>ダートマス会議で「Artificial Intelligence」という用語が登場</p></li>
+            <li><h3>1960–1970年代</h3><p>初期の成功と、研究が停滞する「冬の時代」</p></li>
+            <li><h3>1980年代</h3><p>エキスパートシステムの商業的成功</p></li>
+            <li><h3>1990年代</h3><p>インターネットの普及と大量データ</p></li>
+            <li><h3>2000年代</h3><p>機械学習とデータ駆動型アプローチが主流に</p></li>
+            <li><h3>2012年</h3><p>ディープラーニングが画像認識コンペティションで成功</p></li>
+            <li><h3>現在</h3><p>AI技術の急速な発展と、応用分野の拡大</p></li>
+          </ol>
         </div>
       </div>
 
@@ -716,7 +730,11 @@
 
           <div class="reason-card">
             <h3>基本的な流れ</h3>
-            <p>学習データの準備 → 機械学習モデルの学習 → モデルの利用</p>
+            <ol class="learning-flow" aria-label="機械学習の基本的な流れ">
+              <li>学習データ<br />の準備</li>
+              <li>機械学習モデル<br />の学習</li>
+              <li>モデル<br />の利用</li>
+            </ol>
           </div>
         </div>
       </div>
