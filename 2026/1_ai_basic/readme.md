@@ -133,10 +133,6 @@ AI の活用については、上記のように便利さや必要性がある�
 
 ### デモ 🧑‍💻
 
-#### モック作成
-
-[Google AI Studio](https://aistudio.google.com/prompts/new_chat)
-
 #### Web アプリ作成
 
 [Google AI Studio](https://aistudio.google.com/prompts/new_chat)
