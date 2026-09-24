@@ -81,6 +81,10 @@
       .nav-btn:hover { background: var(--blue); color: white; border-color: var(--blue); }
       .nav-btn:disabled { color: #aaa; background: #f6f6f6; border-color: #eee; cursor: default; }
       .progress { position: absolute; bottom: 0; left: 0; height: 4px; background: var(--blue); transition: width .2s; }
+      .layout-cases .slide-content { font-size: 22px; gap: 20px; }
+      .layout-cases .case-date { color: var(--blue); font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+      .layout-cases .case-source { font-size: 17px; margin-top: 18px; }
+      .layout-cases .highlight { grid-column: 1 / -1; padding: 20px 30px; }
       .layout-three .slide-content { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .layout-wide .slide-content { grid-template-columns: 1fr; }
       .layout-intro .slide-content > p, .layout-intro .slide-content > h3,
@@ -255,28 +259,30 @@
       </div>
 
       <!-- Slide 4: Why Learn -->
-      <div class="slide">
+      <div class="slide layout-cases">
         <div class="slide-header">
           <div class="slide-title">なぜAIとプログラミングを学ぶのか？</div>
-          <div class="slide-subtitle">時代の変化への対応</div>
+          <div class="slide-subtitle">IT企業から銀行・金融へ。自分の課題を、自分で形にする</div>
         </div>
         <div class="slide-content">
-          <div class="quote">
-            <strong
-              >新規プロダクトの企画時は、まず生成AIなどで開発したプロトタイプを持ってくること</strong
-            >、企画書のみ提出はNG──DeNAが一部の部署で、ある新制度を採用していることが7月4日までに判明した。
+          <div class="reason-card">
+            <p class="case-date">2025年7月4日のニュース</p>
+            <h3>DeNA｜企画にプロトタイプを</h3>
+            <p><strong>新規プロダクトの提案に、生成AIなどで作った試作品を添える制度。</strong></p>
+            <p>AIイノベーション事業本部では、エンジニアに加え、ビジネス職・デザイナー職も対象に。</p>
+            <p>実物を使って検討することで、企画の精度を高める。</p>
+            <p class="case-source"><a href="https://www.itmedia.co.jp/aiplus/articles/2507/04/news070.html" target="_blank" rel="noopener noreferrer">出典：ITmedia AI＋（2025年7月4日） ↗</a></p>
           </div>
-
+          <div class="reason-card">
+            <p class="case-date">2026年3月の取り組み</p>
+            <h3>みずほ｜銀行の現場でも開発を</h3>
+            <p><strong>「自らの業務課題を解決するプロトタイプを実際に開発する」</strong></p>
+            <p>社内イベント「DXカフェ BUILD」で、事務企画・業務監査などの5チームがバイブコーディングに挑戦。</p>
+            <p>AIに自然言語で指示し、1日で稟議書の作成支援などの試作品を開発。</p>
+            <p class="case-source"><a href="https://www.mizuho-fg.co.jp/dx/articles/dxcafebuild-2603/index.html" target="_blank" rel="noopener noreferrer">出典：MIZUHO DX（2026年4月22日公開） ↗</a></p>
+          </div>
           <div class="highlight">
-            <h3>背景</h3>
-            <ul>
-              <li>AIの登場でプログラミングの敷居が下がった</li>
-              <li>
-                ビジネス職・デザイナー職もプロトタイプ作成が求められる時代
-              </li>
-              <li>企画書を書くより実装の方が早い</li>
-              <li>現物を見て判断した方が良い判断ができる</li>
-            </ul>
+            <p><strong>統制やセキュリティを重視する銀行・金融でも、現場からAIで課題解決。</strong><br />自分の専門分野の課題を見つけ、動くものを作って確かめる力を身につけよう。</p>
           </div>
         </div>
       </div>
