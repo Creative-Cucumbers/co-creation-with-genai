@@ -85,16 +85,10 @@
       .layout-cases .case-date { color: var(--blue); font-size: 18px; font-weight: 700; margin-bottom: 12px; }
       .layout-cases .case-source { font-size: 17px; margin-top: 18px; }
       .layout-cases .highlight { grid-column: 1 / -1; padding: 20px 30px; }
-      .layout-news .slide-content { grid-template-columns: 1fr 1fr; }
-      .layout-news figure { height: 570px; display: flex; flex-direction: column; align-items: center; }
-      .layout-news figure > a { display: block; min-height: 0; flex: 1; }
-      .layout-news .slide-image { width: auto; max-width: 100%; height: 100%; max-height: none; }
-      .layout-news-photo .slide-content { grid-template-columns: 1.3fr 1fr; }
-      .layout-news-photo figure { height: auto; align-self: center; }
-      .layout-news-photo figure > a { flex: none; }
-      .layout-news-photo .slide-image { width: 100%; height: auto; }
-      .layout-news .reason-card { align-self: start; }
-      .layout-news .case-source { margin-top: 24px; font-size: 19px; }
+      .case-body { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 20px; align-items: start; }
+      .case-image { display: block; align-self: center; }
+      .case-image img { width: 100%; height: 220px; object-fit: contain; display: block; }
+      .case-body p { font-size: 21px; }
       .layout-timeline .slide-content { display: block; }
       .history-timeline { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 24px; padding: 0; list-style: none; counter-reset: milestone; }
       .history-timeline li { margin: 0; padding: 28px 24px 24px; min-height: 230px; background: var(--panel); border-top: 4px solid var(--blue); position: relative; counter-increment: milestone; }
@@ -152,7 +146,7 @@
   <body>
     <div class="presentation-container">
       <div class="slide-indicator">
-        <span id="current-slide">1</span> / <span id="total-slides">27</span>
+        <span id="current-slide">1</span> / <span id="total-slides">25</span>
       </div>
 
       <!-- Slide 1: Title -->
@@ -287,69 +281,33 @@
           <div class="reason-card">
             <p class="case-date">2025年7月4日のニュース</p>
             <h3>DeNA｜企画にプロトタイプを</h3>
-            <p><strong>新規プロダクトの提案に、生成AIなどで作った試作品を添える制度。</strong></p>
-            <p>AIイノベーション事業本部では、エンジニアに加え、ビジネス職・デザイナー職も対象に。</p>
-            <p>実物を使って検討することで、企画の精度を高める。</p>
+            <div class="case-body">
+              <a class="case-image" href="images/2025-07-04-DeNA.png" target="_blank" rel="noopener noreferrer" aria-label="DeNAの記事画像を原寸で開く">
+                <img src="images/2025-07-04-DeNA.png" alt="2025年7月4日のDeNAのプロトタイプ制度を紹介する記事" />
+              </a>
+              <div>
+                <p><strong>新規プロダクトの企画に、生成AIなどで作った試作品を添える制度。</strong></p>
+                <p>AIイノベーション事業本部の全員が対象。ビジネス職・デザイナー職も、実物で企画を検討する。</p>
+              </div>
+            </div>
             <p class="case-source"><a href="https://www.itmedia.co.jp/aiplus/articles/2507/04/news070.html" target="_blank" rel="noopener noreferrer">出典：ITmedia AI＋（2025年7月4日） ↗</a></p>
           </div>
           <div class="reason-card">
             <p class="case-date">2026年3月の取り組み</p>
             <h3>みずほ｜銀行の現場でも開発を</h3>
-            <p><strong>「自らの業務課題を解決するプロトタイプを実際に開発する」</strong></p>
-            <p>社内イベント「DXカフェ BUILD」で、事務企画・業務監査などの5チームがバイブコーディングに挑戦。</p>
-            <p>AIに自然言語で指示し、1日で稟議書の作成支援などの試作品を開発。</p>
+            <div class="case-body">
+              <a class="case-image" href="images/mizuho.jpg" target="_blank" rel="noopener noreferrer" aria-label="みずほのイベント画像を原寸で開く">
+                <img src="images/mizuho.jpg" alt="みずほのDXカフェ BUILDでAI開発に取り組む参加者" />
+              </a>
+              <div>
+                <p><strong>「自らの業務課題を解決するプロトタイプを実際に開発する」</strong></p>
+                <p>「DXカフェ BUILD」で事務企画・業務監査などの5チームが、AIへの自然言語の指示で1日かけて試作品を開発。</p>
+              </div>
+            </div>
             <p class="case-source"><a href="https://www.mizuho-fg.co.jp/dx/articles/dxcafebuild-2603/index.html" target="_blank" rel="noopener noreferrer">出典：MIZUHO DX（2026年4月22日公開） ↗</a></p>
           </div>
           <div class="highlight">
             <p><strong>統制やセキュリティを重視する銀行・金融でも、現場からAIで課題解決。</strong><br />自分の専門分野の課題を見つけ、動くものを作って確かめる力を身につけよう。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- DeNA news image from the course README -->
-      <div class="slide layout-news">
-        <div class="slide-header">
-          <div class="slide-title">DeNAの事例｜2025年のニュース</div>
-          <div class="slide-subtitle">2025年7月4日公開・ITmedia AI＋</div>
-        </div>
-        <div class="slide-content">
-          <figure class="image-container">
-            <a href="images/2025-07-04-DeNA.png" target="_blank" rel="noopener noreferrer" aria-label="DeNAの記事画像を原寸で開く">
-              <img src="images/2025-07-04-DeNA.png" alt="2025年7月4日公開のITmedia AI＋記事。DeNAの一部部署で企画に生成AIで作ったプロトタイプを求める制度を紹介" class="slide-image" />
-            </a>
-            <figcaption class="image-caption">記事画像をクリックすると原寸で表示</figcaption>
-          </figure>
-          <div class="reason-card">
-            <h3>記事のポイント</h3>
-            <ul>
-              <li>新規プロダクトの企画に、生成AIなどで作った試作品を添える</li>
-              <li>対象はAIイノベーション事業本部の全員。ビジネス職やデザイナー職も含む</li>
-              <li>実物で検討し、企画の精度を高める</li>
-            </ul>
-            <p class="case-source"><a href="https://www.itmedia.co.jp/aiplus/articles/2507/04/news070.html" target="_blank" rel="noopener noreferrer">出典：ITmedia AI＋（2025年7月4日） ↗</a></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mizuho news image -->
-      <div class="slide layout-news layout-news-photo">
-        <div class="slide-header">
-          <div class="slide-title">みずほの事例｜銀行の現場でもAI開発</div>
-          <div class="slide-subtitle">2026年3月「DXカフェ BUILD」開催・2026年4月22日記事公開</div>
-        </div>
-        <div class="slide-content">
-          <figure class="image-container">
-            <a href="images/mizuho.jpg" target="_blank" rel="noopener noreferrer" aria-label="みずほのDXカフェ BUILDの画像を原寸で開く">
-              <img src="images/mizuho.jpg" alt="みずほのDXカフェ BUILDで参加者がパソコンを囲み、バイブコーディングで金融の業務課題解決に取り組む様子" class="slide-image" />
-            </a>
-            <figcaption class="image-caption">DXカフェ BUILDの様子（出典：MIZUHO DX）</figcaption>
-          </figure>
-          <div class="reason-card">
-            <h3>現場の課題を、動く試作品に</h3>
-            <p><strong>「自らの業務課題を解決するプロトタイプを実際に開発する」</strong></p>
-            <p>事務企画・業務監査などの5チームが、AIに自然言語で指示しながら開発に挑戦。</p>
-            <p>統制やセキュリティを重視する銀行・金融でも、現場の社員によるAI活用が進んでいます。</p>
-            <p class="case-source"><a href="https://www.mizuho-fg.co.jp/dx/articles/dxcafebuild-2603/index.html" target="_blank" rel="noopener noreferrer">出典：MIZUHO DX（2026年4月22日） ↗</a></p>
           </div>
         </div>
       </div>
