@@ -1,4 +1,6 @@
-# Co-creation with Gen AI 2026
+# プログラミング演習 2026
+
+Co-creation with Gen AI
 
 ## 講師
 
