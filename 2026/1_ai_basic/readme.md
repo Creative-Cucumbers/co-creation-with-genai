@@ -133,19 +133,26 @@ AI の活用については、上記のように便利さや必要性がある�
 - 正確性の問題（間違い・偏り・古さ）
 - リスク管理（情報漏洩・著作権・倫理）
 
-### デモ 🧑‍💻
+### AI とつくる、はじめてのゲーム
 
-#### Web アプリ作成
+Google AI Studio でシューティングゲームを作って、遊んで、改良してみましょう。
 
-[Google AI Studio](https://aistudio.google.com/prompts/new_chat)
+1. **ログインする**：[Google AI Studio](https://aistudio.google.com/) を開き、Google アカウントでログイン。「Build」でアプリ作成を始めます。
+2. **ゲームを作る**：下の指示例を入力して送信し、生成されたゲームをプレビューで遊んでみます。
+3. **試して、改良する**：「敵を遅くして」「背景を宇宙にして」など、追加で指示します。動かない場合も、状況を伝えて修正してみましょう。
 
-#### 3D モデル作成
+#### まずは、この指示から
 
-[SuperCraft - Collaborative Design for Physical Products](https://supercraft.ai/)
+```text
+ブラウザで遊べるシューティングゲームを作ってください。左右の矢印キーで自機を動かし、スペースキーで弾を発射します。弾が敵に当たると得点が増え、ゲームオーバー後はもう一度遊べるようにしてください。
+```
 
-#### Blender MCP
+#### ほかの活用例（今回は紹介のみ）
 
-[ahujasid/blender-mcp](https://github.com/ahujasid/blender-mcp/tree/main)
+- 3D モデル作成：[SuperCraft](https://supercraft.ai/)
+- AI と 3D 制作をつなぐ：[Blender MCP](https://github.com/ahujasid/blender-mcp/tree/main)
+
+操作の参考：[Google AI Studio の Build モード（公式ガイド）](https://ai.google.dev/gemini-api/docs/aistudio-build-mode)
 
 ## 3. AI の定義と歴史 (20 分)
 
