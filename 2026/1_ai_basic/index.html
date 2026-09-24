@@ -100,7 +100,9 @@
       .learning-flow li { flex: 1; margin: 0; padding: 24px 10px; background: white; border: 1px solid var(--line); text-align: center; position: relative; font-size: 20px; counter-increment: step; }
       .learning-flow li::before { content: "0" counter(step); display: block; color: var(--blue); font-size: 17px; font-weight: 700; margin-bottom: 12px; }
       .learning-flow li:not(:last-child)::after { content: "→"; position: absolute; right: -27px; top: 50%; transform: translateY(-50%); color: var(--blue); width: 26px; }
-      .layout-game-lab .slide-content { grid-template-columns: repeat(3, minmax(0, 1fr)); font-size: 22px; gap: 20px; }
+      .layout-game-lab .slide-content { grid-template-columns: repeat(4, minmax(0, 1fr)); font-size: 22px; gap: 20px; }
+      .layout-game-lab .title-note { font-size: 17px; font-weight: 400; color: var(--muted); margin-left: 18px; white-space: nowrap; letter-spacing: normal; }
+      .layout-game-lab .demo-card h3 { font-size: 24px; }
       .layout-game-lab .demo-card { padding: 24px; }
       .layout-game-lab .game-prompt { grid-column: 1 / -1; padding: 22px 28px; }
       .layout-game-lab .game-prompt h3 { margin-bottom: 10px; }
@@ -464,7 +466,7 @@
       <!-- Slide 8: Hands-on game creation -->
       <div class="slide layout-game-lab">
         <div class="slide-header">
-          <div class="slide-title">AIとつくる、はじめてのゲーム</div>
+          <div class="slide-title">AIとつくる、はじめてのゲーム<small class="title-note">はじめてじゃない人すみません</small></div>
           <div class="slide-subtitle">Google AI Studioでシューティングゲームを作って、遊んで、改良しよう</div>
         </div>
         <div class="slide-content">
@@ -482,6 +484,11 @@
             <h3>03｜試して、改良する</h3>
             <p>「敵を遅くして」「背景を宇宙にして」など、追加で指示。</p>
             <p>動かない場合も、状況を伝えて修正しよう。</p>
+          </div>
+          <div class="demo-card">
+            <h3>04｜Slackで共有</h3>
+            <p>作ったゲームの画面をキャプチャ。</p>
+            <p>授業のSlackチャンネルに画像を投稿しよう。</p>
           </div>
           <div class="highlight game-prompt">
             <h3>まずは、この指示から</h3>
