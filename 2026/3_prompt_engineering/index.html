@@ -1,0 +1,2520 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>プログラミング演習｜第2回 プロンプトエンジニアリング</title>
+    <style>
+      .media-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 28px;
+        align-items: start;
+      }
+      .media-copy > * + * {
+        margin-top: 20px;
+      }
+      .media-page .body img {
+        max-height: 520px;
+        width: 100%;
+      }
+      .media-page .media-copy {
+        font-size: 21px;
+        line-height: 1.7;
+      }
+      .tree-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .tree-grid article {
+        min-width: 0;
+      }
+      .tree-grid pre {
+        font-size: 21px;
+        line-height: 1.8;
+        padding: 22px 20px;
+      }
+      .model-table th:nth-child(1) {
+        width: 14%;
+      }
+      .model-table th:nth-child(2) {
+        width: 22%;
+      }
+      .model-table th:nth-child(3) {
+        width: 19%;
+      }
+      .model-table th:nth-child(4) {
+        width: 45%;
+      }
+      .service-table th:first-child {
+        width: 30%;
+      }
+      .system-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+      .system-grid .system-flow {
+        align-self: center;
+      }
+      .system-grid .input-pair {
+        gap: 12px;
+        font-size: 21px;
+      }
+      .system-grid .input-pair > div {
+        padding: 18px;
+      }
+      .system-grid .flow-model,
+      .system-grid .flow-output {
+        width: 85%;
+      }
+      .principles h3 {
+        margin: 4px 0 12px;
+      }
+      .example-note {
+        color: var(--muted);
+        margin-top: 12px;
+      }
+      .source {
+        font-size: 17px !important;
+      }
+
+      :root {
+        --ink: #242424;
+        --muted: #666;
+        --blue: #004898;
+        --paper: #fff;
+        --panel: #f2f3f4;
+        --tint: #edf3f9;
+        --line: #d9dde2;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic",
+          Meiryo, sans-serif;
+        background: #e6e8eb;
+        color: var(--ink);
+        height: 100vh;
+        overflow: hidden;
+      }
+      #deck {
+        width: 1600px;
+        height: 900px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(var(--scale, 1));
+        background: var(--paper);
+        box-shadow: 0 16px 70px #16223818;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        padding: 70px 80px 100px;
+        display: none;
+        flex-direction: column;
+      }
+      .slide.active {
+        display: flex;
+      }
+      .slide[hidden] {
+        display: none;
+      }
+      .brand {
+        position: absolute;
+        top: 29px;
+        left: 80px;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: var(--blue);
+      }
+      header {
+        padding-bottom: 24px;
+        margin-bottom: 28px;
+        border-bottom: 2px solid var(--ink);
+        flex: none;
+      }
+      h1 {
+        font-size: 44px;
+        line-height: 1.4;
+        letter-spacing: -0.03em;
+      }
+      h2,
+      h3 {
+        font-size: 26px;
+        line-height: 1.45;
+        margin-bottom: 16px;
+      }
+      .subtitle {
+        font-size: 20px;
+        color: var(--muted);
+        margin-top: 8px;
+        line-height: 1.4;
+      }
+      .body {
+        font-size: 23px;
+        line-height: 1.7;
+        min-height: 0;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .body > * {
+        flex-shrink: 0;
+        min-width: 0;
+      }
+      p {
+        overflow-wrap: anywhere;
+      }
+      strong {
+        font-weight: 700;
+      }
+      ul,
+      ol {
+        padding-left: 1.4em;
+      }
+      li {
+        margin: 0 0 10px;
+      }
+      li:last-child {
+        margin-bottom: 0;
+      }
+      li::marker {
+        color: var(--blue);
+        font-weight: 700;
+      }
+      a {
+        color: var(--blue);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        overflow-wrap: anywhere;
+      }
+      a:hover {
+        text-decoration-thickness: 2px;
+      }
+      :focus-visible {
+        outline: 3px solid var(--blue);
+        outline-offset: 4px;
+      }
+      pre {
+        background: var(--tint);
+        border-top: 3px solid var(--blue);
+        padding: 24px 28px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        font-family: inherit;
+        font-size: 23px;
+        line-height: 1.65;
+      }
+      pre code {
+        font-family: inherit;
+        background: none;
+        padding: 0;
+      }
+      code {
+        background: var(--panel);
+        padding: 2px 6px;
+      }
+      blockquote {
+        background: var(--tint);
+        border-top: 3px solid var(--blue);
+        padding: 20px 28px;
+      }
+      .callout-label {
+        display: block;
+        color: var(--blue);
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 21px;
+        line-height: 1.65;
+      }
+      th,
+      td {
+        border: 1px solid var(--line);
+        padding: 16px 18px;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      th {
+        color: #fff;
+        background: var(--blue);
+        text-align: left;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--panel);
+      }
+      .body img {
+        max-width: 100%;
+        max-height: 360px;
+        object-fit: contain;
+        display: block;
+        margin: auto;
+      }
+      .image-link {
+        display: block;
+      }
+      .file-tree {
+        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+        font-size: 23px;
+      }
+      .exercise .body > ol {
+        background: var(--panel);
+        padding: 28px 30px 28px 64px;
+        border-top: 3px solid var(--line);
+      }
+      .exercise-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .steps,
+      .prompt-column {
+        min-width: 0;
+      }
+      .steps {
+        background: var(--panel);
+        padding: 28px 30px;
+        border-top: 3px solid var(--line);
+      }
+      .steps > * + * {
+        margin-top: 22px;
+      }
+      .prompt-column pre {
+        margin-bottom: 16px;
+      }
+      .steps > ol {
+        padding-left: 1.35em;
+      }
+      .examples {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .examples article {
+        min-width: 0;
+      }
+      .examples pre {
+        height: auto;
+      }
+      .quiz pre {
+        font-size: 30px;
+        line-height: 1.9;
+        padding: 38px 40px;
+      }
+      .quiz .body > p {
+        font-size: 21px;
+      }
+      .quiz .body {
+        justify-content: center;
+      }
+      .principles {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .principles article {
+        padding: 24px 28px;
+        background: var(--panel);
+        border-top: 3px solid var(--line);
+        font-size: 21px;
+        line-height: 1.7;
+      }
+      .principles strong {
+        display: block;
+        font-size: 26px;
+        margin: 6px 0 10px;
+      }
+      .principles .eyebrow {
+        font-size: 16px;
+      }
+      .principle-page .body > p {
+        font-size: 21px;
+      }
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        list-style: none;
+        padding: 0;
+        gap: 28px;
+      }
+      .flow li {
+        margin: 0;
+        padding: 28px 24px;
+        background: var(--panel);
+        border-top: 3px solid var(--blue);
+        position: relative;
+      }
+      .flow b {
+        font-size: 18px;
+        color: var(--blue);
+      }
+      .flow h3 {
+        margin-top: 14px;
+      }
+      .flow p {
+        font-size: 21px;
+      }
+      .flow li:not(:last-child):after {
+        content: "→";
+        position: absolute;
+        right: -25px;
+        top: 45%;
+        color: var(--blue);
+      }
+      .system-flow {
+        text-align: center;
+      }
+      .input-pair {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        align-items: center;
+      }
+      .input-pair > div,
+      .flow-model,
+      .flow-output {
+        padding: 14px 26px;
+        background: var(--tint);
+        border-top: 3px solid var(--blue);
+      }
+      .input-pair small {
+        font-size: 18px;
+        color: var(--muted);
+      }
+      .flow-model,
+      .flow-output {
+        width: 60%;
+        margin: auto;
+      }
+      .arrow {
+        line-height: 1.3;
+        color: var(--blue);
+      }
+      .cover header {
+        border: none;
+        margin: 28px 0 12px;
+        padding: 0;
+      }
+      .cover h1 {
+        font-size: 86px;
+        line-height: 1.15;
+        letter-spacing: -0.05em;
+      }
+      .cover .subtitle {
+        font-size: 23px;
+        margin-top: 22px;
+      }
+      .cover .body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+        align-items: center;
+      }
+      .cover figure img {
+        height: 380px;
+        max-height: 380px;
+        width: 100%;
+        object-fit: contain;
+      }
+      .eyebrow {
+        color: var(--blue);
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+      .cover-lead {
+        font-size: 32px;
+        line-height: 1.6;
+        margin-top: 22px;
+      }
+      .cover-meta {
+        font-size: 20px;
+        color: var(--muted);
+        margin-top: 28px;
+      }
+      .divider header {
+        display: none;
+      }
+      .divider .body {
+        justify-content: center;
+        gap: 28px;
+      }
+      .chapter-title {
+        font-size: 62px;
+        font-weight: 700;
+        line-height: 1.35;
+        max-width: 1250px;
+        letter-spacing: -0.04em;
+      }
+      .chapter-topics {
+        font-size: 25px;
+        padding-left: 1.4em;
+        max-width: 1300px;
+      }
+      .divider .body > .eyebrow {
+        font-size: 20px;
+      }
+      .schedule table {
+        font-size: 21px;
+      }
+      .schedule td,
+      .schedule th {
+        padding: 22px 12px;
+        text-align: center;
+      }
+      .footer {
+        position: absolute;
+        left: 80px;
+        bottom: 34px;
+        font-size: 15px;
+        color: var(--muted);
+      }
+      #indicator {
+        position: absolute;
+        right: 80px;
+        top: 29px;
+        font-size: 16px;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+      }
+      #current {
+        color: var(--blue);
+        font-weight: 700;
+      }
+      .nav {
+        position: absolute;
+        right: 80px;
+        bottom: 22px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .nav button {
+        border: 1px solid var(--line);
+        background: #fff;
+        padding: 12px 20px;
+        font: inherit;
+        font-size: 18px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .nav button:hover {
+        background: var(--tint);
+      }
+      .nav button:disabled {
+        color: #aaa;
+        background: #f6f6f6;
+        cursor: default;
+      }
+      .nav .key-hint {
+        font-size: 15px;
+        color: var(--muted);
+        margin-right: 12px;
+      }
+      #progress {
+        height: 4px;
+        background: var(--blue);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transition: width 0.15s;
+      }
+      dialog {
+        margin: auto;
+        border: 1px solid var(--line);
+        padding: 30px;
+        width: min(900px, 90vw);
+        max-height: 85vh;
+        color: var(--ink);
+      }
+      dialog::backdrop {
+        background: #0005;
+      }
+      dialog h2 {
+        font-size: 25px;
+      }
+      dialog ol {
+        columns: 2;
+        font-size: 17px;
+        line-height: 1.6;
+      }
+      dialog a {
+        display: block;
+        padding: 3px;
+      }
+      dialog button {
+        float: right;
+        font: inherit;
+        padding: 8px 16px;
+        background: white;
+        border: 1px solid var(--line);
+        cursor: pointer;
+      }
+      dialog .toc-exercise {
+        font-weight: 700;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #progress {
+          transition: none;
+        }
+      }
+      @media print {
+        body {
+          overflow: visible;
+          background: #fff;
+          height: auto;
+        }
+        #deck {
+          position: static;
+          transform: none;
+          width: 1600px;
+          height: auto;
+          box-shadow: none;
+        }
+        .slide,
+        .slide[hidden] {
+          position: relative;
+          display: flex;
+          width: 1600px;
+          height: 900px;
+          break-after: page;
+        }
+        .nav,
+        #indicator,
+        #progress,
+        dialog {
+          display: none;
+        }
+        @page {
+          size: 1600px 900px;
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main id="deck" aria-label="授業スライド">
+      <section
+        class="slide cover active"
+        data-source="プロンプトエンジニアリング"
+      >
+        <header>
+          <h1>プロンプト<br />エンジニアリング</h1>
+          <p class="subtitle">2026年度 / プログラミング演習 / 第2回</p>
+        </header>
+        <div class="body">
+          <div class="cover-copy">
+            <p class="eyebrow">指示を考え、作って、確かめる。</p>
+            <p class="cover-lead">
+              生成AIと一緒に<br />チャットアプリを形にする
+            </p>
+            <p class="cover-meta">2026年10月2日<br />担当：髙田</p>
+          </div>
+          <figure>
+            <img
+              src="images/firefly.jpg"
+              alt="生成AIの活用をイメージしたイラスト"
+            />
+          </figure>
+        </div>
+      </section>
+      <section class="slide schedule" data-source="授業のスケジュール" hidden>
+        <header>
+          <h1>授業のスケジュール</h1>
+          <p class="subtitle">全7回 / 今回は第2回</p>
+        </header>
+        <div class="body">
+          <table>
+            <thead>
+              <tr>
+                <th>回数</th>
+                <th style="text-align: center">1<br />(9/25)</th>
+                <th style="text-align: center">2<br />(10/2)</th>
+                <th style="text-align: center">3<br />(10/9)</th>
+                <th style="text-align: center">4<br />(10/16)</th>
+                <th style="text-align: center">5<br />(10/23)</th>
+                <th style="text-align: center">6<br />(11/6)</th>
+                <th style="text-align: center">7<br />(11/13)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>テーマ</td>
+                <td style="text-align: center">AI 基礎</td>
+                <td style="text-align: center">プロンプトエンジニアリング</td>
+                <td style="text-align: center">AI の活用と倫理</td>
+                <td style="text-align: center">AI を活用したアプリ生成 ①</td>
+                <td style="text-align: center">AI を活用したアプリ生成 ②</td>
+                <td style="text-align: center">総合演習</td>
+                <td style="text-align: center">総合演習</td>
+              </tr>
+              <tr>
+                <td>担当講師</td>
+                <td style="text-align: center">伊藤、髙田</td>
+                <td style="text-align: center">髙田</td>
+                <td style="text-align: center">伊藤</td>
+                <td style="text-align: center">伊藤</td>
+                <td style="text-align: center">髙田</td>
+                <td style="text-align: center">髙田、伊藤</td>
+                <td style="text-align: center">伊藤、髙田</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section
+        class="slide divider"
+        data-source="1限目（前半）：プロンプトと生成AIの仕組みを知る (13:40-14:30, 50分)"
+        hidden
+      >
+        <header>
+          <h1>
+            1限目（前半）：プロンプトと生成AIの仕組みを知る (13:40-14:30, 50分)
+          </h1>
+          <p class="subtitle">13:40-14:30, 50分</p>
+        </header>
+        <div class="body">
+          <p class="eyebrow">PROGRAMMING / 2026</p>
+          <div class="chapter-title">
+            1限目（前半）：プロンプトと生成AIの仕組みを知る
+          </div>
+        </div>
+      </section>
+      <section class="slide divider" data-source="1. 導入 (25分)" hidden>
+        <header>
+          <h1>1. 導入</h1>
+          <p class="subtitle">25分</p>
+        </header>
+        <div class="body">
+          <p class="eyebrow">CHAPTER 1</p>
+          <div class="chapter-title">1. 導入</div>
+          <ul class="chapter-topics">
+            <li>1-1. アイスブレイク (5分)</li>
+            <li>1-2. 準備 (5分)</li>
+            <li>1-4. 授業の目的 (5分)</li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="slide quiz"
+        data-source="1-1. アイスブレイク (5分)"
+        hidden
+      >
+        <header>
+          <h1>1-1. アイスブレイク</h1>
+          <p class="subtitle">5分 / 1問目</p>
+        </header>
+        <div class="body">
+          <pre><code>今日はどの生成AIを相棒として使う予定?
+① ChatGPT
+② Claude
+③ Gemini
+④ その他 (スレッドでサービス名を投稿)
+</code></pre>
+        </div>
+      </section>
+      <section
+        class="slide quiz"
+        data-source="1-1. アイスブレイク (5分)"
+        hidden
+      >
+        <header>
+          <h1>1-1. アイスブレイク</h1>
+          <p class="subtitle">5分 / 2問目</p>
+        </header>
+        <div class="body">
+          <pre><code>「Mythos（ミトス）」と「Fable（ファーブル）」って知ってる？
+① ニュースで見て震えた（セキュリティヤバいよね）
+② クロードの新しいやつでしょ？名前だけ！
+③ ギリシャ神話とイソップ童話の話……？
+</code></pre>
+          <!-- <p>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://blog.cloudnative.co.jp/articles/what-is-claude-mythos-news/"
+              >Claude Mythosとは？Project
+              Glasswing・3メガバンク・日本政府の動きを整理【2026年5月版】</a
+            >
+          </p> -->
+        </div>
+      </section>
+      <section
+        class="slide quiz"
+        data-source="1-1. アイスブレイク (5分)"
+        hidden
+      >
+        <header>
+          <h1>1-1. アイスブレイク</h1>
+          <p class="subtitle">5分 / 3問目</p>
+        </header>
+        <div class="body">
+          <pre><code>HTML/CSS触ったことある？
+① ある
+② ちょっとだけ
+③ なにそれおいしいの？
+</code></pre>
+        </div>
+      </section>
+      <section class="slide" data-source="1-2. 準備 (5分)" hidden>
+        <header>
+          <h1>1-2. 準備</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <ul>
+            <li>
+              生成AIをすぐに利用できるようにしておきましょう。以下の中で利用したいサービスをクリック、Googleアカウントでログインすれば、利用できるようになります。
+            </li>
+          </ul>
+          <ol>
+            <li>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://chat.openai.com/"
+                >ChatGPT</a
+              >
+            </li>
+            <li>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://claude.ai/"
+                >Claude</a
+              >
+            </li>
+            <li>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://gemini.google.com/app"
+                >Gemini</a
+              >
+            </li>
+          </ol>
+          <ul>
+            <li>
+              アプリ制作には前回利用した
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://aistudio.google.com/"
+                >Google AI Studio</a
+              >
+              を使用します。利用できるか確認しましょう。
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="slide media-page"
+        data-source="生成AIが作成したファイルの確認"
+        hidden
+      >
+        <header>
+          <h1>生成AIが作成したファイルの確認</h1>
+          <p class="subtitle">1-3. 宿題の確認と解説</p>
+        </header>
+        <div class="body">
+          <div class="media-grid">
+            <div>
+              <p>
+                <a
+                  class="image-link"
+                  href="images/google-studio-game-code.png"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><img
+                    src="images/google-studio-game-code.png"
+                    alt="Google AI Studioで生成されたゲームのコード画面"
+                /></a>
+              </p>
+            </div>
+            <div class="media-copy">
+              <blockquote>
+                <p>
+                  <span class="callout-label">やってみよう</span
+                  >生成AIがどのようなファイルを生成したかGoogle AI
+                  Studioで確認しましょう。
+                </p>
+              </blockquote>
+              <blockquote>
+                <p>
+                  <span class="callout-label">ポイント</span
+                  >今日はコードを読めるようになる必要はありません。<strong>画面の構造・見た目・動きに、それぞれ役割がある</strong>と分かればOKです。
+                </p>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="slide"
+        data-source="生成AIが作成したファイルの確認"
+        hidden
+      >
+        <header>
+          <h1>画面を作るコードをたどる</h1>
+          <p class="subtitle">1-3. 宿題の確認と解説</p>
+        </header>
+        <div class="body">
+          <p>
+            コードは、コンピューターに表示や動作を伝えるために書かれたものです。
+            最終的にブラウザに表示されている画面は、複数のコードファイルの組み合わせでできています。
+          </p>
+          <blockquote>
+            <p>
+              <span class="callout-label">やってみよう</span
+              >index.htmlからどのようなファイルが紐づいているのか辿ってみよう
+            </p>
+          </blockquote>
+        </div>
+      </section>
+      <section class="slide" data-source="HTML・CSS・Javascriptとは？" hidden>
+        <header>
+          <h1>HTML・CSS・Javascriptとは？</h1>
+          <p class="subtitle">
+            1. 導入 (25分)　/　1限目（前半）：プロンプトと生成AIの仕組みを知る
+            (13:40-14:30, 50分)
+          </p>
+        </header>
+        <div class="body">
+          <p>
+            Webページでは、<strong>HTML</strong>・<strong>CSS</strong>・<strong>JavaScript</strong>がそれぞれ異なる役割を担います。
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>名前</th>
+                <th>役割</th>
+                <th>このゲームでいうと</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>HTML（エイチティーエムエル）</td>
+                <td>画面の構造を作る</td>
+                <td>見出しやボタンなど、部品の土台</td>
+              </tr>
+              <tr>
+                <td>CSS（シーエスエス）</td>
+                <td>見た目を整える</td>
+                <td>色、文字の形や大きさ、配置</td>
+              </tr>
+              <tr>
+                <td>JavaScript（ジャバスクリプト）</td>
+                <td>動きを付ける</td>
+                <td>キー操作への反応、弾の移動、得点の計算</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            このゲームでは、JavaScriptに書き方のルールを加えた
+            <strong>TypeScript（タイプスクリプト）</strong>
+            と、画面を部品に分けて作る
+            <strong>React（リアクト）</strong>
+            も使っています。そのため、ファイル名の末尾に <code>.ts</code> や
+            <code>.tsx</code>
+            が出てきます。今は「画面や動きを作るコードが入っている」と捉えましょう。
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide"
+        data-source="生成AIが作成したファイルの構造と役割の理解"
+        hidden
+      >
+        <header>
+          <h1>生成AIが作成したファイルの構造と役割の理解</h1>
+          <p class="subtitle">1-3. 宿題の確認と解説</p>
+        </header>
+        <div class="body">
+          <blockquote>
+            <p>
+              <span class="callout-label">やってみよう</span
+              >生成AIが作成したファイルの役割を聞いてみよう
+            </p>
+          </blockquote>
+          <pre><code class="language-text">生成したファイルの構造と役割を教えてください。
+</code></pre>
+        </div>
+      </section>
+      <section
+        class="slide tree-page"
+        data-source="生成AIが作成したファイルの構造と役割の理解"
+        hidden
+      >
+        <header>
+          <h1>生成されたファイルの構成</h1>
+          <p class="subtitle">設定ファイルと、アプリ本体のコード</p>
+        </header>
+        <div class="body">
+          <div class="tree-grid">
+            <article>
+              <h3>プロジェクトの設定</h3>
+              <pre class="file-tree"><code>retro-space-defender/
+├── index.html            … ページの土台・表示場所
+├── package.json          … 使用ライブラリ・実行コマンド
+├── vite.config.ts        … 開発・ビルド環境の設定
+├── tsconfig.json         … TypeScriptの設定
+├── metadata.json         … AI Studio向けのアプリ情報
+├── .env.example          … 環境変数の記入例
+├── .gitignore            … Git管理から除外するファイルの指定
+├── README.md             … 起動方法の説明
+└── src/                  … アプリ本体のソースコード</code></pre>
+            </article>
+            <article>
+              <h3>src/：アプリ本体</h3>
+              <pre
+                class="file-tree"
+              ><code>    ├── main.tsx          … Reactの起動処理
+    ├── App.tsx           … ページ全体の構成
+    ├── index.css         … 共通の見た目
+    ├── game/
+    │   ├── GameCanvas.tsx … ゲームの処理・描画・操作
+    │   └── types.ts       … ゲームで使うデータの型
+    └── audio/
+        └── sound.ts       … 効果音の生成・再生
+</code></pre>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="slide" data-source="1-4. 授業の目的 (5分)" hidden>
+        <header>
+          <h1>1-4. 授業の目的</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <p>
+            私たちは普段、授業や生活の中で生成AIと会話し、無意識のうちに「プロンプト」を作っています。
+          </p>
+          <p>
+            この授業では、<strong>プロンプト設計の4原則</strong>を実践を通して理解し、授業や就職活動、さらにはWebアプリの制作など、<strong>さまざまな場面で生成AIを役立てるための基盤を築く</strong>ことを目指します。
+          </p>
+          <p>
+            さらに応用として、<strong>Webアプリを作るためのプロンプト</strong>と、<strong>アプリに組み込まれた生成AIの振る舞いを決めるプロンプト</strong>の両方を作成し、<strong>目的に応じてAIへの指示を設計する力</strong>を養います。
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide divider"
+        data-source="2. プロンプトとは？ (25分)"
+        hidden
+      >
+        <header>
+          <h1>2. プロンプトとは？</h1>
+          <p class="subtitle">25分</p>
+        </header>
+        <div class="body">
+          <p class="eyebrow">CHAPTER 2</p>
+          <div class="chapter-title">2. プロンプトとは？</div>
+          <ul class="chapter-topics">
+            <li>2-1. 処理の流れ (5分)</li>
+            <li>2-2. トークンの理解 (5分)</li>
+          </ul>
+        </div>
+      </section>
+      <section class="slide" data-source="2-1. 処理の流れ (5分)" hidden>
+        <header>
+          <h1>2-1. 処理の流れ</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <p>
+            <strong>プロンプト</strong
+            >は、生成AIに渡す指示や情報です。「何をしてほしいか」に加えて、背景、条件、参考資料、出力例なども含められます。
+          </p>
+          <p>
+            文章を生成する言語モデルの処理を、大まかに表すと次のようになります。
+          </p>
+          <ol class="flow">
+            <li>
+              <b>01</b>
+              <h3>プロンプト入力</h3>
+              <p>指示・参考情報・会話履歴</p>
+            </li>
+            <li>
+              <b>02</b>
+              <h3>トークン化</h3>
+              <p>文章をトークンに分ける</p>
+            </li>
+            <li>
+              <b>03</b>
+              <h3>次のトークンを予測</h3>
+              <p>入力と生成済みの内容から<br />候補を計算して選ぶ</p>
+            </li>
+            <li>
+              <b>04</b>
+              <h3>文章を生成</h3>
+              <p>回答として表示する</p>
+            </li>
+          </ol>
+          <p>
+            自然な文章でも、内容が正しいとは限りません。指示を具体化することと、出力を確かめることをセットで行いましょう。
+          </p>
+        </div>
+      </section>
+      <section class="slide" data-source="2-2. トークンの理解 (5分)" hidden>
+        <header>
+          <h1>2-2. トークンの理解</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <p>
+            <strong>トークン</strong
+            >は、モデルが文章を扱うための単位です。単語の一部や記号なども単位になるため、「1文字＝1トークン」「1単語＝1トークン」とは限りません。
+          </p>
+          <ul>
+            <li>
+              <strong>トークン数とコスト</strong>:
+              多くのサービスでは、入力と出力の合計トークン数に応じて料金が決まります。長文を扱う際はコストと応答時間が増えるため、重要な情報に絞って入力するのが基本です。
+            </li>
+            <li>
+              <strong>トークン上限</strong>:
+              モデルには一度に扱える最大トークン数（コンテキスト長）があり、上限を超えると入力が途中で切れたり、会話の前半が忘れられたりします。利用するモデルごとに上限が異なるため、公式ドキュメントを事前に確認しましょう。
+            </li>
+            <li>
+              <strong>実務でのチェック方法</strong>: OpenAI の
+              <code>tiktoken</code> や Anthropic
+              のトークンカウンターなど、各社が提供するツールで事前に文字数とトークン数を確認できます。ドキュメント作成やコードレビューなど長文を扱う際は、これらのツールで見積もりを行うと効率的です。
+            </li>
+          </ul>
+          <p>
+            代表的な商用モデルのコンテキスト長は以下の通りです。最新情報は各社の公式アナウンスを参照してください。
+          </p>
+          <p>
+            参考：<a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://ai.google.dev/gemini-api/docs/tokens"
+              >Google：トークンの理解とカウント</a
+            >
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide model-table"
+        data-source="2-2. トークンの理解 (5分)"
+        hidden
+      >
+        <header>
+          <h1>モデルごとのコンテキスト長</h1>
+          <p class="subtitle">
+            README掲載の目安 / 1・2 / 最新情報は公式資料で確認
+          </p>
+        </header>
+        <div class="body">
+          <table>
+            <thead>
+              <tr>
+                <th>プラットフォーム</th>
+                <th>モデル</th>
+                <th>最大トークン数 (目安)</th>
+                <th>備考</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ChatGPT</td>
+                <td>GPT-5.6 Sol / Pro</td>
+                <td>約 1,050,000 トークン</td>
+                <td>
+                  OpenAIのフラッグシップ。高精度なリアルタイムルーターと拡張リーズニング機能を備え、大規模コード・研究データの解析に対応。
+                </td>
+              </tr>
+              <tr>
+                <td>ChatGPT</td>
+                <td>GPT-5 Mini</td>
+                <td>約 400,000 トークン</td>
+                <td>
+                  低遅延・低コストかつ高精度な軽量モデル。業務自動化やリアルタイムアプリ組み込みに最適。
+                </td>
+              </tr>
+              <tr>
+                <td>Gemini</td>
+                <td>Gemini 3.1 Pro</td>
+                <td>約 1,000,000 トークン</td>
+                <td>
+                  Googleの高性能モデル。マルチモーダル（動画・音声・コード・長文文書）の横断分析と高度な推論が得意。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section
+        class="slide model-table"
+        data-source="2-2. トークンの理解 (5分)"
+        hidden
+      >
+        <header>
+          <h1>モデルごとのコンテキスト長</h1>
+          <p class="subtitle">
+            README掲載の目安 / 2・2 / 最新情報は公式資料で確認
+          </p>
+        </header>
+        <div class="body">
+          <table>
+            <thead>
+              <tr>
+                <th>プラットフォーム</th>
+                <th>モデル</th>
+                <th>最大トークン数 (目安)</th>
+                <th>備考</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gemini</td>
+                <td>Gemini 3.5 Flash</td>
+                <td>約 1,000,000 トークン</td>
+                <td>
+                  応答速度と効率を最優先した高速モデル。広いコンテキストを維持しつつ低コストでの処理を実現。
+                </td>
+              </tr>
+              <tr>
+                <td>Claude</td>
+                <td>Claude Opus 4.8 / 5</td>
+                <td>約 1,000,000 トークン</td>
+                <td>
+                  Anthropicの最高峰モデル。長編ナレッジベースの正確な処理や高度な自律エージェント構築に強い。
+                </td>
+              </tr>
+              <tr>
+                <td>Claude</td>
+                <td>Claude Sonnet 5</td>
+                <td>約 1,000,000 トークン</td>
+                <td>
+                  1Mコンテキストへ拡張され、圧倒的な処理スピードとコスト性能比を両立した万能実務用モデル。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section
+        class="slide exercise"
+        data-source="演習 A：Tokenizerを試してみる (5分)"
+        hidden
+      >
+        <header>
+          <h1>演習 A：Tokenizerを試してみる</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <div class="exercise-grid">
+            <div class="steps">
+              <blockquote>
+                <p>
+                  <span class="callout-label">NOTE</span
+                  ><a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://platform.openai.com/tokenizer"
+                    >Tokenizer</a
+                  >に次の文章を貼り付け、区切られ方とトークン数を観察しましょう。ここでの数値が、別のモデルにもそのまま当てはまるわけではありません。
+                </p>
+              </blockquote>
+              <ol>
+                <li>日本語、英語、記号で区切られ方を比べる。</li>
+                <li>自分のプロンプトを貼り付け、トークン数を記録する。</li>
+                <li>意味を保ちながら短く書き直し、数の変化を確認する。</li>
+              </ol>
+              <p>
+                短くするだけで、よいプロンプトになるとは限りません。必要な条件まで消えていないか確認しましょう。
+              </p>
+            </div>
+            <div class="prompt-column">
+              <h3>入力するプロンプト</h3>
+              <pre><code class="language-text">生成AIと一緒に作品を作りたい。
+I want to create art with generative AI.
+こんにちは！ 🎨 1234567890
+</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="slide divider"
+        data-source="1限目 後半：伝え方を工夫して、アプリを作る (14:30-15:20, 50分)"
+        hidden
+      >
+        <header>
+          <h1>
+            1限目 後半：伝え方を工夫して、アプリを作る (14:30-15:20, 50分)
+          </h1>
+          <p class="subtitle">14:30-15:20, 50分</p>
+        </header>
+        <div class="body">
+          <p class="eyebrow">PROGRAMMING / 2026</p>
+          <div class="chapter-title">
+            1限目 後半：伝え方を工夫して、アプリを作る
+          </div>
+        </div>
+      </section>
+      <section
+        class="slide divider"
+        data-source="3. プロンプトを書く時のテクニック (35分)"
+        hidden
+      >
+        <header>
+          <h1>3. プロンプトを書く時のテクニック</h1>
+          <p class="subtitle">35分</p>
+        </header>
+        <div class="body">
+          <p class="eyebrow">CHAPTER 3</p>
+          <div class="chapter-title">3. プロンプトを書く時のテクニック</div>
+          <ul class="chapter-topics">
+            <li>3-1. 様々なユースケース (5分)</li>
+            <li>3-2. プロンプトを書く時のコツ (5分)</li>
+          </ul>
+        </div>
+      </section>
+      <section class="slide" data-source="3-1. 様々なユースケース (5分)" hidden>
+        <header>
+          <h1>3-1. 様々なユースケース</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 1.65fr 1fr;
+              gap: 28px;
+              align-items: start;
+            "
+          >
+            <figure>
+              <a
+                class="image-link"
+                href="images/soumu.png"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="images/soumu.png"
+                  alt="総務省の生成AI活用例：文章作成・要約、情報検索、翻訳、議論、画像・映像、音声・音楽、3Dモデルの生成"
+                  style="width: 100%; max-height: 510px; object-fit: contain"
+                />
+              </a>
+              <figcaption
+                style="font-size: 17px; color: var(--muted); margin-top: 12px"
+              >
+                出典：総務省「生成AIはじめの一歩」／クリックで原寸表示
+              </figcaption>
+            </figure>
+            <div class="media-copy" style="font-size: 21px">
+              <h3>用途を広げる参考資料</h3>
+              <p>
+                <strong>総務省</strong><br /><a
+                  href="https://www.soumu.go.jp/use_the_internet_wisely/special/generativeai/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >生成AIはじめの一歩<br />入門的な使い方と注意点</a
+                >
+              </p>
+              <p>
+                <a
+                  href="https://www.soumu.go.jp/use_the_internet_wisely/special/generativeai/data/file01.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >「生成AIはじめの一歩」PDF</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="slide principle-page"
+        data-source="3-2. プロンプトを書く時のコツ (5分)"
+        hidden
+      >
+        <header>
+          <h1>3-2. プロンプトを書く時のコツ</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <div class="principles">
+            <article>
+              <span class="eyebrow">01</span>
+              <h3>明確性</h3>
+              <p>目的や期待する出力を具体的に伝える。</p>
+              <p class="example-note">
+                「卒業制作のアイデア」→「記憶をテーマにしたアイデア」
+              </p>
+            </article>
+            <article>
+              <span class="eyebrow">02</span>
+              <h3>制約の明示</h3>
+              <p>形式や条件を指定する。</p>
+              <p class="example-note">
+                「箇条書きで」「学生でも実現可能」「展示会場の制約を考慮」
+              </p>
+            </article>
+            <article>
+              <span class="eyebrow">03</span>
+              <h3>役割付与</h3>
+              <p>どんな役割・視点で答えるかを伝える。</p>
+              <p class="example-note">
+                「現代アートに詳しいキュレーターとして講評して」
+              </p>
+            </article>
+            <article>
+              <span class="eyebrow">04</span>
+              <h3>手順分解と例示</h3>
+              <p>手順を分け、期待する形式の見本を示す。</p>
+              <p class="example-note">
+                「①テーマ整理 → ②作品構造 → ③必要なリソースの順に」
+              </p>
+            </article>
+          </div>
+          <p class="source">
+            状況に合わせて組み合わせましょう。 参考：<a
+              href="https://ai.google.dev/gemini-api/docs/prompting-strategies"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Google：プロンプト設計の戦略</a
+            >
+          </p>
+        </div>
+      </section>
+      <section class="slide exercise" data-source="演習 B：明確性 (5分)" hidden>
+        <header>
+          <h1>演習 B：明確性</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <div class="exercise-grid">
+            <div class="steps">
+              <p>まずは、次のプロンプトを試しましょう。</p>
+              <ol>
+                <li>作品のテーマ・表現方法を考えましょう。</li>
+                <li>自分の言葉でプロンプトを書き換え、試しましょう。</li>
+                <li>
+                  回答を比べ、作品のイメージが具体的になったか確認しましょう。
+                </li>
+              </ol>
+              <p>
+                ヒント：テーマは「記憶」「日常」、表現方法は「映像」「参加型の展示」など、興味のあるものを選べます。
+              </p>
+            </div>
+            <div class="prompt-column">
+              <h3>入力するプロンプト</h3>
+              <pre><code class="language-text">卒業制作のアイデアを考えて。
+</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="slide exercise"
+        data-source="演習 C：制約の明示 (5分)"
+        hidden
+      >
+        <header>
+          <h1>演習 C：制約の明示</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <ol>
+            <li>演習Bのプロンプトに、条件を2〜3個追加しましょう。</li>
+            <li>回答の形式も指定して、試しましょう。</li>
+            <li>回答を比べ、実現できそうか確認して条件を調整しましょう。</li>
+          </ol>
+          <p>
+            ヒント：回答の件数・文字数・表や箇条書き、予算・制作期間・使える機材・展示場所など。
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide exercise"
+        data-source="演習 D：役割付与 (5分)"
+        hidden
+      >
+        <header>
+          <h1>演習 D：役割付与</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <div class="exercise-grid">
+            <div class="steps">
+              <p>作品案を1つ選び、次のプロンプトを試しましょう。</p>
+              <ol>
+                <li>別の役割を自分で考えましょう。</li>
+                <li>作品案と質問は同じまま、役割だけ変えて試しましょう。</li>
+                <li>回答を比べ、注目する点の違いを確認しましょう。</li>
+              </ol>
+              <p>
+                ヒント：展示の企画者、初めて見る来場者、制作を手伝う人など。どんな意見が制作に役立つかを考えます。
+              </p>
+            </div>
+            <div class="prompt-column">
+              <h3>入力するプロンプト</h3>
+              <pre><code class="language-text">あなたは現代アートの展示を企画するキュレーターです。
+次の作品案について、良い点と改善案を1つずつ挙げてください。
+
+作品案：［選んだアイデアをここに貼り付ける］
+</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="slide exercise"
+        data-source="演習 E：手順分解 (5分)"
+        hidden
+      >
+        <header>
+          <h1>演習 E：手順分解</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <div class="exercise-grid">
+            <div class="steps">
+              <ol>
+                <li>
+                  演習Bのプロンプトにアイデア創出の手順を加えて、試しましょう。
+                </li>
+                <li>演習Bの回答と比べ、アイデアの違いを確認しましょう。</li>
+              </ol>
+              <p><strong>追加する手順の例</strong></p>
+            </div>
+            <div class="prompt-column">
+              <h3>入力するプロンプト</h3>
+              <pre><code class="language-text">アイデアは、次の順番で検討してください。
+
+1. テーマから連想する場面や感情を3つ挙げる。
+2. その中から1つ選び、作品にする方法を2つ考える。
+3. 2つの方法を、テーマの伝わりやすさと実現しやすさで比較する。
+4. 1つ選び、具体的な作品案を提案する。
+</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="slide examples-page"
+        data-source="演習 F：例示 (5分)"
+        hidden
+      >
+        <header>
+          <h1>演習 F：例示</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <ol>
+            <li>卒業制作の作品案を1つ選びましょう。</li>
+            <li>同じ作品案で、下の2つのプロンプトを試しましょう。</li>
+            <li>キャプションの言葉遣いや雰囲気を比べましょう。</li>
+          </ol>
+          <div class="examples">
+            <article>
+              <h3>見本なし</h3>
+              <pre><code class="language-text">次の卒業制作の作品案に、短いキャプション（展示用の紹介文）を付けてください。
+作品案：［タイトルを含む作品案をここに貼り付ける］
+</code></pre>
+            </article>
+            <article>
+              <h3>見本あり</h3>
+              <pre><code class="language-text">次の卒業制作の作品案に、短いキャプション（展示用の紹介文）を付けてください。
+見本の形式と雰囲気に合わせ、内容は作品案に合わせてください。
+見本：
+キャプション：消えていく言葉の向こうに、あなたの記憶は何を残すでしょう。
+作品案：［同じタイトル・作品案をここに貼り付ける］
+</code></pre>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section
+        class="slide divider"
+        data-source="4. チャットアプリを作ってみよう (20分)"
+        hidden
+      >
+        <header>
+          <h1>4. チャットアプリを作ってみよう</h1>
+          <p class="subtitle">20分</p>
+        </header>
+        <div class="body">
+          <p class="eyebrow">CHAPTER 4</p>
+          <div class="chapter-title">4. チャットアプリを作ってみよう</div>
+          <ul class="chapter-topics">
+            <li>4-1. なぜチャットアプリ？ (2分)</li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="slide"
+        data-source="4-1. なぜチャットアプリ？ (2分)"
+        hidden
+      >
+        <header>
+          <h1>4-1. なぜチャットアプリ？</h1>
+          <p class="subtitle">2分</p>
+        </header>
+        <div class="body">
+          <p>ここからは、次の2種類の「AIへの指示」が登場します。</p>
+          <table>
+            <thead>
+              <tr>
+                <th>指示の種類</th>
+                <th>何を決める？</th>
+                <th>例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>アプリを作るAIへの指示</strong></td>
+                <td>作るアプリの目的・画面・機能</td>
+                <td>「休日のお出かけを相談できるチャットアプリを作って」</td>
+              </tr>
+              <tr>
+                <td><strong>アプリ内のAIへの指示</strong></td>
+                <td>利用者に返す回答の内容・口調・長さ</td>
+                <td>「親しみやすい口調で、プランを3つ提案して」</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            まずは<strong>アプリを作るAIへの指示</strong>を工夫して、できあがるアプリの違いを観察します。アプリ内のAIの答え方は、後半で詳しく扱います。
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide"
+        data-source="ひとことの指示で、何ができる？ (3分)"
+        hidden
+      >
+        <header>
+          <h1>ひとことの指示で、何ができる？</h1>
+          <p class="subtitle">3分</p>
+        </header>
+        <div class="body">
+          <pre><code class="language-text">日本語で会話できるチャットWebアプリを作ってください。
+</code></pre>
+          <blockquote>
+            <p>
+              <span class="callout-label">やってみよう</span
+              >画面と回答を見て、<strong>指示していないのにAIが決めたこと</strong>を探しましょう。
+            </p>
+          </blockquote>
+          <p>
+            短い指示でもアプリは作れますが、誰向けか、どんな画面にするかなどはAIに任せることになります。
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide exercise"
+        data-source="演習 G：プロンプトを工夫して、自分のチャットアプリを作る (15分)"
+        hidden
+      >
+        <header>
+          <h1>演習 G：プロンプトを工夫して、自分のチャットアプリを作る</h1>
+          <p class="subtitle">15分</p>
+        </header>
+        <div class="body">
+          <ol>
+            <li>
+              ヒントを参考に、チャットアプリを生成するためのプロンプトを考えましょう。
+            </li>
+            <li>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://aistudio.google.com/"
+                >Google AI Studio</a
+              >のBuildモードで試し、画面と会話を確認しましょう。指定した条件が反映されているか確かめ、必要に応じて指示を追加しましょう。
+            </li>
+          </ol>
+          <p>
+            ヒント：明確性と制約の明示を使い、チャットアプリの用途を具体化しましょう。
+          </p>
+          <ul>
+            <li>
+              <strong>使う人</strong>：どんな人向け？
+              初めて学ぶ人、制作中の人、旅行中の人など。
+            </li>
+            <li>
+              <strong>使う場面</strong>：いつ、どこで使う？
+              通学中、作業の合間、寝る前など。
+            </li>
+            <li>
+              <strong>目的</strong>：何ができると嬉しい？
+              アイデアを広げる、選択肢を比べる、練習する、振り返るなど。
+            </li>
+            <li>
+              <strong>見た目</strong>：どんな雰囲気にする？
+              ノート風、ゲーム風、落ち着いた配色など。
+            </li>
+            <li>
+              <strong>機能</strong>：何があると便利？
+              相談テーマを選ぶボタン、会話のリセット、返信待ちの表示など。
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="slide divider"
+        data-source="2限目 前半：AIの応答をデザインする (15:40-16:30, 50分)"
+        hidden
+      >
+        <header>
+          <h1>2限目 前半：AIの応答をデザインする (15:40-16:30, 50分)</h1>
+          <p class="subtitle">15:40-16:30, 50分</p>
+        </header>
+        <div class="body">
+          <p class="eyebrow">PROGRAMMING / 2026</p>
+          <div class="chapter-title">2限目 前半：AIの応答をデザインする</div>
+        </div>
+      </section>
+      <section
+        class="slide divider"
+        data-source="5. 生成AIが作成したコードの確認 (10分)"
+        hidden
+      >
+        <header>
+          <h1>5. 生成AIが作成したコードの確認</h1>
+          <p class="subtitle">10分</p>
+        </header>
+        <div class="body">
+          <p class="eyebrow">CHAPTER 5</p>
+          <div class="chapter-title">5. 生成AIが作成したコードの確認</div>
+          <ul class="chapter-topics">
+            <li>5-1. 振り返りクイズ：HTML・CSS・JavaScriptの役割 (5分)</li>
+            <li>5-2. 実際にチャットアプリのコードを変えてみよう (5分)</li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="slide quiz"
+        data-source="5-1. 振り返りクイズ：HTML・CSS・JavaScriptの役割 (5分)"
+        hidden
+      >
+        <header>
+          <h1>5-1. 振り返りクイズ：HTML・CSS・JavaScriptの役割</h1>
+          <p class="subtitle">5分 / 1問目</p>
+        </header>
+        <div class="body">
+          <p>
+            前半で紹介した3つの役割を覚えていますか？
+            最初のアイスブレイクと同じように、番号のリアクションで答えましょう。
+          </p>
+          <pre><code>見出しやボタンなど、画面の構造を作るのは？
+① HTML
+② CSS
+③ JavaScript
+</code></pre>
+        </div>
+      </section>
+      <section
+        class="slide quiz"
+        data-source="5-1. 振り返りクイズ：HTML・CSS・JavaScriptの役割 (5分)"
+        hidden
+      >
+        <header>
+          <h1>5-1. 振り返りクイズ：HTML・CSS・JavaScriptの役割</h1>
+          <p class="subtitle">5分 / 2問目</p>
+        </header>
+        <div class="body">
+          <pre><code>文字の色や大きさなど、見た目を整えるのは？
+① HTML
+② CSS
+③ JavaScript
+</code></pre>
+        </div>
+      </section>
+      <section
+        class="slide quiz"
+        data-source="5-1. 振り返りクイズ：HTML・CSS・JavaScriptの役割 (5分)"
+        hidden
+      >
+        <header>
+          <h1>5-1. 振り返りクイズ：HTML・CSS・JavaScriptの役割</h1>
+          <p class="subtitle">5分 / 3問目</p>
+        </header>
+        <div class="body">
+          <pre><code>キー操作への反応や得点の計算など、動きを付けるのは？
+① HTML
+② CSS
+③ JavaScript
+</code></pre>
+        </div>
+      </section>
+      <section
+        class="slide"
+        data-source="5-2. 実際にチャットアプリのコードを変えてみよう (5分)"
+        hidden
+      >
+        <header>
+          <h1>5-2. 実際にチャットアプリのコードを変えてみよう</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <blockquote>
+            <p>
+              <span class="callout-label">ポイント</span
+              >コードを書けるようになる必要はありませんが、生成AIが作成しているコードの理解を深めるために次の演習を実施してみましょう！皆さんは生成AIを武器にどんどんこのようなプログラムを生成し、自分自身の表現の幅をぜひ広げていってください。
+            </p>
+          </blockquote>
+        </div>
+      </section>
+      <section
+        class="slide exercise"
+        data-source="演習 H：背景色を変えて、戻してみる"
+        hidden
+      >
+        <header><h1>演習 H：背景色を変えて、戻してみる</h1></header>
+        <div class="body">
+          <ol>
+            <li>プレビューモードからコードモードに切り替える。</li>
+            <li>
+              背景色が指定されているコードを探す。（AIで聞いてください！）
+            </li>
+            <li>
+              背景色を一時的に黒<code>#000000</code>に変更し、保存。（他の色でも大丈夫です！）
+            </li>
+            <li>プレビューモードに戻り、背景色が変わってることを確認。</li>
+            <li>背景色を元に戻す。</li>
+          </ol>
+        </div>
+      </section>
+      <section
+        class="slide divider"
+        data-source="6. アプリやサービスに組み込まれているAIの振る舞い (40分)"
+        hidden
+      >
+        <header>
+          <h1>6. アプリやサービスに組み込まれているAIの振る舞い</h1>
+          <p class="subtitle">40分</p>
+        </header>
+        <div class="body">
+          <p class="eyebrow">CHAPTER 6</p>
+          <div class="chapter-title">
+            6. アプリやサービスに組み込まれているAIの振る舞い
+          </div>
+          <ul class="chapter-topics">
+            <li>6-1. システムプロンプトとは (5分)</li>
+            <li>6-2. 生成AIを組み込んだアプリやサービスの例 (5分)</li>
+            <li>6-3. チャットアプリ内のAIの振る舞いを調整してみよう（30分）</li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="slide system-page"
+        data-source="6-1. システムプロンプトとは (5分)"
+        hidden
+      >
+        <header>
+          <h1>6-1. システムプロンプトとは</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <div class="system-grid">
+            <div class="media-copy">
+              <p>
+                これまでは「アプリを作る指示」を考えてきました。ここからは「アプリ内のAIがどう振る舞うかを決める指示」を考えます。
+              </p>
+              <p>
+                利用者が短い文章を入力したり、ボタンを押したりするだけで、AIがその機能に合った結果を返すのはなぜでしょう？
+                <strong
+                  >サービスを作る側が、AIの役割や出力の条件をあらかじめ設計している</strong
+                >からです。その方法の一つが、利用者の画面には表示されない「AIへの指示」です。これを<strong>システムプロンプト</strong>と言います。
+              </p>
+              <p>
+                <strong>システムプロンプト</strong
+                >は、AIの役割や答え方のルールをあらかじめ設定する指示です。チャットアプリでは、利用者が毎回入力するメッセージとは別に、アプリ側で用意します。
+              </p>
+            </div>
+            <div class="system-flow">
+              <div class="input-pair">
+                <div>利用者のプロンプト</div>
+                <b>＋</b>
+                <div>システムプロンプト<br /><small>アプリ側で設定</small></div>
+              </div>
+              <div class="arrow">↓</div>
+              <div class="flow-model">生成AI</div>
+              <div class="arrow">↓</div>
+              <div class="flow-output">アプリに回答を表示</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="slide service-table"
+        data-source="6-2. 生成AIを組み込んだアプリやサービスの例 (5分)"
+        hidden
+      >
+        <header>
+          <h1>6-2. 生成AIを組み込んだアプリやサービスの例</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <p>
+            身近なサービスで、生成AIがどのような役割を担っているか見てみましょう。
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>サービス・機能</th>
+                <th>概要</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://guide.line.me/ja/services/agent-i-in-chat.html"
+                    >LINE「ムードを分析」</a
+                  >
+                </td>
+                <td>
+                  直近のトークから、二人の関係性や会話の雰囲気を分析し、コミュニケーションのヒントを提示する機能。
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://www.apple.com/jp/newsroom/2024/06/introducing-apple-intelligence-for-iphone-ipad-and-mac/"
+                    >Genmoji</a
+                  >
+                </td>
+                <td>
+                  作りたい絵文字を言葉で説明すると、メッセージで使えるオリジナルの絵文字を生成する機能。
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://asana.com/ja/product/ai/ai-teammates"
+                    >Asana AI Teammates（AI チームメイト）</a
+                  >
+                </td>
+                <td>
+                  仕事の管理サービスAsanaで、人と協力して働くAI。プロジェクトの計画づくりや進捗の整理、文章の作成などを支援する。
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://note.com/techls/n/n73d1702e4920"
+                    >ええやん.ai</a
+                  >
+                </td>
+                <td>
+                  作品の画像に複数のキャラクターがコメントし、チャットで作品についての言葉を整えられるアプリ。作者や周囲の人との会話のきっかけを作る。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section
+        class="slide"
+        data-source="6-2. 生成AIを組み込んだアプリやサービスの例 (5分)"
+        hidden
+      >
+        <header>
+          <h1>サービスの裏側にあるAIへの指示</h1>
+          <p class="subtitle">6-2. 生成AIを組み込んだアプリやサービスの例</p>
+        </header>
+        <div class="body">
+          <p>
+            Asana AI
+            Teammatesは、仕事の管理サービスの中で役割を持って働くAIの例です。授業に置き換えるなら「グループ展の準備を整理する進行役」をイメージできます。参考：<a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://asana.com/ja/resources/ai-assistant"
+              >AsanaによるAIアシスタントの解説</a
+            >
+          </p>
+          <blockquote>
+            <p>
+              <span class="callout-label">ポイント</span
+              >生成AIを組み込むアプリでは、利用者の入力に加えて、作り手が用意したシステムプロンプトで役割や答え方を決められます。
+            </p>
+          </blockquote>
+          <blockquote>
+            <p>
+              <span class="callout-label">考えてみよう</span
+              >生成AIが組み込まれたサービス、他に知ってる？
+            </p>
+          </blockquote>
+          <p>
+            自分のチャットアプリでも、この「利用者には見えない指示」を設定できます。次は、アプリ内のAIのキャラクターや答え方を考えてみましょう。
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide"
+        data-source="6-3. チャットアプリ内のAIの振る舞いを調整してみよう（30分）"
+        hidden
+      >
+        <header>
+          <h1>6-3. チャットアプリ内のAIの振る舞いを調整してみよう</h1>
+          <p class="subtitle">30分</p>
+        </header>
+        <div class="body">
+          <p>
+            1限目に作ったアプリで、システムプロンプトを変更してみましょう。各演習では、変更する項目以外はそのままにして、同じ質問への回答を比べます。比較するときは会話履歴をリセットするなど、新しい会話で試しましょう。
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide exercise"
+        data-source="演習 I：チャットアプリのシステムプロンプト（5分）"
+        hidden
+      >
+        <header>
+          <h1>演習 I：チャットアプリのシステムプロンプト</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <div class="exercise-grid">
+            <div class="steps">
+              <ol>
+                <li>
+                  コードの表示を開き、アプリ内のAIの役割や答え方を設定している箇所を探しましょう。
+                </li>
+                <li>
+                  どんな指示が書かれているか読み、元に戻せるようにコピーしておきましょう。
+                </li>
+                <li>
+                  自分のアプリに合う質問を1つ送り、質問と回答を記録しましょう。次の演習でも同じ質問を使います。
+                </li>
+              </ol>
+              <p>
+                ヒント：場所が分からなければ、アプリを作るAIに次のように聞いてみましょう。
+              </p>
+            </div>
+            <div class="prompt-column">
+              <h3>入力するプロンプト</h3>
+              <pre><code class="language-text">このアプリ内のAIに渡しているシステムプロンプトは、コードのどこにありますか？
+ファイル名と該当箇所、指示の内容を教えてください。まだ編集はしないでください。
+</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="slide exercise"
+        data-source="演習 J：生成AIの役割を変更する (5分)"
+        hidden
+      >
+        <header>
+          <h1>演習 J：生成AIの役割を変更する</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <ol>
+            <li>
+              アプリ内のAIに、どんな立場で相談に乗ってほしいか考えましょう。
+            </li>
+            <li>
+              システムプロンプトの役割の部分を書き換え、同じ質問を送ってみましょう。
+            </li>
+            <li>回答を比べ、注目する点や提案の違いを確認しましょう。</li>
+          </ol>
+          <p>
+            ヒント：アイデアを広げる発明家、実現方法を考える職人、初めて作品を見る来場者など。自分のアプリに合う役割を選びましょう。
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide exercise"
+        data-source="演習 K：生成AIの出力形式を変更する（5分）"
+        hidden
+      >
+        <header>
+          <h1>演習 K：生成AIの出力形式を変更する</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <ol>
+            <li>回答をどんな形で受け取りたいか考えましょう。</li>
+            <li>
+              システムプロンプトに出力形式を指定し、同じ質問を送ってみましょう。すでに形式の指定があれば書き換えます。
+            </li>
+            <li>
+              回答を比べ、読みやすさや使いやすさがどう変わったか確認しましょう。
+            </li>
+          </ol>
+          <p>
+            ヒント：「箇条書きで3つ」「結論→理由→次の一歩の順」「各案をタイトルと説明に分ける」など。文字数も指定できます。
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide exercise"
+        data-source="演習 L：生成AIの語り口（トーンやマナー）を変更する (5分)"
+        hidden
+      >
+        <header>
+          <h1>演習 L：生成AIの語り口（トーンやマナー）を変更する</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <ol>
+            <li>利用者にどんな話し方で接してほしいか考えましょう。</li>
+            <li>
+              システムプロンプトの語り口の指示を追加・変更し、同じ質問を送ってみましょう。
+            </li>
+            <li>
+              回答を比べ、言葉遣いや相談のしやすさがどう変わったか確認しましょう。
+            </li>
+          </ol>
+          <p>
+            ヒント：「友人のように親しみやすく」「落ち着いた丁寧な言葉で」「関西弁で明るく」など。「否定から入らない」「絵文字は使わない」といった接し方も指定できます。
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide exercise"
+        data-source="演習 M：理想のシステムプロンプトを書く（10分）"
+        hidden
+      >
+        <header>
+          <h1>演習 M：理想のシステムプロンプトを書く</h1>
+          <p class="subtitle">10分</p>
+        </header>
+        <div class="body">
+          <ol>
+            <li>
+              これまで試した役割・出力形式・語り口、または例示・手順分解の手法を適用しながら、自分のアプリに合うシステムプロンプトを書き直しましょう。
+            </li>
+            <li>別の質問でも試し、期待した答え方になるよう調整しましょう。</li>
+          </ol>
+          <p>
+            ヒント：誰が何のために使うアプリかを振り返り、その人にとって相談しやすく、役立つ回答を考えましょう。
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide divider"
+        data-source="2限目 後半：試して、直して、共有する (16:30-17:20, 50分)"
+        hidden
+      >
+        <header>
+          <h1>2限目 後半：試して、直して、共有する (16:30-17:20, 50分)</h1>
+          <p class="subtitle">16:30-17:20, 50分</p>
+        </header>
+        <div class="body">
+          <p class="eyebrow">PROGRAMMING / 2026</p>
+          <div class="chapter-title">2限目 後半：試して、直して、共有する</div>
+        </div>
+      </section>
+      <section
+        class="slide divider"
+        data-source="7. 作成したチャットアプリの共有 (20分)"
+        hidden
+      >
+        <header>
+          <h1>7. 作成したチャットアプリの共有</h1>
+          <p class="subtitle">20分</p>
+        </header>
+        <div class="body">
+          <p class="eyebrow">CHAPTER 7</p>
+          <div class="chapter-title">7. 作成したチャットアプリの共有</div>
+          <ul class="chapter-topics">
+            <li>7-1. お互いのアプリ使ってみよう (10分)</li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="slide"
+        data-source="7-1. お互いのアプリ使ってみよう (10分)"
+        hidden
+      >
+        <header>
+          <h1>7-1. お互いのアプリ使ってみよう</h1>
+          <p class="subtitle">10分</p>
+        </header>
+        <div class="body">
+          <p>
+            2人1組でお互いに作成したチャットアプリを紹介し、実際に使ってもらいましょう。
+          </p>
+          <p>以下の項目を中心に共有しましょう。</p>
+          <ol>
+            <li>誰のための、どんなチャットアプリか。</li>
+            <li>アプリ作成時に工夫した点。</li>
+            <li>プロンプト調整時に工夫した点。</li>
+            <li>改善のアイデアやもらったフィードバック。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="slide" data-source="7-3. 発表 (10分)" hidden>
+        <header>
+          <h1>7-3. 発表</h1>
+          <p class="subtitle">10分</p>
+        </header>
+        <div class="body">
+          <p>数名が、1人2分程度で紹介します。</p>
+          <ol>
+            <li>誰のための、どんなチャットアプリか。</li>
+            <li>アプリ作成時に工夫した点。</li>
+            <li>プロンプト調整時に工夫した点。</li>
+            <li>改善のアイデアやもらったフィードバック。</li>
+          </ol>
+        </div>
+      </section>
+      <section
+        class="slide divider"
+        data-source="8. 文章以外の生成 (10分)"
+        hidden
+      >
+        <header>
+          <h1>8. 文章以外の生成</h1>
+          <p class="subtitle">10分</p>
+        </header>
+        <div class="body">
+          <p class="eyebrow">CHAPTER 8</p>
+          <div class="chapter-title">8. 文章以外の生成</div>
+          <ul class="chapter-topics">
+            <li>8-2. 参考：3Dモデルや動画も生成できる</li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="slide exercise"
+        data-source="演習 N：チャットアプリのAIを画像で表現しよう (5分)"
+        hidden
+      >
+        <header>
+          <h1>演習 N：チャットアプリのAIを画像で表現しよう</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <div class="exercise-grid">
+            <div class="steps">
+              <ol>
+                <li>
+                  演習MのシステムプロンプトをChatGPTなどの生成AIに渡し、画像生成用のプロンプトを考えてもらいましょう。
+                </li>
+                <li>提案を読み、自分のイメージに合わせて書き換えます。</li>
+                <li>完成したプロンプトで画像を生成しましょう。</li>
+              </ol>
+              <p>
+                ヒント：次のように依頼できます。色・表情・画風など、希望があれば加えてみましょう。
+              </p>
+            </div>
+            <div class="prompt-column">
+              <h3>入力するプロンプト</h3>
+              <pre><code class="language-text">以下は、私が作ったチャットアプリのシステムプロンプトです。
+AIの役割や性格、語り口に合うキャラクターを考え、
+画像生成用のプロンプトを作ってください。
+アプリのアイコンとして使います。
+
+［システムプロンプトを貼り付ける］
+</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="slide exercise"
+        data-source="演習 O：チャットアプリのBGMや効果音を考えよう (5分)"
+        hidden
+      >
+        <header>
+          <h1>演習 O：チャットアプリのBGMや効果音を考えよう</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <ol>
+            <li>自分のアプリに合うBGMや効果音を考えましょう。</li>
+            <li>
+              BGMなら<a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://suno.com/"
+                >Suno</a
+              >、効果音なら<a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://elevenlabs.io/docs/eleven-creative/playground/sound-effects"
+                >ElevenLabs</a
+              >で生成して、聞いてみましょう。
+            </li>
+          </ol>
+          <p>
+            ヒント：サービスによってプロンプトの書き方や設定が違うので、使うサービスの説明や入力欄を確認しましょう。
+          </p>
+          <p>
+            生成サービスを利用できない場合は、プロンプトを考えるところまでで大丈夫です。アプリへの画像・音の組み込みは、時間があれば挑戦しましょう。
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide"
+        data-source="8-2. 参考：3Dモデルや動画も生成できる"
+        hidden
+      >
+        <header>
+          <h1>8-2. 参考：3Dモデルや動画も生成できる</h1>
+          <p class="subtitle">
+            8. 文章以外の生成 (10分)　/　2限目 後半：試して、直して、共有する
+            (16:30-17:20, 50分)
+          </p>
+        </header>
+        <div class="body">
+          <ul>
+            <li>
+              <strong
+                >3Dモデル：<a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.meshy.ai/"
+                  >Meshy</a
+                ></strong
+              >
+              —
+              文章や画像から立体モデルを生成できます。演習Nのキャラクターを立体にする、といった使い方が考えられます。<a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://docs.meshy.ai/en/webapp/image-to-3d"
+                >画像から3Dモデルを生成する方法</a
+              >
+            </li>
+            <li>
+              <strong
+                >動画：<a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://firefly.adobe.com/"
+                  >Adobe Firefly</a
+                ></strong
+              >
+              —
+              文章で場面や動きを指定して動画を生成できます。アプリの紹介映像や、キャラクターが登場する短い映像などに使えます。<a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://helpx.adobe.com/jp/firefly/web/work-with-audio-and-video/work-with-video/generate-videos-using-text-prompts.html"
+                >テキストから動画を生成する方法</a
+              >
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="slide divider"
+        data-source="9. クロージング (15分)"
+        hidden
+      >
+        <header>
+          <h1>9. クロージング</h1>
+          <p class="subtitle">15分</p>
+        </header>
+        <div class="body">
+          <p class="eyebrow">CHAPTER 9</p>
+          <div class="chapter-title">9. クロージング</div>
+          <ul class="chapter-topics">
+            <li>9-1. 本日の授業のポイント (5分)</li>
+            <li>9-2. 振り返り (5分)</li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="slide"
+        data-source="9-1. 本日の授業のポイント (5分)"
+        hidden
+      >
+        <header>
+          <h1>9-1. 本日の授業のポイント</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <ul>
+            <li>
+              <strong>伝え方で、生成されるものが変わる。</strong>
+              明確性・制約の明示・役割付与・手順分解と例示を使って、目的に合う指示を考えました。
+            </li>
+            <li>
+              <strong>生成AIが作るアプリも、コードでできている。</strong>
+              コードを少し変更し、画面とのつながりを確かめました。生成AIが普及する前は、こうした画面や動作を作るコードを、人が自分で書いたり、既存のコードを組み合わせたりしていました。
+            </li>
+            <li>
+              <strong
+                >「アプリを作る指示」と「アプリ内のAIへの指示」は違う。</strong
+              >
+              システムプロンプトで、AIの役割・出力形式・語り口を調整しました。画面や機能だけでなく、AIへの指示も、相談のしやすさや回答の使いやすさなど、ユーザー体験を大きく左右します。
+            </li>
+            <li>
+              <strong>作って終わりではなく、試して改善する。</strong>
+              回答を比べたり、他の人に使ってもらったりして、意図どおりか確かめました。
+            </li>
+            <li>
+              <strong>プロンプトの工夫は、文章以外にも使える。</strong>
+              AIの役割や雰囲気をもとに、画像や音による表現も考えました。
+            </li>
+          </ul>
+          <blockquote>
+            <p>
+              <span class="callout-label">ポイント</span
+              >何を作りたいかを考え、生成AIに伝え、結果を確かめて直す。この繰り返しを、自分の制作にも活かしましょう。
+            </p>
+          </blockquote>
+        </div>
+      </section>
+      <section class="slide" data-source="9-2. 振り返り (5分)" hidden>
+        <header>
+          <h1>9-2. 振り返り</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <p>今日の授業を振り返り、それぞれ一言ずつ書いてみましょう。</p>
+          <pre><code class="language-text">今日、印象に残ったこと：
+感想・質問など：
+</code></pre>
+        </div>
+      </section>
+      <section class="slide" data-source="9-3. 次回予告と宿題 (5分)" hidden>
+        <header>
+          <h1>9-3. 次回予告と宿題</h1>
+          <p class="subtitle">5分</p>
+        </header>
+        <div class="body">
+          <p>
+            <a target="_blank" rel="noopener noreferrer" href="../readme.md"
+              >授業一覧</a
+            >で次に予定されているテーマは、<a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="../2_ai_ethics/readme.md"
+              >AI の活用と倫理</a
+            >です。生成AIは便利ですが、利用時の倫理的な観点での注意点を考えます。
+          </p>
+          <p>宿題：</p>
+          <ul>
+            <li>演習O</li>
+            <li>作ったアプリを誰か1人に見せて、感想を聞く</li>
+          </ul>
+        </div>
+      </section>
+      <div class="brand">2026 / PROMPT ENGINEERING</div>
+      <div id="indicator" aria-live="polite">
+        <span id="current">1</span> / <span id="total">62</span>
+      </div>
+      <div class="footer">
+        プログラミング演習 · 第2回 プロンプトエンジニアリング
+      </div>
+      <nav class="nav" aria-label="スライド移動">
+        <span class="key-hint">← → で移動</span
+        ><button id="toc-open">目次</button
+        ><button id="prev" disabled>前へ</button><button id="next">次へ</button>
+      </nav>
+      <div id="progress"></div>
+    </main>
+    <dialog id="toc">
+      <button id="toc-close">閉じる</button>
+      <h2>スライド一覧</h2>
+      <ol id="toc-list"></ol>
+    </dialog>
+    <script>
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      let current = 0;
+      const prev = document.getElementById("prev"),
+        next = document.getElementById("next");
+      function resize() {
+        document
+          .getElementById("deck")
+          .style.setProperty(
+            "--scale",
+            Math.min(innerWidth / 1600, innerHeight / 900),
+          );
+      }
+      function show(index, update = true) {
+        current = Math.max(0, Math.min(slides.length - 1, index));
+        slides.forEach((s, i) => {
+          s.hidden = i !== current;
+          s.classList.toggle("active", i === current);
+        });
+        document.getElementById("current").textContent = current + 1;
+        document.getElementById("total").textContent = slides.length;
+        prev.disabled = current === 0;
+        next.disabled = current === slides.length - 1;
+        document.getElementById("progress").style.width =
+          ((current + 1) / slides.length) * 100 + "%";
+        if (update) history.replaceState(null, "", "#slide-" + (current + 1));
+      }
+      function fromHash() {
+        const n = Number(location.hash.replace("#slide-", ""));
+        show(Number.isFinite(n) && n > 0 ? n - 1 : 0, false);
+      }
+      prev.onclick = () => show(current - 1);
+      next.onclick = () => show(current + 1);
+      const toc = document.getElementById("toc");
+      document.getElementById("toc-open").onclick = () => toc.showModal();
+      document.getElementById("toc-close").onclick = () => toc.close();
+      slides.forEach((s, i) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = "#slide-" + (i + 1);
+        a.textContent = s.querySelector("h1").textContent;
+        if (s.classList.contains("exercise")) a.className = "toc-exercise";
+        a.onclick = (e) => {
+          e.preventDefault();
+          show(i);
+          toc.close();
+        };
+        li.append(a);
+        document.getElementById("toc-list").append(li);
+      });
+      addEventListener("keydown", (e) => {
+        if (
+          toc.open ||
+          e.ctrlKey ||
+          e.metaKey ||
+          e.altKey ||
+          e.target.closest(
+            'a,button,input,select,textarea,[contenteditable="true"]',
+          )
+        )
+          return;
+        if (e.key === "ArrowRight" || e.key === "PageDown") {
+          e.preventDefault();
+          show(current + 1);
+        }
+        if (e.key === "ArrowLeft" || e.key === "PageUp") {
+          e.preventDefault();
+          show(current - 1);
+        }
+        if (e.key === "Home") {
+          e.preventDefault();
+          show(0);
+        }
+        if (e.key === "End") {
+          e.preventDefault();
+          show(slides.length - 1);
+        }
+      });
+      addEventListener("resize", resize);
+      addEventListener("hashchange", fromHash);
+      resize();
+      fromHash();
+    </script>
+  </body>
+</html>
