@@ -11,7 +11,7 @@
 
 [TOC]
 
-## 1限目（前半）：プロンプトと生成AIの仕組みを知る (13:40-14:30, 50分)
+## 1限目（前半）：プロンプトと生成AIの仕組みを知る (13:40-14:25, 45分)
 
 <!-- 出席コード：当日案内 -->
 
@@ -49,6 +49,13 @@ Fable（ファーブル）
  -->
  [Claude Mythosとは？Project Glasswing・3メガバンク・日本政府の動きを整理【2026年5月版】](https://blog.cloudnative.co.jp/articles/what-is-claude-mythos-news/)
 
+```
+OpenAIのdotsって知ってる？
+:one: 知ってる！どんなものか説明できる
+:two: 名前だけ聞いたことある！
+:three: 初耳！ドット絵の話……？
+```
+[Introducing dots](https://openai.com/index/introducing-dots/)
 
 ```
 HTML/CSS触ったことある？
@@ -70,7 +77,7 @@ HTML/CSS触ったことある？
 ### 1-3. 宿題の確認と解説 (10分)
 
 #### 生成AIが作成したファイルの確認
-<!-- 
+<!--
 起動したゲームを見ながら、次の3つを探しましょう。
 
 - **何がある？**：ゲーム名、操作説明、ボタン。
@@ -80,8 +87,7 @@ HTML/CSS触ったことある？
 どういう仕組みでこれが動いてるか確認しましょう。
 -->
 
-> [!Note]
-> 生成AIがどのようなファイルを生成したかGoogle AI Studioで確認しましょう。
+生成AIがどのようなファイルを生成したかGoogle AI Studioで確認しましょう。
 
 ![スクリーンショット](images/google-studio-game-code.png)
 
@@ -108,8 +114,7 @@ Webページでは、**HTML**・**CSS**・**JavaScript**がそれぞれ異なる
 
 #### 生成AIが作成したファイルの構造と役割の理解
 
-> [!Note]
-> 生成AIが作成したファイルの役割を聞いてみよう
+生成AIが作成したファイルの役割を聞いてみよう
 
 ```text
 生成したファイルの構造と役割を教えてください。
@@ -135,7 +140,7 @@ retro-space-defender/
         └── sound.ts       … 効果音の生成・再生
 ```
 
-<!-- 
+<!--
 | ファイル | 入っているもの | 見るポイント |
 | --- | --- | --- |
 | [index.html](game/retro-space-defender/index.html) | Webページの入口 | `<title>` の中にブラウザーのタブに出るタイトルがある |
@@ -149,7 +154,7 @@ retro-space-defender/
 
 私たちは普段、授業や生活の中で生成AIと会話し、無意識のうちに「プロンプト」を作っています。
 
-この授業では、**プロンプト設計の4原則**を実践を通して理解し、授業や就職活動、さらにはWebアプリの制作など、**さまざまな場面で生成AIを役立てるための基盤を築く**ことを目指します。
+この授業では、**プロンプト設計の4原則（明確性・制約の明示・役割付与・手順分解と例示）**を実践を通して理解し、授業や就職活動、さらにはWebアプリの制作など、**さまざまな場面で生成AIを役立てるための基盤を築く**ことを目指します。
 
 さらに応用として、**Webアプリを作るためのプロンプト**と、**アプリに組み込まれた生成AIの振る舞いを決めるプロンプト**の両方を作成し、**目的に応じてAIへの指示を設計する力**を養います。
 
@@ -173,6 +178,20 @@ retro-space-defender/
 
 自然な文章でも、内容が正しいとは限りません。指示を具体化することと、出力を確かめることをセットで行いましょう。
 
+<!--
+『おはよう』を英語にして
+「Good」→「morning」→「!」
+
+Good   ← 選ぶ
+  Morning
+  Hello
+
+Good ...
+  ├ morning
+  ├ evening
+  └ luck
+ -->
+
 ### 2-2. トークンの理解 (5分)
 
 **トークン**は、モデルが文章を扱うための単位です。単語の一部や記号なども単位になるため、「1文字＝1トークン」「1単語＝1トークン」とは限りません。
@@ -185,19 +204,23 @@ retro-space-defender/
 
 | プラットフォーム | モデル | 最大トークン数 (目安) | 備考 |
 | --- | --- | --- | --- |
-| ChatGPT | GPT-5.6 Sol / Pro | 約 1,050,000 トークン | OpenAIのフラッグシップ。高精度なリアルタイムルーターと拡張リーズニング機能を備え、大規模コード・研究データの解析に対応。 |
-| ChatGPT | GPT-5 Mini | 約 400,000 トークン | 低遅延・低コストかつ高精度な軽量モデル。業務自動化やリアルタイムアプリ組み込みに最適。 |
-| Gemini | Gemini 3.1 Pro | 約 1,000,000 トークン | Googleの高性能モデル。マルチモーダル（動画・音声・コード・長文文書）の横断分析と高度な推論が得意。 |
-| Gemini | Gemini 3.5 Flash | 約 1,000,000 トークン | 応答速度と効率を最優先した高速モデル。広いコンテキストを維持しつつ低コストでの処理を実現。 |
-| Claude | Claude Opus 4.8 / 5 | 約 1,000,000 トークン | Anthropicの最高峰モデル。長編ナレッジベースの正確な処理や高度な自律エージェント構築に強い。 |
-| Claude | Claude Sonnet 5 | 約 1,000,000 トークン | 1Mコンテキストへ拡張され、圧倒的な処理スピードとコスト性能比を両立した万能実務用モデル。 |
+| ChatGPT | [GPT-6 Astra](https://developers.openai.com/api/docs/models/gpt-6-astra) | 約 1,050,000 トークン | OpenAIの最上位モデル。複雑な推論・プログラミング・調査・文書作成に対応。 |
+| ChatGPT | [GPT-6.1 Sol](https://developers.openai.com/api/docs/models/gpt-6.1-sol) | 約 1,050,000 トークン | Astraに近い性能を低コストで提供。複雑なプログラミングやコンピューター操作、実務に対応。 |
+| Gemini | [Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview) | 約 1,000,000 トークン | プレビュー版。高度な推論やプログラミング、ツールを使った複数ステップの処理に対応。 |
+| Gemini | [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash) | 約 1,000,000 トークン | 安定版。速度とコスト効率を保ちつつ、長時間のソフトウェア開発や自律型エージェント、複雑な業務処理に対応。 |
+| Claude | [Claude Opus 5.5](https://platform.claude.com/docs/ja/models/overview) | 約 1,000,000 トークン | 長時間にわたるエージェント型のプログラミングや知識を扱う業務に対応。幅広い用途で推奨されるモデル。 |
+| Claude | [Claude Sonnet 5.5](https://platform.claude.com/docs/ja/models/overview) | 約 1,000,000 トークン | 応答速度と高い知能を両立したモデル。Opusより低コストで、推論・プログラミング・ツール使用に対応。 |
 
 参考：[Google：トークンの理解とカウント](https://ai.google.dev/gemini-api/docs/tokens)
+[OpenAI Developers Models](https://developers.openai.com/api/docs/models)
+[Gemini API 長いコンテキスト](https://ai.google.dev/gemini-api/docs/long-context?hl=ja)
+[Gemini モデル](https://ai.google.dev/gemini-api/docs/models?hl=ja)
+[Claude コンテキストウィンドウ](https://platform.claude.com/docs/ja/build-with-claude/context-windows)
+[Claude モデル](https://platform.claude.com/docs/ja/models/overview)
 
 #### 演習 A：Tokenizerを試してみる (5分)
 
-> [!Note]
-> [Tokenizer](https://platform.openai.com/tokenizer)に次の文章を貼り付け、区切られ方とトークン数を観察しましょう。ここでの数値が、別のモデルにもそのまま当てはまるわけではありません。
+[Tokenizer](https://platform.openai.com/tokenizer)に次の文章を貼り付け、区切られ方とトークン数を観察しましょう。ここでの数値が、別のモデルにもそのまま当てはまるわけではありません。
 
 ```text
 生成AIと一緒に作品を作りたい。
@@ -211,7 +234,20 @@ I want to create art with generative AI.
 
 短くするだけで、よいプロンプトになるとは限りません。必要な条件まで消えていないか確認しましょう。
 
-<!-- ### 2-3. 温度（temperature）の理解 (5分)
+### 2-3. RAG (Retrieval-Augmented Generation：検索拡張生成) (5分)
+
+最近のAIサービスは、検索機能と生成 AI（LLM）を組み合わせて RAG (Retrieval-Augmented Generation) と呼ばれる方法で実現しています。
+
+> 生成系 AI／LLM（大規模言語モデル）の RAG（Retrieval-Augmented Generation：検索拡張生成）とは、ChatGPT や Gemini に代表されるチャット AI に独自の情報源を付与する仕組みのことで、具体的には言語モデルによるテキスト生成に特定の知識や情報源（例えばナレッジベースなど）への検索を組み合わせることである。
+
+![rag](images/rag.png)
+
+- [RAG（Retrieval-Augmented Generation：検索拡張生成）とは？：AI・機械学習の用語辞典 - ＠IT](https://atmarkit.itmedia.co.jp/ait/articles/2403/13/news035.html)
+- [RAG とは何ですか? - 検索拡張生成の説明 - AWS](https://aws.amazon.com/jp/what-is/retrieval-augmented-generation/)
+- [RAG（検索拡張生成）とは | IBM](
+https://www.ibm.com/jp-ja/think/topics/retrieval-augmented-generation)
+
+<!-- ### 2-4. 温度（temperature）の理解 (5分)
 
 **温度**は、出力するトークンの選び方に関わる設定です。一般に低い値では選ばれやすい候補に集中し、高い値では候補の選択に幅が出ます。
 
@@ -239,7 +275,7 @@ I want to create art with generative AI.
 
 「温度を高くして」とチャットに書くだけでは、実際の設定値を変えたことにはなりません。比較には設定欄を使い、少数の結果だけで傾向を断定しないようにしましょう。 -->
 
-## 1限目 後半：伝え方を工夫して、アプリを作る (14:30-15:20, 50分)
+## 1限目 後半：伝え方を工夫して、アプリを作る (14:25-15:20, 55分)
 
 ## 3. プロンプトを書く時のテクニック (35分)
 
@@ -377,6 +413,8 @@ I want to create art with generative AI.
 
 まずは**アプリを作るAIへの指示**を工夫して、できあがるアプリの違いを観察します。アプリ内のAIの答え方は、後半で詳しく扱います。
 
+
+
 ### 4-2. チャットアプリを形にする
 
 #### ひとことの指示で、何ができる？ (3分)
@@ -384,8 +422,8 @@ I want to create art with generative AI.
 ```text
 日本語で会話できるチャットWebアプリを作ってください。
 ```
-> [!Note]
-> 画面と回答を見て、**指示していないのにAIが決めたこと**を探しましょう。
+[!Note]
+画面と回答を見て、**指示していないのにAIが決めたこと**を探しましょう。
 
 短い指示でもアプリは作れますが、誰向けか、どんな画面にするかなどはAIに任せることになります。
 
@@ -480,12 +518,7 @@ Geminiを使って、入力した相談に回答するようにしてくださ�
 | [Asana AI Teammates（AI チームメイト）](https://asana.com/ja/product/ai/ai-teammates) | 仕事の管理サービスAsanaで、人と協力して働くAI。プロジェクトの計画づくりや進捗の整理、文章の作成などを支援する。 |
 | [ええやん.ai](https://note.com/techls/n/n73d1702e4920) | 作品の画像に複数のキャラクターがコメントし、チャットで作品についての言葉を整えられるアプリ。作者や周囲の人との会話のきっかけを作る。 |
 
-Asana AI Teammatesは、仕事の管理サービスの中で役割を持って働くAIの例です。授業に置き換えるなら「グループ展の準備を整理する進行役」をイメージできます。参考：[AsanaによるAIアシスタントの解説](https://asana.com/ja/resources/ai-assistant)
-
 <!-- Genmojiの紹介動画：[Apple Support：Genmojiの作り方](https://www.youtube.com/shorts/TkFFD2whcBk) -->
-
-> [!Note]
-> 生成AIを組み込むアプリでは、利用者の入力に加えて、作り手が用意したシステムプロンプトで役割や答え方を決められます。
 
 > [!Note]
 > 生成AIが組み込まれたサービス、他に知ってる？

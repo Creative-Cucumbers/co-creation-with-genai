@@ -678,14 +678,14 @@
       </section>
       <section
         class="slide divider"
-        data-source="1限目（前半）：プロンプトと生成AIの仕組みを知る (13:40-14:30, 50分)"
+        data-source="1限目（前半）：プロンプトと生成AIの仕組みを知る (13:40-14:25, 45分)"
         hidden
       >
         <header>
           <h1>
-            1限目（前半）：プロンプトと生成AIの仕組みを知る (13:40-14:30, 50分)
+            1限目（前半）：プロンプトと生成AIの仕組みを知る (13:40-14:25, 45分)
           </h1>
-          <p class="subtitle">13:40-14:30, 50分</p>
+          <p class="subtitle">13:40-14:25, 45分</p>
         </header>
         <div class="body">
           <p class="eyebrow">PROGRAMMING / 2026</p>
@@ -705,6 +705,7 @@
           <ul class="chapter-topics">
             <li>1-1. アイスブレイク (5分)</li>
             <li>1-2. 準備 (5分)</li>
+            <li>1-3. 宿題の確認と解説 (10分)</li>
             <li>1-4. 授業の目的 (5分)</li>
           </ul>
         </div>
@@ -742,7 +743,7 @@
 ② クロードの新しいやつでしょ？名前だけ！
 ③ ギリシャ神話とイソップ童話の話……？
 </code></pre>
-          <!-- <p>
+          <p class="source">
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -750,7 +751,7 @@
               >Claude Mythosとは？Project
               Glasswing・3メガバンク・日本政府の動きを整理【2026年5月版】</a
             >
-          </p> -->
+          </p>
         </div>
       </section>
       <section
@@ -761,6 +762,24 @@
         <header>
           <h1>1-1. アイスブレイク</h1>
           <p class="subtitle">5分 / 3問目</p>
+        </header>
+        <div class="body">
+          <pre><code>OpenAIのdotsって知ってる？
+① 知ってる！どんなものか説明できる
+② 名前だけ聞いたことある！
+③ 初耳！ドット絵の話……？
+</code></pre>
+          <p class="source"><a href="https://openai.com/index/introducing-dots/" target="_blank" rel="noopener noreferrer">Introducing dots</a></p>
+        </div>
+      </section>
+      <section
+        class="slide quiz"
+        data-source="1-1. アイスブレイク (5分)"
+        hidden
+      >
+        <header>
+          <h1>1-1. アイスブレイク</h1>
+          <p class="subtitle">5分 / 4問目</p>
         </header>
         <div class="body">
           <pre><code>HTML/CSS触ったことある？
@@ -846,13 +865,12 @@
               </p>
             </div>
             <div class="media-copy">
-              <blockquote>
+
                 <p>
-                  <span class="callout-label">Note</span
-                  >生成AIがどのようなファイルを生成したかGoogle AI
+                  生成AIがどのようなファイルを生成したかGoogle AI
                   Studioで確認しましょう。
                 </p>
-              </blockquote>
+
               <blockquote>
                 <p>
                   <span class="callout-label">Note</span
@@ -890,7 +908,7 @@
           <h1>HTML・CSS・Javascriptとは？</h1>
           <p class="subtitle">
             1. 導入 (25分)　/　1限目（前半）：プロンプトと生成AIの仕組みを知る
-            (13:40-14:30, 50分)
+            (13:40-14:25, 45分)
           </p>
         </header>
         <div class="body">
@@ -944,12 +962,11 @@
           <p class="subtitle">1-3. 宿題の確認と解説</p>
         </header>
         <div class="body">
-          <blockquote>
+
             <p>
-              <span class="callout-label">Note</span
-              >生成AIが作成したファイルの役割を聞いてみよう
+              生成AIが作成したファイルの役割を聞いてみよう
             </p>
-          </blockquote>
+
           <pre><code class="language-text">生成したファイルの構造と役割を教えてください。
 </code></pre>
         </div>
@@ -1005,7 +1022,7 @@
             私たちは普段、授業や生活の中で生成AIと会話し、無意識のうちに「プロンプト」を作っています。
           </p>
           <p>
-            この授業では、<strong>プロンプト設計の4原則</strong>を実践を通して理解し、授業や就職活動、さらにはWebアプリの制作など、<strong>さまざまな場面で生成AIを役立てるための基盤を築く</strong>ことを目指します。
+            この授業では、<strong>プロンプト設計の4原則（明確性・制約の明示・役割付与・手順分解と例示）</strong>を実践を通して理解し、授業や就職活動、さらにはWebアプリの制作など、<strong>さまざまな場面で生成AIを役立てるための基盤を築く</strong>ことを目指します。
           </p>
           <p>
             さらに応用として、<strong>Webアプリを作るためのプロンプト</strong>と、<strong>アプリに組み込まれた生成AIの振る舞いを決めるプロンプト</strong>の両方を作成し、<strong>目的に応じてAIへの指示を設計する力</strong>を養います。
@@ -1027,6 +1044,7 @@
           <ul class="chapter-topics">
             <li>2-1. 処理の流れ (5分)</li>
             <li>2-2. トークンの理解 (5分)</li>
+            <li>2-3. RAG：検索拡張生成 (5分)</li>
           </ul>
         </div>
       </section>
@@ -1098,13 +1116,14 @@
           <p>
             代表的な商用モデルのコンテキスト長は以下の通りです。最新情報は各社の公式アナウンスを参照してください。
           </p>
-          <p>
+          <p class="source">
             参考：<a
               target="_blank"
               rel="noopener noreferrer"
               href="https://ai.google.dev/gemini-api/docs/tokens"
               >Google：トークンの理解とカウント</a
-            >
+            ><br /><a href="https://developers.openai.com/api/docs/models">OpenAI Developers Models</a> ／ <a href="https://ai.google.dev/gemini-api/docs/models?hl=ja">Gemini モデル</a> ／ <a href="https://platform.claude.com/docs/ja/models/overview">Claude モデル</a>
+            <br /><a href="https://ai.google.dev/gemini-api/docs/long-context?hl=ja">Gemini API 長いコンテキスト</a> ／ <a href="https://platform.claude.com/docs/ja/build-with-claude/context-windows">Claude コンテキストウィンドウ</a>
           </p>
         </div>
       </section>
@@ -1132,26 +1151,26 @@
             <tbody>
               <tr>
                 <td>ChatGPT</td>
-                <td>GPT-5.6 Sol / Pro</td>
+                <td><a href="https://developers.openai.com/api/docs/models/gpt-6-astra">GPT-6 Astra</a></td>
                 <td>約 1,050,000 トークン</td>
                 <td>
-                  OpenAIのフラッグシップ。高精度なリアルタイムルーターと拡張リーズニング機能を備え、大規模コード・研究データの解析に対応。
+                  OpenAIの最上位モデル。複雑な推論・プログラミング・調査・文書作成に対応。
                 </td>
               </tr>
               <tr>
                 <td>ChatGPT</td>
-                <td>GPT-5 Mini</td>
-                <td>約 400,000 トークン</td>
+                <td><a href="https://developers.openai.com/api/docs/models/gpt-6.1-sol">GPT-6.1 Sol</a></td>
+                <td>約 1,050,000 トークン</td>
                 <td>
-                  低遅延・低コストかつ高精度な軽量モデル。業務自動化やリアルタイムアプリ組み込みに最適。
+                  Astraに近い性能を低コストで提供。複雑なプログラミングやコンピューター操作、実務に対応。
                 </td>
               </tr>
               <tr>
                 <td>Gemini</td>
-                <td>Gemini 3.1 Pro</td>
+                <td><a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview">Gemini 3.1 Pro</a></td>
                 <td>約 1,000,000 トークン</td>
                 <td>
-                  Googleの高性能モデル。マルチモーダル（動画・音声・コード・長文文書）の横断分析と高度な推論が得意。
+                  プレビュー版。高度な推論やプログラミング、ツールを使った複数ステップの処理に対応。
                 </td>
               </tr>
             </tbody>
@@ -1182,26 +1201,26 @@
             <tbody>
               <tr>
                 <td>Gemini</td>
-                <td>Gemini 3.5 Flash</td>
+                <td><a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash">Gemini 3.8 Flash</a></td>
                 <td>約 1,000,000 トークン</td>
                 <td>
-                  応答速度と効率を最優先した高速モデル。広いコンテキストを維持しつつ低コストでの処理を実現。
+                  安定版。速度とコスト効率を保ちつつ、長時間のソフトウェア開発や自律型エージェント、複雑な業務処理に対応。
                 </td>
               </tr>
               <tr>
                 <td>Claude</td>
-                <td>Claude Opus 4.8 / 5</td>
+                <td><a href="https://platform.claude.com/docs/ja/models/overview">Claude Opus 5.5</a></td>
                 <td>約 1,000,000 トークン</td>
                 <td>
-                  Anthropicの最高峰モデル。長編ナレッジベースの正確な処理や高度な自律エージェント構築に強い。
+                  長時間にわたるエージェント型のプログラミングや知識を扱う業務に対応。幅広い用途で推奨されるモデル。
                 </td>
               </tr>
               <tr>
                 <td>Claude</td>
-                <td>Claude Sonnet 5</td>
+                <td><a href="https://platform.claude.com/docs/ja/models/overview">Claude Sonnet 5.5</a></td>
                 <td>約 1,000,000 トークン</td>
                 <td>
-                  1Mコンテキストへ拡張され、圧倒的な処理スピードとコスト性能比を両立した万能実務用モデル。
+                  応答速度と高い知能を両立したモデル。Opusより低コストで、推論・プログラミング・ツール使用に対応。
                 </td>
               </tr>
             </tbody>
@@ -1220,17 +1239,16 @@
         <div class="body">
           <div class="exercise-grid">
             <div class="steps">
-              <blockquote>
+
                 <p>
-                  <span class="callout-label">Note</span
-                  ><a
+                  <a
                     target="_blank"
                     rel="noopener noreferrer"
                     href="https://platform.openai.com/tokenizer"
                     >Tokenizer</a
                   >に次の文章を貼り付け、区切られ方とトークン数を観察しましょう。ここでの数値が、別のモデルにもそのまま当てはまるわけではありません。
                 </p>
-              </blockquote>
+
               <ol>
                 <li>日本語、英語、記号で区切られ方を比べる。</li>
                 <li>自分のプロンプトを貼り付け、トークン数を記録する。</li>
@@ -1250,16 +1268,40 @@ I want to create art with generative AI.
           </div>
         </div>
       </section>
+      <section class="slide" data-source="2-3. RAG (Retrieval-Augmented Generation：検索拡張生成) (5分)" hidden>
+        <header>
+          <h1>2-3. RAG：検索拡張生成</h1>
+          <p class="subtitle">5分 / Retrieval-Augmented Generation</p>
+        </header>
+        <div class="body">
+          <p>検索機能と生成AI（LLM）を組み合わせ、独自の資料や知識を回答に活用する仕組みです。</p>
+          <div style="display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; margin-top: 20px; align-items: start">
+            <figure>
+              <a class="image-link" href="images/rag.png" target="_blank" rel="noopener noreferrer"><img src="images/rag.png" alt="検索した情報を言語モデルに渡して回答を生成するRAGの仕組み" style="width: 100%; height: 400px; object-fit: contain" /></a>
+              <figcaption class="source">RAGの仕組み／クリックで原寸表示</figcaption>
+            </figure>
+            <div>
+              <h3>検索した情報をもとに生成する</h3>
+              <p>ナレッジベースなどから関連する情報を検索し、言語モデルが回答を作るときの参考情報として渡します。</p>
+              <p class="source" style="margin-top: 24px">参考：<br />
+                <a href="https://atmarkit.itmedia.co.jp/ait/articles/2403/13/news035.html" target="_blank" rel="noopener noreferrer">＠IT：RAGとは？</a><br />
+                <a href="https://aws.amazon.com/jp/what-is/retrieval-augmented-generation/" target="_blank" rel="noopener noreferrer">AWS：検索拡張生成の説明</a><br />
+                <a href="https://www.ibm.com/jp-ja/think/topics/retrieval-augmented-generation" target="_blank" rel="noopener noreferrer">IBM：RAGとは</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
       <section
         class="slide divider"
-        data-source="1限目 後半：伝え方を工夫して、アプリを作る (14:30-15:20, 50分)"
+        data-source="1限目 後半：伝え方を工夫して、アプリを作る (14:25-15:20, 55分)"
         hidden
       >
         <header>
           <h1>
-            1限目 後半：伝え方を工夫して、アプリを作る (14:30-15:20, 50分)
+            1限目 後半：伝え方を工夫して、アプリを作る (14:25-15:20, 55分)
           </h1>
-          <p class="subtitle">14:30-15:20, 50分</p>
+          <p class="subtitle">14:25-15:20, 55分</p>
         </header>
         <div class="body">
           <p class="eyebrow">PROGRAMMING / 2026</p>
@@ -1337,6 +1379,7 @@ I want to create art with generative AI.
                   >「生成AIはじめの一歩」PDF</a
                 >
               </p>
+              <p class="source"><a href="https://www.ibm.com/jp-ja/think/topics/generative-ai-use-cases">IBM：生成AIのユースケース</a></p>
             </div>
           </div>
         </div>
@@ -1943,21 +1986,6 @@ I want to create art with generative AI.
           <p class="subtitle">6-2. 生成AIを組み込んだアプリやサービスの例</p>
         </header>
         <div class="body">
-          <p>
-            Asana AI
-            Teammatesは、仕事の管理サービスの中で役割を持って働くAIの例です。授業に置き換えるなら「グループ展の準備を整理する進行役」をイメージできます。参考：<a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://asana.com/ja/resources/ai-assistant"
-              >AsanaによるAIアシスタントの解説</a
-            >
-          </p>
-          <blockquote>
-            <p>
-              <span class="callout-label">Note</span
-              >生成AIを組み込むアプリでは、利用者の入力に加えて、作り手が用意したシステムプロンプトで役割や答え方を決められます。
-            </p>
-          </blockquote>
           <blockquote>
             <p>
               <span class="callout-label">Note</span
@@ -2416,7 +2444,7 @@ AIの役割や性格、語り口に合うキャラクターを考え、
       </section>
       <div class="brand">2026 / PROMPT ENGINEERING</div>
       <div id="indicator" aria-live="polite">
-        <span id="current">1</span> / <span id="total">62</span>
+        <span id="current">1</span> / <span id="total">64</span>
       </div>
       <div class="footer">
         プログラミング演習 · 第2回 プロンプトエンジニアリング
