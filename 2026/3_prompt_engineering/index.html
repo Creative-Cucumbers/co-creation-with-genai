@@ -704,7 +704,7 @@
           <div class="chapter-title">1. 導入</div>
           <ul class="chapter-topics">
             <li>1-1. アイスブレイク (5分)</li>
-            <li>1-2. 準備 (5分)</li>
+            <li>1-2. 前回の振り返り (5分)</li>
             <li>1-3. 宿題の確認と解説 (10分)</li>
             <li>1-4. 授業の目的 (5分)</li>
           </ul>
@@ -789,56 +789,17 @@
 </code></pre>
         </div>
       </section>
-      <section class="slide" data-source="1-2. 準備 (5分)" hidden>
-        <header>
-          <h1>1-2. 準備</h1>
-          <p class="subtitle">5分</p>
-        </header>
-        <div class="body">
-          <ul>
-            <li>
-              生成AIをすぐに利用できるようにしておきましょう。以下の中で利用したいサービスをクリック、Googleアカウントでログインすれば、利用できるようになります。
-            </li>
-          </ul>
-          <ol>
-            <li>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://chat.openai.com/"
-                >ChatGPT</a
-              >
-            </li>
-            <li>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://claude.ai/"
-                >Claude</a
-              >
-            </li>
-            <li>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://gemini.google.com/app"
-                >Gemini</a
-              >
-            </li>
-          </ol>
-          <ul>
-            <li>
-              アプリ制作には前回利用した
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://aistudio.google.com/"
-                >Google AI Studio</a
-              >
-              を使用します。利用できるか確認しましょう。
-            </li>
-          </ul>
-        </div>
+      <section class="slide " data-source="1-2. 前回の振り返り (5分)" hidden>
+        <header><h1>1-2. 前回の振り返り</h1><p class="subtitle">5分 / 1・3</p></header>
+        <div class="body"><div class="principles"><article><h3>AIへの期待</h3><ul><li>作業や学習の時間を短縮したい</li><li>情報整理や文章・画像作成を手伝ってほしい</li><li>自分では思いつかないアイデアを得たい</li><li>面倒な作業を効率化したい</li></ul></article><article><h3>困ったこと・不安</h3><ul><li>AIの情報が正しいのかわからない</li><li>間違った情報や嘘をもっともらしく回答することがある</li><li>情報源がわからず、自分で確認する必要がある</li><li>AIに依存し、自分で考える力が低下しそう</li><li>個人情報の扱いが不安</li></ul></article></div></div>
+      </section>
+      <section class="slide " data-source="1-2. 前回の振り返り (5分)" hidden>
+        <header><h1>1-2. 前回の振り返り</h1><p class="subtitle">5分 / 2・3</p></header>
+        <div class="body"><div class="principles"><article><h3>AIでやってみたいこと</h3><ul><li>画像やWebサイトなどを作る</li><li>調べ物や勉強、文章作成に活用する</li><li>献立など、日常生活のサポートに使う</li><li>自分だけでは難しいことをAIを使って実現する</li></ul></article><article><h3>AIへの疑問</h3><ul><li>AIに自我や感情はあるのか</li><li>AIに好き嫌いはあるのか</li><li>AIはどこから情報を得ているのか</li><li>AIの限界はどこにあるのか</li><li>AIと人間は何が違うのか</li></ul></article></div></div>
+      </section>
+      <section class="slide " data-source="1-2. 前回の振り返り (5分)" hidden>
+        <header><h1>前回の振り返り：全体的な傾向</h1><p class="subtitle">5分 / 3・3</p></header>
+        <div class="body"><p>生徒たちは、AIによる<strong>「効率化・できることの拡大」への期待</strong>を持つ一方で、<strong>「情報をどこまで信頼できるのか」「AIに頼りすぎることで自分で考える力が低下しないか」</strong>という不安も感じていた。</p><p>また、AIを単なる便利なツールとしてだけでなく、<strong>「AIは考えているのか」「感情や自我はあるのか」「人間と何が違うのか」</strong>という、AIそのものへの関心も多く見られた。</p><p>全体として、</p><p><strong>「AIを使ってできることを広げたい」という期待と、「AIをどこまで信頼し、どのような距離感で使うべきか」という問いが共存している</strong></p></div>
       </section>
       <section
         class="slide media-page"
@@ -1267,6 +1228,18 @@ I want to create art with generative AI.
             </div>
           </div>
         </div>
+      </section>
+      <section class="slide " data-source="Google AI Studioの利用制限" hidden>
+        <header><h1>Google AI Studioの利用制限</h1><p class="subtitle">1・3 / ダッシュボードの主要指標</p></header>
+        <div class="body"><p><a href="https://aistudio.google.com/rate-limit?timeRange=last-28-days&amp;project=gen-lang-client-0506929984" target="_blank" rel="noopener noreferrer">Gemini API Rate Limit ダッシュボード</a>を開いてみましょう。</p><ul><li><strong>RPM (Requests Per Minute):</strong> 1分間のリクエスト上限（直近60秒で計算）</li><li><strong>TPM (Tokens Per Minute):</strong> 1分間の処理トークン量（文字・データ量）の上限</li><li><strong>RPD (Requests Per Day):</strong> 1日（24時間）のリクエスト合計上限</li></ul></div>
+      </section>
+      <section class="slide " data-source="Google AI Studioの利用制限" hidden>
+        <header><h1>Google AI Studioの利用制限</h1><p class="subtitle">2・3 / 無料枠の重要ルール</p></header>
+        <div class="body"><ul><li><strong>制限の共有:</strong> Web画面（チャット）とAPI利用の回数は、同一プロジェクト内で<strong>合算</strong>されます。</li><li><strong>自動切替なし:</strong> 上限に達しても、他のモデルへ自動的に切り替わることはありません。</li><li><strong>データの取り扱い:</strong> 無料枠に入力したデータは、Googleのモデル改善・学習に利用される場合があります。</li><li><strong>表示の更新:</strong> ダッシュボードの数値は自動更新されないため、最新状態を確認するにはページの再読み込みが必要です。</li></ul></div>
+      </section>
+      <section class="slide " data-source="Google AI Studioの利用制限" hidden>
+        <header><h1>Google AI Studioの利用制限</h1><p class="subtitle">3・3 / エラー時の対処法</p></header>
+        <div class="body"><ul><li><strong>RPM制限時:</strong> 直近60秒の枠が空くまで、<strong>1分程度待つ</strong>。</li><li><strong>RPD制限時:</strong> 手動で<strong>別のモデルに切り替える</strong>か、翌日まで待つ。</li></ul></div>
       </section>
       <section class="slide" data-source="2-3. RAG (Retrieval-Augmented Generation：検索拡張生成) (5分)" hidden>
         <header>
@@ -2444,7 +2417,7 @@ AIの役割や性格、語り口に合うキャラクターを考え、
       </section>
       <div class="brand">2026 / PROMPT ENGINEERING</div>
       <div id="indicator" aria-live="polite">
-        <span id="current">1</span> / <span id="total">64</span>
+        <span id="current">1</span> / <span id="total">69</span>
       </div>
       <div class="footer">
         プログラミング演習 · 第2回 プロンプトエンジニアリング
