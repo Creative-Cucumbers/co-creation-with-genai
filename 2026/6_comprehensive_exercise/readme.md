@@ -75,7 +75,7 @@
 
 #### 生成 AI の使い方
 
-<img src="../3_prompt_engineering/images/soumu.png" alt="生成AIと分類"  />
+<img src="../2_prompt_engineering/images/soumu.png" alt="生成AIと分類"  />
 
 #### 生成 AI 活用のユースケース
 
