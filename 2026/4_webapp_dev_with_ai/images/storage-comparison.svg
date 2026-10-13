@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 260" role="img" aria-labelledby="title"><title id="title">localStorageは各ブラウザ内、Firestoreは端末共通のクラウドに保存する</title><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#004898"/></marker></defs><g font-family="Arial,Hiragino Kaku Gothic ProN,Yu Gothic,Meiryo,sans-serif" fill="#242424">
+<rect x="2" y="2" width="655" height="256" fill="#f2f3f4"/><rect x="681" y="2" width="677" height="256" fill="#edf3f9"/>
+<text x="28" y="38" font-size="27" font-weight="700">localStorage：保存場所は別々</text>
+<g transform="translate(100 72)"><g stroke="#004898" stroke-width="4" fill="#edf3f9"><rect x="0" y="0" width="128" height="84" rx="4"/><path d="M0 84L-14 100H142L128 84Z"/></g></g><g transform="translate(471 65)"><g stroke="#004898" stroke-width="4" fill="#edf3f9"><rect x="0" y="0" width="58" height="106" rx="6"/><path d="M18 92H40"/></g></g>
+<text x="72" y="211" font-size="23">PCのブラウザ内</text><text x="409" y="211" font-size="23">スマホのブラウザ内</text>
+<text x="292" y="132" font-size="26" fill="#666">同期なし</text>
+<text x="707" y="38" font-size="27" font-weight="700">Firestore：共通の保存場所</text>
+<g transform="translate(738 83) scale(.8)"><g stroke="#004898" stroke-width="4" fill="#edf3f9"><rect x="0" y="0" width="128" height="84" rx="4"/><path d="M0 84L-14 100H142L128 84Z"/></g></g><g transform="translate(995 62) scale(.9)"><g stroke="#004898" stroke-width="4" fill="#edf3f9"><path d="M0 18V90C0 114 120 114 120 90V18"/><ellipse cx="60" cy="18" rx="60" ry="18"/><path d="M0 52C0 76 120 76 120 52M0 82C0 106 120 106 120 82"/></g></g><g transform="translate(1242 78) scale(.8)"><g stroke="#004898" stroke-width="4" fill="#edf3f9"><rect x="0" y="0" width="58" height="106" rx="6"/><path d="M18 92H40"/></g></g>
+<path d="M866 122H978M1113 122H1227" fill="none" stroke="#004898" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<text x="947" y="215" font-size="23">同じアカウントで同期</text></g></svg>
